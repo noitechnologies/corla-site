@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Why AI Agents Forget Everything — And Why Your Organisation Can't Afford That — Corla Blog</title>
+<meta name="description" content="AI agents have no persistent memory between sessions. Your organisation's hard-won knowledge doesn't accumulate. Here's why that's a structural problem — and what the fix looks like.">
+<meta property="og:title" content="Why AI Agents Forget Everything — And Why Your Organisation Can't Afford That — Corla Blog">
+<meta property="og:description" content="AI agents have no persistent memory between sessions. Your organisation's hard-won knowledge doesn't accumulate. Here's why that's a structural problem — and what the fix looks like.">
+<meta property="og:url" content="https://corla.ai/blog/organisational-memory">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Corla">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Why AI Agents Forget Everything — And Why Your Organisation Can't Afford That — Corla Blog">
+<meta name="twitter:description" content="AI agents have no persistent memory between sessions. Your organisation's hard-won knowledge doesn't accumulate. Here's why that's a structural problem — and what the fix looks like.">
+<link rel="canonical" href="https://corla.ai/blog/organisational-memory">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="apple-touch-icon" href="../favicon.svg">
+<meta name="theme-color" content="#F7F5F0">
+<link rel="stylesheet" href="../css/main.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Why AI Agents Forget Everything — And Why Your Organisation Can't Afford That",
+  "description": "AI agents have no persistent memory between sessions. Your organisation's hard-won knowledge doesn't accumulate. Here's why that's a structural problem — and what the fix looks like.",
+  "datePublished": "2025-03-20",
+  "dateModified": "2025-03-20",
+  "author": { "@type": "Organization", "name": "Corla Research", "url": "https://corla.ai" },
+  "publisher": { "@type": "Organization", "name": "Corla", "url": "https://corla.ai" },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://corla.ai/blog/organisational-memory" }
+}
+</script>
+<script>(function(){var t=localStorage.getItem('corla-theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark');})();</script>
+<style>
+.blog-layout { display:grid; grid-template-columns:1fr 280px; gap:64px; align-items:start; }
+.sidebar { position:sticky; top:90px; }
+.sidebar-card { background:var(--bg2); border:1px solid var(--border); border-radius:var(--r2); padding:24px; margin-bottom:20px; }
+.sidebar-card h4 { font-size:0.85rem; margin-bottom:14px; }
+.related-list { list-style:none; display:flex; flex-direction:column; gap:12px; }
+.related-list a { font-size:0.84rem; color:var(--t2); transition:color 0.2s; line-height:1.4; display:block; }
+.related-list a:hover { color:var(--amber); }
+.share-btns { display:flex; gap:8px; flex-wrap:wrap; }
+.share-btn { font-size:0.78rem; padding:7px 14px; border:1px solid var(--border); border-radius:100px; color:var(--t2); background:transparent; cursor:pointer; font-family:var(--body); transition:all 0.2s; }
+.share-btn:hover { border-color:var(--amber); color:var(--amber); }
+@media (max-width:900px) { .blog-layout { grid-template-columns:1fr; } .sidebar { position:static; } }
+</style>
+</head>
+<body>
+<div id="reading-progress"><div id="reading-progress-bar"></div></div>
+<nav>
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><div class="logo-mark"></div>corla<span style="color:var(--amber)">.ai</span></a>
+    <div class="nav-links">
+      <a href="../use-cases.html">Use Cases</a>
+      <a href="../how-it-works.html">How It Works</a>
+      <a href="../agent-deliberation.html">Agent Deliberation</a>
+      <a href="../security.html">Security</a>
+      <a href="index.html" class="active">Blog</a>
+      <a href="../pricing.html">Pricing</a>
+    </div>
+    <div class="nav-right">
+      <a href="../pricing.html#waitlist" class="btn btn-primary btn-sm">Get Access</a>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+        <svg class="icon-moon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.5 9.5A6 6 0 0 1 6.5 2.5a6 6 0 1 0 7 7z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg class="icon-sun" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="3" stroke="currentColor" stroke-width="1.5"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3.05 3.05l1.41 1.41M11.54 11.54l1.41 1.41M3.05 12.95l1.41-1.41M11.54 4.46l1.41-1.41" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+      <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M3 6h16M3 11h16M3 16h16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="../use-cases.html">Use Cases</a>
+  <a href="../how-it-works.html">How It Works</a>
+  <a href="../agent-deliberation.html">Agent Deliberation</a>
+  <a href="../security.html">Security</a>
+  <a href="index.html">Blog</a>
+  <a href="../pricing.html">Pricing</a>
+  <a href="../pricing.html#waitlist" style="color:var(--amber);border-bottom:none;margin-top:8px;">Get Access →</a>
+</div>
+
+<section style="padding:80px 0 48px;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:600px;height:400px;background:radial-gradient(ellipse at 50% 0%,rgba(232,152,12,0.07) 0%,transparent 65%);pointer-events:none;"></div>
+  <div class="wrap-narrow">
+    <a href="index.html" style="font-size:0.84rem;color:var(--t3);display:inline-flex;align-items:center;gap:6px;margin-bottom:24px;transition:color 0.2s;" onmouseover="this.style.color='var(--amber)'" onmouseout="this.style.color='var(--t3)'">← Back to Blog</a>
+    <div style="display:flex;gap:12px;align-items:center;margin-bottom:20px;">
+      <div class="badge">Organisational Learning</div>
+      <span style="font-size:0.8rem;color:var(--t3);">8 min read · March 2025</span>
+    </div>
+    <h1 style="font-size:clamp(1.7rem,3.5vw,2.6rem);margin-bottom:20px;line-height:1.2;">Why AI Agents Forget Everything — And Why Your Organisation Can't Afford That</h1>
+    <p style="font-size:1.1rem;color:var(--t2);line-height:1.75;margin-bottom:32px;">AI agents have no persistent memory between sessions. Every developer starts from scratch. Your organisation's hard-won knowledge — years of decisions, incidents, and standards — never accumulates. This isn't a product limitation. It's a structural problem that requires infrastructure to fix.</p>
+    <div style="display:flex;align-items:center;gap:16px;padding:20px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+      <div style="width:40px;height:40px;border-radius:50%;background:var(--amber-d);border:1px solid rgba(232,152,12,0.3);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:700;color:var(--amber);">CR</div>
+      <div><div style="font-size:0.88rem;font-weight:600;">Corla Research</div><div style="font-size:0.8rem;color:var(--t3);">Published March 2025</div></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding:48px 0 96px;">
+  <div class="wrap">
+    <div class="blog-layout">
+      <article class="prose">
+        <div class="toc">
+          <div class="toc-title">In this article</div>
+          <ol>
+            <li><a href="#the-amnesia">The amnesia problem, precisely defined</a></li>
+            <li><a href="#what-is-lost">What gets lost every session</a></li>
+            <li><a href="#the-compound">The compounding cost</a></li>
+            <li><a href="#pir-problem">The PIR problem: lessons that never reach agents</a></li>
+            <li><a href="#the-fix">What the fix looks like</a></li>
+          </ol>
+        </div>
+
+        <p>Every organisation deploying AI coding tools has the same silent problem. A developer spends an afternoon getting their AI agent up to speed — explaining the codebase patterns, the service architecture, the conventions the team follows. The agent produces good output. The next morning, they open their IDE and the agent knows nothing. The session is gone. They start again.</p>
+
+        <p>This isn't a bug. It's how large language models work. They have no persistent memory between conversations. But the implications for organisations deploying AI at scale are significant and largely unaddressed.</p>
+
+        <h2 id="the-amnesia">The amnesia problem, precisely defined</h2>
+
+        <p>When we talk about AI agent amnesia in an organisational context, we mean something specific. It's not that the underlying model forgets — it's that the <em>organisational context</em> that makes the model useful for your specific situation has no persistent home. It exists in developers' heads, in local configuration files, in chat histories that get cleared. There is no authoritative, maintained, accessible source of what your organisation knows that AI agents can draw on.</p>
+
+        <p>The result is three separate failure modes that compound over time:</p>
+
+        <p><strong>Session-level amnesia.</strong> Each developer rebuilds context from scratch at the start of each working session. Time spent explaining things the agent "already knew" yesterday is time not spent building.</p>
+
+        <p><strong>Team-level fragmentation.</strong> Different teams configure their agents differently, or not at all. Two agents working on adjacent systems have no shared understanding of the interface between them. Standards drift. Inconsistencies accumulate.</p>
+
+        <p><strong>Organisational forgetting.</strong> When an engineer leaves, the context they'd built into their local AI configuration — the domain knowledge, the workarounds, the hard-won understanding of why certain decisions were made — goes with them. It was never recorded anywhere the agent could access.</p>
+
+        <h2 id="what-is-lost">What gets lost every session</h2>
+
+        <p>To make this concrete, consider what a senior engineer's AI agent knows at the end of a productive week — and how much of it survives to the following Monday:</p>
+
+        <ul>
+          <li>That the payments service uses idempotency keys in a specific format — and why (a production incident two years ago)</li>
+          <li>That the logging library was deprecated and any new code should use the replacement</li>
+          <li>That a particular pattern for handling async errors was approved after six months of debate</li>
+          <li>That the recommendation engine has a known race condition under high load that hasn't been fixed yet</li>
+          <li>That one vendor's SDK has a subtle memory leak in version 3.x that the team worked around</li>
+        </ul>
+
+        <p>None of this survives the session boundary. On Monday morning, the agent is a highly capable generalist with no knowledge of your specific context. The senior engineer rebuilds it, or they don't — and the agent makes suggestions that violate the patterns the team has agreed on, that use the deprecated library, that reproduce the race condition.</p>
+
+        <blockquote>The knowledge exists in the organisation. It just has no path to reach the agent. That's the gap. Not a model problem — an infrastructure problem.</blockquote>
+
+        <h2 id="the-compound">The compounding cost</h2>
+
+        <p>The individual session cost is measurable but modest. Fifteen minutes rebuilding context at the start of each day, across ten developers, is 150 minutes of productivity loss per day. Annoying, but survivable.</p>
+
+        <p>The compounding cost is harder to quantify and much more damaging. It shows up in three places:</p>
+
+        <p><strong>Repeated mistakes.</strong> The same architecture mistakes get made repeatedly because the context that would prevent them — "we tried this in 2023 and it caused this problem" — never reaches the agent. The agent is knowledgeable but not wise. It knows the general pattern but not your specific failure history.</p>
+
+        <p><strong>Inconsistent quality floors.</strong> Teams that invest in building and maintaining local agent context get better output than teams that don't. This isn't a talent difference — it's an infrastructure difference. But it presents as a talent difference, which makes it harder to address.</p>
+
+        <p><strong>Onboarding drag.</strong> New engineers don't have the context that senior engineers have built up. Their agents reflect that. Weeks of osmosis that previously converted implicit organisational knowledge into tacit understanding now also need to convert it into AI agent context — a task nobody is explicitly responsible for.</p>
+
+        <h2 id="the-pir-problem">The PIR problem: lessons that never reach agents</h2>
+
+        <p>The most concrete version of this problem is what happens to post-incident reviews.</p>
+
+        <p>Most engineering organisations have a PIR process. An incident occurs. The team investigates. A document is produced that explains what happened, why, and what should be done differently. It is discussed in a retrospective. The lessons are acknowledged.</p>
+
+        <p>And then, with remarkable frequency, the same failure mode recurs — sometimes years later, sometimes in a different team, sometimes AI-assisted into production by an agent that had no way of knowing about the incident.</p>
+
+        <p>The PIR is stored in Confluence or Notion. It might be read once during the retrospective period. It is almost certainly not in any developer's agent context window when they're writing the code that will reproduce the issue.</p>
+
+        <p>This is not a process failure — it's an infrastructure failure. The lesson was captured. It just had no path from the PIR document to the AI agent that would have prevented the recurrence.</p>
+
+        <h2 id="the-fix">What the fix looks like</h2>
+
+        <p>Solving organisational AI amnesia requires a piece of infrastructure that doesn't exist in most organisations today: a persistent, maintained, authoritative source of organisational context that AI agents can access at session start.</p>
+
+        <p>The properties this infrastructure needs:</p>
+
+        <p><strong>Persistent across sessions.</strong> Context shouldn't live in individual developers' configurations. It should live in a shared layer that every agent draws from, regardless of which developer opened their IDE this morning.</p>
+
+        <p><strong>Maintained centrally, consumed automatically.</strong> Updating context shouldn't require every developer to update their local configuration. Publish once — every agent gets it on their next session start.</p>
+
+        <p><strong>Structured for AI consumption.</strong> A Confluence page is not AI-ready context. The lessons, standards, and decisions need to be structured in a form that an AI agent can act on — specific, actionable, and directly relevant to the work at hand.</p>
+
+        <p><strong>Connected to the PIR process.</strong> The learning loop needs to close. When an incident produces a lesson, there should be a direct path from that lesson to the context package that every agent loads. The same mistake shouldn't be reproducible by an AI agent that had access to the history.</p>
+
+        <div class="callout callout-amber">
+          <strong>This is the organisational learning loop Corla is built to close.</strong> Context packages encode incidents, decisions, and standards. They're published to the broker once. Every agent across the organisation — including new hires and vendors — draws from them on every session start. <a href="../use-cases.html#learning" style="color:var(--amber)">See how the learning loop works →</a>
+        </div>
+
+        <p>The fix isn't more capable AI models. The models are already more capable than most organisations know how to use effectively. The fix is giving those models persistent access to what the organisation actually knows — and keeping that knowledge current as the organisation learns.</p>
+
+        <p>An organisation that solves this problem accumulates an AI advantage over time. Every incident that gets encoded, every decision that gets documented, every standard that gets maintained in the context layer compounds. After a year, the agents working in that organisation are materially smarter about that organisation's specific context than any AI tool deployed anywhere else. That's not a model advantage — it's an infrastructure advantage. And it's available to any organisation willing to build the layer.</p>
+
+      </article>
+
+      <aside class="sidebar">
+        <div class="sidebar-card">
+          <h4>Related articles</h4>
+          <ul class="related-list">
+            <li><a href="ai-context-governance.html">Why Enterprises Need AI Context Governance</a></li>
+            <li><a href="agent-deliberation-enterprise.html">From Task Execution to Conclusions</a></li>
+            <li><a href="platform-engineering-ai-agents.html">Platform Engineering's New Job</a></li>
+            <li><a href="outsourcing-ai-risk.html">The Hidden Risk in AI-Assisted Outsourcing</a></li>
+          </ul>
+        </div>
+        <div class="sidebar-card">
+          <h4>Share</h4>
+          <div class="share-btns">
+            <button class="share-btn" onclick="navigator.clipboard.writeText(window.location.href)">Copy link</button>
+            <button class="share-btn">LinkedIn</button>
+          </div>
+        </div>
+        <div class="sidebar-card card-amber">
+          <h4 style="margin-bottom:8px;">Close the loop</h4>
+          <p style="font-size:0.84rem;margin-bottom:14px;">Corla encodes your organisation's lessons into context packages every agent draws from — automatically, every session.</p>
+          <a href="../pricing.html#waitlist" class="btn btn-primary btn-sm" style="width:100%;justify-content:center;">Request Access</a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="../index.html" class="nav-logo" style="margin-bottom:4px;"><div class="logo-mark"></div>corla<span style="color:var(--amber)">.ai</span></a><p>Enterprise AI Context Broker.</p><div class="badge" style="width:fit-content;margin-top:8px;"><span class="badge-dot pulse"></span>Private Beta</div></div>
+      <div class="footer-col"><h5>Product</h5><ul><li><a href="../use-cases.html">Use Cases</a></li><li><a href="../how-it-works.html">How It Works</a></li><li><a href="../agent-deliberation.html">Agent Deliberation</a></li><li><a href="../security.html">Security</a></li><li><a href="../pricing.html">Pricing</a></li></ul></div>
+      <div class="footer-col"><h5>Blog</h5><ul><li><a href="index.html">All articles</a></li><li><a href="ai-context-governance.html">AI Governance</a></li><li><a href="outsourcing-ai-risk.html">Outsourcing Risk</a></li></ul></div>
+      <div class="footer-col"><h5>Company</h5><ul><li><a href="#">NOI Technologies</a></li><li><a href="mailto:hello@corla.ai">hello@corla.ai</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><div class="footer-copy">© 2025 Corla · A product by NOI Technologies</div><div class="footer-legal"><a href="/privacy.html">Privacy</a><a href="/security.html">Security</a><a href="/terms.html">Terms</a></div></div>
+  </div>
+</footer>
+<script src="../js/main.js"></script>
+</body>
+</html>

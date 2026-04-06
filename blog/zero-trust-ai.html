@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Zero Trust for AI Context: Why Your Security Model Is Missing a Layer — Corla Blog</title>
+<meta name="description" content="Zero-trust network architecture is well understood. Zero-trust for AI context — governing what gets injected into your AI tools — is new and largely unaddressed.">
+<meta property="og:title" content="Zero Trust for AI Context: Why Your Security Model Is Missing a Layer — Corla Blog">
+<meta property="og:description" content="Zero-trust network architecture is well understood. Zero-trust for AI context — governing what gets injected into your AI tools — is new and largely unaddressed.">
+<meta property="og:url" content="https://corla.ai/blog/zero-trust-ai">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Corla">
+<meta property="og:image" content="https://corla.ai/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Zero Trust for AI Context: Why Your Security Model Is Missing a Layer — Corla Blog">
+<meta name="twitter:description" content="Zero-trust network architecture is well understood. Zero-trust for AI context — governing what gets injected into your AI tools — is new and largely unaddressed.">
+<link rel="canonical" href="https://corla.ai/blog/zero-trust-ai">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="../favicon.svg">
+<meta name="theme-color" content="#F7F5F0">
+<link rel="stylesheet" href="../css/main.css">
+<style>
+.blog-layout { display:grid; grid-template-columns:1fr 280px; gap:64px; align-items:start; }
+.sidebar { position:sticky; top:90px; }
+.sidebar-card { background:var(--bg2); border:1px solid var(--border); border-radius:var(--r2); padding:24px; margin-bottom:20px; }
+.sidebar-card h4 { font-size:0.85rem; margin-bottom:14px; }
+.related-list { list-style:none; display:flex; flex-direction:column; gap:12px; }
+.related-list a { font-size:0.84rem; color:var(--t2); transition:color 0.2s; line-height:1.4; display:block; }
+.related-list a:hover { color:var(--amber); }
+.share-btns { display:flex; gap:8px; flex-wrap:wrap; }
+.share-btn { font-size:0.78rem; padding:7px 14px; border:1px solid var(--border); border-radius:100px; color:var(--t2); background:transparent; cursor:pointer; font-family:var(--body); transition:all 0.2s; }
+.share-btn:hover { border-color:var(--amber); color:var(--amber); }
+.principle-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:28px 0; }
+.principle-card { background:var(--bg3); border:1px solid var(--border); border-radius:var(--r2); padding:22px; }
+.principle-card .p-num { font-family:var(--mono); font-size:0.72rem; color:var(--amber); margin-bottom:8px; }
+.principle-card h4 { font-size:0.92rem; margin-bottom:6px; }
+.principle-card p { font-size:0.84rem; line-height:1.6; }
+@media (max-width:900px) { .blog-layout { grid-template-columns:1fr; } .sidebar { position:static; } .principle-grid { grid-template-columns:1fr; } }
+</style>
+<script>
+  (function(){var t=localStorage.getItem('corla-theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark');})();
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Zero Trust for AI Context: Why Your Security Model Is Missing a Layer",
+  "description": "Zero-trust for AI context — governing what gets injected into your AI tools — is a new and largely unaddressed problem.",
+  "datePublished": "2025-03-18",
+  "dateModified": "2025-03-18",
+  "author": {
+    "@type": "Organization",
+    "name": "Corla Research",
+    "url": "https://corla.ai"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Corla",
+    "url": "https://corla.ai"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://corla.ai/blog/zero-trust-ai"
+  }
+}
+</script>
+</head>
+<body>
+<div id="reading-progress"><div id="reading-progress-bar"></div></div>
+<nav>
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><div class="logo-mark"></div>corla<span style="color:var(--amber)">.ai</span></a>
+    <div class="nav-links">
+      <a href="../use-cases.html">Use Cases</a>
+      <a href="../how-it-works.html">How It Works</a>
+      <a href="../agent-deliberation.html">Agent Deliberation</a>
+      <a href="../security.html">Security</a>
+      <a href="index.html" class="active">Blog</a>
+      <a href="../pricing.html">Pricing</a>
+    </div>
+    <div class="nav-right">
+      <a href="../pricing.html#waitlist" class="btn btn-primary btn-sm">Get Access</a>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme" title="Toggle light/dark mode">
+        <svg class="icon-moon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.5 9.5A6 6 0 0 1 6.5 2.5a6 6 0 1 0 7 7z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg class="icon-sun" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="3" stroke="currentColor" stroke-width="1.5"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3.05 3.05l1.41 1.41M11.54 11.54l1.41 1.41M3.05 12.95l1.41-1.41M11.54 4.46l1.41-1.41" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+      <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M3 6h16M3 11h16M3 16h16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="../use-cases.html">Use Cases</a>
+  <a href="../how-it-works.html">How It Works</a>
+  <a href="../agent-deliberation.html">Agent Deliberation</a>
+  <a href="../security.html">Security</a>
+  <a href="index.html">Blog</a>
+  <a href="../pricing.html">Pricing</a>
+  <a href="../pricing.html#waitlist" style="color:var(--amber);border-bottom:none;margin-top:8px;">Get Access →</a>
+</div>
+
+<section style="padding:80px 0 48px;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:600px;height:400px;background:radial-gradient(ellipse at 50% 0%,rgba(34,197,94,0.07) 0%,rgba(79,126,255,0.05) 40%,transparent 65%);pointer-events:none;"></div>
+  <div class="wrap-narrow">
+    <a href="index.html" style="font-size:0.84rem;color:var(--t3);display:inline-flex;align-items:center;gap:6px;margin-bottom:24px;transition:color 0.2s;" onmouseover="this.style.color='var(--amber)'" onmouseout="this.style.color='var(--t3)'">← Back to Blog</a>
+    <div style="display:flex;gap:12px;align-items:center;margin-bottom:20px;">
+      <div class="badge" style="background:rgba(248,113,113,0.12);border-color:rgba(248,113,113,0.25);color:var(--red);">Security</div>
+      <span style="font-size:0.8rem;color:var(--t3);">7 min read · March 2025</span>
+    </div>
+    <h1 style="font-size:clamp(1.7rem,3.5vw,2.6rem);margin-bottom:20px;line-height:1.2;">Zero Trust for AI Context: Why Your Security Model Is Missing a Layer</h1>
+    <p style="font-size:1.1rem;color:var(--t2);line-height:1.75;margin-bottom:32px;">Zero-trust network architecture is well understood and widely deployed. Zero-trust for AI context — governing what gets injected into your AI tools, and when — is a new and largely unaddressed problem. Here's how to think about it.</p>
+    <div style="display:flex;align-items:center;gap:16px;padding:20px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+      <div style="width:40px;height:40px;border-radius:50%;background:var(--green-d);border:1px solid rgba(34,197,94,0.3);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:700;color:var(--green);">CB</div>
+      <div><div style="font-size:0.88rem;font-weight:600;">Corla Research</div><div style="font-size:0.8rem;color:var(--t3);">Published March 2025</div></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding:48px 0 96px;">
+  <div class="wrap">
+    <div class="blog-layout">
+      <article class="prose">
+        <div class="toc">
+          <div class="toc-title">In this article</div>
+          <ol>
+            <li><a href="#ztna-recap">A brief recap of zero-trust network architecture</a></li>
+            <li><a href="#the-gap">The gap: AI context as a trust domain</a></li>
+            <li><a href="#why-implicit">Why implicit trust in AI context is dangerous</a></li>
+            <li><a href="#principles">Zero-trust principles applied to AI context</a></li>
+            <li><a href="#in-practice">What this looks like in practice</a></li>
+          </ol>
+        </div>
+
+        <p>The zero-trust security model became enterprise mainstream in the late 2010s, driven by the death of the traditional network perimeter. The premise was simple but consequential: don't assume any user, device, or system inside the corporate network should be trusted by default. Verify every request. Enforce least-privilege access. Assume breach.</p>
+
+        <p>This was a hard cultural and architectural shift. It required replacing implicit trust with explicit verification at every layer: identity (who are you?), device (is your machine healthy?), network (are you on an approved path?), application (what are you allowed to do?). After a decade of work, many enterprises have a reasonably mature zero-trust posture — for traditional infrastructure.</p>
+
+        <p>But enterprise AI tools have introduced a new trust domain that zero-trust architectures have not yet addressed: <strong>the AI context layer</strong>. And in most organisations, this layer operates under precisely the kind of implicit trust that zero-trust was designed to eliminate.</p>
+
+        <h2 id="ztna-recap">A brief recap of zero-trust network architecture</h2>
+
+        <p>Zero-trust, as defined by NIST SP 800-207, rests on several core tenets: all resources are accessed securely regardless of location; access is granted on a per-session basis with least privilege; all traffic is inspected and logged; the state of all network assets and associated traffic is monitored.</p>
+
+        <p>The practical effect of mature zero-trust implementation: a contractor connecting from an unmanaged device gets different access than an employee on a corporate laptop. A database request from an application that has been recently patched is treated differently than one from an application with known vulnerabilities. Every assertion of identity is verified against current state — not cached from a previous verification.</p>
+
+        <p>This is continuous, explicit, context-aware access control. It is exactly the model we need to apply to AI context — and it is almost universally absent from AI infrastructure today.</p>
+
+        <h2 id="the-gap">The gap: AI context as a trust domain</h2>
+
+        <p>When an enterprise AI coding assistant starts a session, it receives context. That context shapes every output the AI produces. It may include system prompts, tool definitions, project-specific guidelines, domain knowledge, and examples of approved patterns.</p>
+
+        <p>In a zero-trust world, we would ask of this context: Who authorised it? When was that authorisation granted? Does it still apply? Was the content of the context verified before delivery? Can the delivery be revoked? Is there an audit trail?</p>
+
+        <p>In most current enterprise AI deployments, the answer to all of these questions is either "we don't know" or "no." Context is configured once, distributed widely, and governed by nothing more than file system permissions and the implicit trust that everyone with repository access is equivalent.</p>
+
+        <blockquote>The traditional network perimeter treated everyone inside the firewall as trusted. AI context, as currently managed, treats everyone with repository access as equivalently trusted to receive the organisation's most sensitive AI assets. This is the exact pattern that zero-trust was designed to replace.</blockquote>
+
+        <h2 id="why-implicit">Why implicit trust in AI context is dangerous</h2>
+
+        <p>Implicit trust in AI context creates three categories of risk that don't exist with explicit verification:</p>
+
+        <p><strong>Stale access.</strong> In a zero-trust network, a contractor's access is terminated when the engagement ends. In most AI context management today, a contractor who had access to a system prompt during their engagement retains the patterns they learned from working with outputs shaped by that prompt. There's no revocation — because there was no explicit grant to revoke.</p>
+
+        <p><strong>Undifferentiated exposure.</strong> Zero-trust enforces least-privilege: you get access to what you need, not to everything you might find useful. Most AI context delivery today is undifferentiated — the same system prompts, the same playbooks, the same domain context flows to senior employees and to entry-level contractors. The sensitivity ceiling is controlled by file permissions, not by role-aware access policy.</p>
+
+        <p><strong>No audit trail.</strong> Zero-trust mandates logging of all access. When you need to investigate a security incident, you have a complete record of who accessed what, when, and from where. AI context delivery today produces no equivalent record. If context is extracted or misused, there is no forensic trail of who had what context and what they asked the AI to do with it.</p>
+
+        <h2 id="principles">Zero-trust principles applied to AI context</h2>
+
+        <div class="principle-grid">
+          <div class="principle-card">
+            <div class="p-num">Principle 01</div>
+            <h4>Never trust, always verify</h4>
+            <p>Every context delivery request is authenticated and authorised against current state. A token issued yesterday is validated against today's revocation list before any context flows.</p>
+          </div>
+          <div class="principle-card">
+            <div class="p-num">Principle 02</div>
+            <h4>Least-privilege access</h4>
+            <p>Developers receive only the context their role and project require. The scope of delivered context matches the scope of the engagement — no more, no less.</p>
+          </div>
+          <div class="principle-card">
+            <div class="p-num">Principle 03</div>
+            <h4>Assume breach</h4>
+            <p>Design as if any developer could be adversarial or compromised. Context is compiled into opaque packages — useful but not directly extractable. Disclosure attempts are detected and logged.</p>
+          </div>
+          <div class="principle-card">
+            <div class="p-num">Principle 04</div>
+            <h4>Verify explicitly</h4>
+            <p>Context packages are cryptographically signed. The adapter verifies the signature before injecting context. An invalid signature is a security event, not a configuration error.</p>
+          </div>
+          <div class="principle-card">
+            <div class="p-num">Principle 05</div>
+            <h4>Log everything</h4>
+            <p>Every context request, delivery, and developer interaction is logged immutably. The audit trail exists to support incident response and continuous improvement — not just compliance.</p>
+          </div>
+          <div class="principle-card">
+            <div class="p-num">Principle 06</div>
+            <h4>Short-lived credentials</h4>
+            <p>Context packages are TTL-bounded. A developer's session cannot use yesterday's context indefinitely — each session re-validates against current grants and revocation state.</p>
+          </div>
+        </div>
+
+        <p>These are not abstract principles — they map directly to implementation choices. "Never trust, always verify" means token validation always hits the revocation list, never a cache. "Least-privilege" means RBAC with sensitivity ceiling enforcement at compile time. "Assume breach" means the compilation pipeline produces outputs that are useful without being extractable.</p>
+
+        <h2 id="in-practice">What this looks like in practice</h2>
+
+        <p>A mature zero-trust AI context posture has several observable properties that distinguish it from the implicit-trust status quo:</p>
+
+        <p><strong>Developer access is role-differentiated.</strong> A contractor working on the payments API receives context scoped to that domain and that role. They cannot access context for other projects or other sensitivity levels, even if they can access the repositories. Role and project are enforced at the context delivery layer, not just at the file system layer.</p>
+
+        <p><strong>Access can be revoked in near-real-time.</strong> When a vendor engagement ends, the admin revokes the developer's grant. Within 30 seconds, subsequent context requests from that developer fail. There is no lag between the policy decision and its enforcement. This mirrors how zero-trust network access works — revocation is immediate, not eventual.</p>
+
+        <p><strong>Every delivery is logged.</strong> The audit trail records which developer received which context assets, when, from which IP and device, and what they asked the AI to produce in that session. If a context-related incident occurs, the investigation starts with a complete record, not a blank page.</p>
+
+        <p><strong>Anomalies surface automatically.</strong> Unusual patterns — a developer requesting context at 3am from an unfamiliar geography, a sudden spike in context requests, repeated disclosure attempts — trigger alerts. The monitoring is continuous, not periodic.</p>
+
+        <p>None of this is more complex than mature zero-trust network architecture. In many ways it is simpler, because the scope is narrower. But it requires treating AI context as a first-class trust domain — which most enterprise security teams have not yet done.</p>
+
+        <p>The window to establish this infrastructure before incidents force it is still open. The organisations that build zero-trust AI context posture proactively will have a cleaner outcome than those that build it reactively. That gap will close faster than most expect.</p>
+
+        <div class="callout callout-amber">
+          <strong>Corla implements zero-trust principles for enterprise AI context:</strong> per-session authentication, role-scoped delivery, cryptographic signing, instant revocation, and immutable audit logging. <a href="../security.html" style="color:var(--amber)">See the full security model →</a>
+        </div>
+      </article>
+
+      <aside class="sidebar">
+        <div class="sidebar-card">
+          <h4>Related articles</h4>
+          <ul class="related-list">
+            <li><a href="outsourcing-ai-risk.html">The Hidden Risk in AI-Assisted Outsourcing</a></li>
+            <li><a href="ai-context-governance.html">Why Enterprises Need AI Context Governance</a></li>
+            <li><a href="mcp-for-ctos.html">MCP Explained for CTOs</a></li>
+            <li><a href="prompt-as-ip.html">Your Prompts Are Intellectual Property</a></li>
+          </ul>
+        </div>
+        <div class="sidebar-card">
+          <h4>Share</h4>
+          <div class="share-btns">
+            <button class="share-btn" onclick="navigator.clipboard.writeText(window.location.href)">Copy link</button>
+            <button class="share-btn">LinkedIn</button>
+          </div>
+        </div>
+        <div class="sidebar-card card-amber">
+          <h4 style="margin-bottom:8px;">Zero-trust for AI context</h4>
+          <p style="font-size:0.84rem;margin-bottom:14px;">Corla implements zero-trust principles for enterprise AI context — cooperative, auditable, and server-side enforced.</p>
+          <a href="../pricing.html#waitlist" class="btn btn-primary btn-sm" style="width:100%;justify-content:center;">Request Access</a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="../index.html" class="nav-logo" style="margin-bottom:4px;"><div class="logo-mark"></div>corla<span style="color:var(--amber)">.ai</span></a><p>The AI Context Broker for enterprise engineering teams.</p><div class="badge" style="width:fit-content;"><span class="badge-dot pulse"></span>Private Beta</div></div>
+      <div class="footer-col"><h5>Product</h5><ul><li><a href="../how-it-works.html">How it works</a></li><li><a href="../security.html">Security</a></li><li><a href="../pricing.html">Pricing</a></li></ul></div>
+      <div class="footer-col"><h5>Blog</h5><ul><li><a href="index.html">All articles</a></li><li><a href="outsourcing-ai-risk.html">Outsourcing Risk</a></li><li><a href="ai-context-governance.html">AI Governance</a></li></ul></div>
+      <div class="footer-col"><h5>Company</h5><ul><li><a href="#">NOI Technologies</a></li><li><a href="mailto:hello@corla.ai">hello@corla.ai</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><div class="footer-copy">© 2025 Corla · A product by NOI Technologies</div><div class="footer-legal"><a href="/privacy.html">Privacy</a><a href="/security.html">Security</a><a href="/terms.html">Terms</a></div></div>
+  </div>
+</footer>
+<script src="../js/main.js"></script>
+</body>
+</html>

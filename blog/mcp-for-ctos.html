@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>MCP Explained for CTOs: The Protocol That Changes Everything — Corla Blog</title>
+<meta name="description" content="Model Context Protocol has become the most important enterprise AI infrastructure standard of 2025. What it creates in terms of both opportunity and new governance risk.">
+<meta property="og:title" content="MCP Explained for CTOs: The Protocol That Changes Everything — Corla Blog">
+<meta property="og:description" content="Model Context Protocol has become the most important enterprise AI infrastructure standard of 2025. What it creates in terms of both opportunity and new governance risk.">
+<meta property="og:url" content="https://corla.ai/blog/mcp-for-ctos">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Corla">
+<meta property="og:image" content="https://corla.ai/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="MCP Explained for CTOs: The Protocol That Changes Everything — Corla Blog">
+<meta name="twitter:description" content="Model Context Protocol has become the most important enterprise AI infrastructure standard of 2025. What it creates in terms of both opportunity and new governance risk.">
+<link rel="canonical" href="https://corla.ai/blog/mcp-for-ctos">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="../favicon.svg">
+<meta name="theme-color" content="#F7F5F0">
+<link rel="stylesheet" href="../css/main.css">
+<style>
+.blog-layout { display:grid; grid-template-columns:1fr 280px; gap:64px; align-items:start; }
+.sidebar { position:sticky; top:90px; }
+.sidebar-card { background:var(--bg2); border:1px solid var(--border); border-radius:var(--r2); padding:24px; margin-bottom:20px; }
+.sidebar-card h4 { font-size:0.85rem; margin-bottom:14px; }
+.related-list { list-style:none; display:flex; flex-direction:column; gap:12px; }
+.related-list a { font-size:0.84rem; color:var(--t2); transition:color 0.2s; line-height:1.4; display:block; }
+.related-list a:hover { color:var(--amber); }
+.share-btns { display:flex; gap:8px; flex-wrap:wrap; }
+.share-btn { font-size:0.78rem; padding:7px 14px; border:1px solid var(--border); border-radius:100px; color:var(--t2); background:transparent; cursor:pointer; font-family:var(--body); transition:all 0.2s; }
+.share-btn:hover { border-color:var(--amber); color:var(--amber); }
+@media (max-width:900px) { .blog-layout { grid-template-columns:1fr; } .sidebar { position:static; } }
+@media (max-width:600px) { .prose h2 { font-size:1.3rem; margin:36px 0 12px; } .prose p, .prose li { font-size:0.975rem; } .toc { padding:18px 20px; } .prose blockquote { padding:14px 18px; } }
+</style>
+<script>
+  (function(){var t=localStorage.getItem('corla-theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark');})();
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "MCP Explained for CTOs: The Protocol That Changes Everything",
+  "description": "Model Context Protocol has become the most important enterprise AI infrastructure standard of 2025.",
+  "datePublished": "2025-02-20",
+  "dateModified": "2025-02-20",
+  "author": {
+    "@type": "Organization",
+    "name": "Corla Research",
+    "url": "https://corla.ai"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Corla",
+    "url": "https://corla.ai"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://corla.ai/blog/mcp-for-ctos"
+  }
+}
+</script>
+</head>
+<body>
+<div id="reading-progress"><div id="reading-progress-bar"></div></div>
+<nav>
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><div class="logo-mark"></div>corla<span style="color:var(--amber)">.ai</span></a>
+    <div class="nav-links">
+      <a href="../use-cases.html">Use Cases</a>
+      <a href="../how-it-works.html">How It Works</a>
+      <a href="../agent-deliberation.html">Agent Deliberation</a>
+      <a href="../security.html">Security</a>
+      <a href="index.html" class="active">Blog</a>
+      <a href="../pricing.html">Pricing</a>
+    </div>
+    <div class="nav-right">
+      <a href="../pricing.html#waitlist" class="btn btn-primary btn-sm">Get Access</a>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme" title="Toggle light/dark mode">
+        <svg class="icon-moon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.5 9.5A6 6 0 0 1 6.5 2.5a6 6 0 1 0 7 7z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg class="icon-sun" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="3" stroke="currentColor" stroke-width="1.5"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3.05 3.05l1.41 1.41M11.54 11.54l1.41 1.41M3.05 12.95l1.41-1.41M11.54 4.46l1.41-1.41" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+      <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M3 6h16M3 11h16M3 16h16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="../use-cases.html">Use Cases</a>
+  <a href="../how-it-works.html">How It Works</a>
+  <a href="../agent-deliberation.html">Agent Deliberation</a>
+  <a href="../security.html">Security</a>
+  <a href="index.html">Blog</a>
+  <a href="../pricing.html">Pricing</a>
+  <a href="../pricing.html#waitlist" style="color:var(--amber);border-bottom:none;margin-top:8px;">Get Access →</a>
+</div>
+
+<section style="padding:80px 0 48px;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:600px;height:400px;background:radial-gradient(ellipse at 50% 0%,rgba(79,126,255,0.08) 0%,transparent 65%);pointer-events:none;"></div>
+  <div class="wrap-narrow">
+    <a href="index.html" style="font-size:0.84rem;color:var(--t3);display:inline-flex;align-items:center;gap:6px;margin-bottom:24px;transition:color 0.2s;" onmouseover="this.style.color='var(--amber)'" onmouseout="this.style.color='var(--t3)'">← Back to Blog</a>
+    <div style="display:flex;gap:12px;align-items:center;margin-bottom:20px;">
+      <div class="badge badge-blue">Technology</div>
+      <span style="font-size:0.8rem;color:var(--t3);">8 min read · February 2025</span>
+    </div>
+    <h1 style="font-size:clamp(1.7rem,3.5vw,2.6rem);margin-bottom:20px;line-height:1.2;">MCP Explained for CTOs: The Protocol That Changes Everything</h1>
+    <p style="font-size:1.1rem;color:var(--t2);line-height:1.75;margin-bottom:32px;">Model Context Protocol has quietly become the most important enterprise AI infrastructure standard of 2025. Here's what your engineering team needs to understand — and why it creates both significant opportunity and new risk.</p>
+    <div style="display:flex;align-items:center;gap:16px;padding:20px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+      <div style="width:40px;height:40px;border-radius:50%;background:var(--blue-d);border:1px solid rgba(79,126,255,0.3);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:700;color:var(--blue);">CB</div>
+      <div><div style="font-size:0.88rem;font-weight:600;">Corla Research</div><div style="font-size:0.8rem;color:var(--t3);">Published February 2025</div></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding:48px 0 96px;">
+  <div class="wrap">
+    <div class="blog-layout">
+      <article class="prose">
+        <div class="toc">
+          <div class="toc-title">In this article</div>
+          <ol>
+            <li><a href="#what-mcp">What MCP actually is</a></li>
+            <li><a href="#why-matters">Why it matters more than you think</a></li>
+            <li><a href="#enterprise-adoption">The enterprise adoption picture in 2025</a></li>
+            <li><a href="#the-risk">The governance risk nobody is talking about</a></li>
+            <li><a href="#what-to-do">What to do about it</a></li>
+          </ol>
+        </div>
+
+        <p>In November 2024, Anthropic released the Model Context Protocol. At the time, it received moderate coverage as a technical standard for connecting AI assistants to external data sources. By mid-2025, it had become the de facto integration layer for enterprise AI — backed by Anthropic, OpenAI, Google, Microsoft, and the Linux Foundation.</p>
+
+        <p>If you're a CTO and MCP is not yet on your radar, it should be. Not because it's new technology you need to adopt, but because your developers have already adopted it — and the governance implications are significant.</p>
+
+        <h2 id="what-mcp">What MCP actually is</h2>
+
+        <p>The non-technical version: MCP is a standard protocol that lets AI tools (like Claude Code, GitHub Copilot, or Cursor) connect to external services and data sources. Without MCP, connecting an AI assistant to your database requires custom integration code. With MCP, the AI assistant and the database both speak a common language, and connecting them is configuration, not engineering.</p>
+
+        <p>The technical version: MCP is a client-server protocol based on JSON-RPC 2.0. AI clients (IDE plugins, coding agents) connect to MCP servers (services that expose tools and context). The protocol standardises three types of server capabilities: <strong>tools</strong> (actions the AI can invoke), <strong>resources</strong> (data the AI can read), and <strong>prompts</strong> (templates that shape AI behaviour).</p>
+
+        <p>The governance version — which is what matters for this article: MCP creates a standardised channel through which AI tools receive instructions, context, and capabilities. That channel is powerful, and it is largely ungoverned in most enterprise environments today.</p>
+
+        <h2 id="why-matters">Why it matters more than you think</h2>
+
+        <p>The Boston Consulting Group characterised MCP as "a deceptively simple idea with outsized implications." The implication they highlighted: without MCP, integration complexity between AI agents and enterprise systems rises quadratically. With MCP, it rises linearly. That's a large structural efficiency gain as AI agent use scales.</p>
+
+        <p>But there's a more specific implication that BCG didn't highlight: MCP standardises the channel through which enterprise AI context flows. Before MCP, context delivery to AI tools was ad hoc — files here, system prompts there, custom integrations everywhere. Each approach had its own access patterns and its own (limited) security posture.</p>
+
+        <p>MCP creates a single, standardised pipe. That's excellent news for integration efficiency. It is also the canonical attack surface for anyone who wants to intercept, modify, or extract enterprise AI context.</p>
+
+        <blockquote>MCP is to enterprise AI context what HTTP is to web data. The standardisation that enables the ecosystem also concentrates the risk. HTTP needed TLS, firewalls, and WAFs. MCP needs its own governance layer.</blockquote>
+
+        <h2 id="enterprise-adoption">The enterprise adoption picture in 2025</h2>
+
+        <p>The adoption data, when you look at it, is striking. As of late 2025, over 97 million monthly SDK downloads and 5,800+ available MCP servers. Block, Bloomberg, Amazon, and hundreds of Fortune 500 companies have production MCP deployments. The Linux Foundation's Agentic AI Foundation now governs the spec, which has removed the single-vendor governance risk that early skeptics raised.</p>
+
+        <p>The security picture is more concerning. Recent research from Clutch Security found that in a typical 10,000-person organisation, roughly 15% of employees are running an average of two MCP servers each — meaning 3,000+ MCP servers running across the organisation, each with its own credentials, and most with no centralised governance, no audit trails, and no revocation mechanism.</p>
+
+        <p>This is the pattern security teams call "shadow infrastructure" — functional, widely used, completely outside the governance perimeter. It happened with SaaS in the early 2010s. It happened with cloud infrastructure in the late 2010s. It is happening with AI context in 2025.</p>
+
+        <h2 id="the-risk">The governance risk nobody is talking about</h2>
+
+        <p>The MCP governance conversation in 2025 is primarily about <em>what tools AI agents can call</em>. MCP gateway products control which external services an AI agent can invoke. That's the right question for agentic risk, where an AI might execute code or write to databases.</p>
+
+        <p>But there's a second, less-discussed risk: <em>what context flows through the MCP channel into AI tools</em>. Most MCP gateway products are designed to govern the outbound direction — what the AI can do. Fewer are designed to govern the inbound direction — what proprietary knowledge reaches the AI tool.</p>
+
+        <p>For most enterprises, the inbound direction is where the proprietary IP lives. Your system prompts, your engineering playbooks, your internal knowledge base — these flow into developer AI tools via MCP and related mechanisms. And right now, that flow is typically:</p>
+
+        <ul>
+          <li>Ungoverned — no policy on what context should flow to which developers</li>
+          <li>Unaudited — no record of what context a developer's AI tool received</li>
+          <li>Unrevocable — when a vendor engagement ends, the context they received during it is permanent</li>
+        </ul>
+
+        <p>The MCP standard does not inherently solve any of these problems. It provides the pipe. What flows through the pipe, with what controls, remains an open question for most enterprises.</p>
+
+        <h2 id="what-to-do">What to do about it</h2>
+
+        <p>The governance response to MCP has three levels, and most organisations are at level zero:</p>
+
+        <p><strong>Level 1 — Visibility.</strong> Know which MCP servers are running in your organisation, who created them, and what they expose. This is the minimum viable governance posture. An MCP registry with mandatory registration for production servers achieves this. Most MCP gateway products provide this visibility as a baseline capability.</p>
+
+        <p><strong>Level 2 — Outbound control.</strong> Govern what external services AI agents can call. This is what current MCP gateway products do well. OAuth 2.1 authentication, RBAC, audit trails for tool invocations. This protects against agentic risk — an AI agent that shouldn't have access to your CRM, or shouldn't be able to write to your database.</p>
+
+        <p><strong>Level 3 — Inbound context governance.</strong> Govern what proprietary context flows into developer AI tools, with scoping, compilation, auditing, and revocation. This is what Corla addresses, and it is currently the least-served governance layer. An AI agent that receives the wrong context can do as much damage as an AI agent with the wrong permissions — it's just a different kind of damage.</p>
+
+        <p>The enterprises that will lead in AI-assisted development over the next five years are the ones that treat the context pipe — not just the action pipe — as core governance infrastructure. MCP made that pipe universal. Governing it is now table stakes.</p>
+
+        <div class="callout">
+          <strong>Further reading:</strong> <a href="../how-it-works.html" style="color:var(--amber)">How Corla uses MCP as the delivery mechanism for governed enterprise context →</a>
+        </div>
+      </article>
+
+      <aside class="sidebar">
+        <div class="sidebar-card">
+          <h4>Related articles</h4>
+          <ul class="related-list">
+            <li><a href="ai-context-governance.html">Why Enterprises Need AI Context Governance</a></li>
+            <li><a href="zero-trust-ai.html">Zero Trust for AI Context</a></li>
+            <li><a href="outsourcing-ai-risk.html">The Hidden Risk in AI-Assisted Outsourcing</a></li>
+          </ul>
+        </div>
+        <div class="sidebar-card">
+          <h4>Share</h4>
+          <div class="share-btns">
+            <button class="share-btn" onclick="navigator.clipboard.writeText(window.location.href)">Copy link</button>
+            <button class="share-btn">LinkedIn</button>
+          </div>
+        </div>
+        <div class="sidebar-card card-amber">
+          <h4 style="margin-bottom:8px;">The MCP context broker</h4>
+          <p style="font-size:0.84rem;margin-bottom:14px;">Corla is built on MCP and agent-agnostic from day one. Context delivery + multi-agent coordination in one platform.</p>
+          <a href="../pricing.html#waitlist" class="btn btn-primary btn-sm" style="width:100%;justify-content:center;">Request Access</a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="../index.html" class="nav-logo" style="margin-bottom:4px;"><div class="logo-mark"></div>corla<span style="color:var(--amber)">.ai</span></a><p>The AI Context Broker for enterprise engineering teams.</p><div class="badge" style="width:fit-content;"><span class="badge-dot pulse"></span>Private Beta</div></div>
+      <div class="footer-col"><h5>Product</h5><ul><li><a href="../how-it-works.html">How it works</a></li><li><a href="../security.html">Security</a></li><li><a href="../pricing.html">Pricing</a></li></ul></div>
+      <div class="footer-col"><h5>Blog</h5><ul><li><a href="index.html">All articles</a></li><li><a href="outsourcing-ai-risk.html">Outsourcing Risk</a></li></ul></div>
+      <div class="footer-col"><h5>Company</h5><ul><li><a href="#">NOI Technologies</a></li><li><a href="mailto:hello@corla.ai">hello@corla.ai</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><div class="footer-copy">© 2025 Corla · A product by NOI Technologies</div><div class="footer-legal"><a href="/privacy.html">Privacy</a><a href="/security.html">Security</a><a href="/terms.html">Terms</a></div></div>
+  </div>
+</footer>
+<script src="../js/main.js"></script>
+</body>
+</html>

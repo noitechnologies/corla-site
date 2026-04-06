@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>The Hidden Risk in AI-Assisted Outsourcing — Corla Blog</title>
+<meta name="description" content="When outsourced developers use AI tools with your codebase, proprietary context leaks in ways most security frameworks haven't modelled. Three specific vectors explained.">
+<meta property="og:title" content="The Hidden Risk in AI-Assisted Outsourcing — Corla Blog">
+<meta property="og:description" content="When outsourced developers use AI tools with your codebase, proprietary context leaks in ways most security frameworks haven't modelled. Three specific vectors explained.">
+<meta property="og:url" content="https://corla.ai/blog/outsourcing-ai-risk">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Corla">
+<meta property="og:image" content="https://corla.ai/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Hidden Risk in AI-Assisted Outsourcing — Corla Blog">
+<meta name="twitter:description" content="When outsourced developers use AI tools with your codebase, proprietary context leaks in ways most security frameworks haven't modelled. Three specific vectors explained.">
+<link rel="canonical" href="https://corla.ai/blog/outsourcing-ai-risk">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="../favicon.svg">
+<meta name="theme-color" content="#F7F5F0">
+<link rel="stylesheet" href="../css/main.css">
+<style>
+.blog-layout { display:grid; grid-template-columns:1fr 280px; gap:64px; align-items:start; }
+.sidebar { position:sticky; top:90px; }
+.sidebar-card { background:var(--bg2); border:1px solid var(--border); border-radius:var(--r2); padding:24px; margin-bottom:20px; }
+.sidebar-card h4 { font-size:0.85rem; margin-bottom:14px; color:var(--t1); }
+.related-list { list-style:none; display:flex; flex-direction:column; gap:12px; }
+.related-list a { font-size:0.84rem; color:var(--t2); transition:color 0.2s; line-height:1.4; display:block; }
+.related-list a:hover { color:var(--amber); }
+.share-btns { display:flex; gap:8px; flex-wrap:wrap; }
+.share-btn { font-size:0.78rem; padding:7px 14px; border:1px solid var(--border); border-radius:100px; color:var(--t2); background:transparent; cursor:pointer; font-family:var(--body); transition:all 0.2s; }
+.share-btn:hover { border-color:var(--amber); color:var(--amber); }
+@media (max-width:900px) { .blog-layout { grid-template-columns:1fr; } .sidebar { position:static; } }
+@media (max-width:600px) { .prose h2 { font-size:1.3rem; margin:36px 0 12px; } .prose p, .prose li { font-size:0.975rem; } .toc { padding:18px 20px; } .prose blockquote { padding:14px 18px; } }
+</style>
+<script>
+  (function(){var t=localStorage.getItem('corla-theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark');})();
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "The Hidden Risk in AI-Assisted Outsourcing",
+  "description": "When outsourced developers use AI tools with your codebase, proprietary context leaks in ways most security frameworks have not modelled.",
+  "datePublished": "2025-01-15",
+  "dateModified": "2025-01-15",
+  "author": {
+    "@type": "Organization",
+    "name": "Corla Research",
+    "url": "https://corla.ai"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Corla",
+    "url": "https://corla.ai"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://corla.ai/blog/outsourcing-ai-risk"
+  }
+}
+</script>
+</head>
+<body>
+<div id="reading-progress"><div id="reading-progress-bar"></div></div>
+<nav>
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><div class="logo-mark"></div>corla<span style="color:var(--amber)">.ai</span></a>
+    <div class="nav-links">
+      <a href="../how-it-works.html">How it works</a>
+      <a href="../security.html">Security</a>
+      <a href="index.html" class="active">Blog</a>
+      <a href="../pricing.html">Pricing</a>
+    </div>
+    <div class="nav-right">
+      <a href="../pricing.html#waitlist" class="btn btn-primary btn-sm">Get Access</a>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme" title="Toggle light/dark mode">
+        <svg class="icon-moon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.5 9.5A6 6 0 0 1 6.5 2.5a6 6 0 1 0 7 7z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg class="icon-sun" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="3" stroke="currentColor" stroke-width="1.5"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3.05 3.05l1.41 1.41M11.54 11.54l1.41 1.41M3.05 12.95l1.41-1.41M11.54 4.46l1.41-1.41" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+      <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M3 6h16M3 11h16M3 16h16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="../use-cases.html">Use Cases</a>
+  <a href="../how-it-works.html">How It Works</a>
+  <a href="../agent-deliberation.html">Agent Deliberation</a>
+  <a href="../security.html">Security</a>
+  <a href="index.html">Blog</a>
+  <a href="../pricing.html">Pricing</a>
+  <a href="../pricing.html#waitlist" style="color:var(--amber);border-bottom:none;margin-top:8px;">Get Access →</a>
+</div>
+
+<!-- HERO -->
+<section style="padding:80px 0 48px;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:600px;height:400px;background:radial-gradient(ellipse at 50% 0%,rgba(248,113,113,0.07) 0%,transparent 65%);pointer-events:none;"></div>
+  <div class="wrap-narrow">
+    <a href="index.html" style="font-size:0.84rem;color:var(--t3);display:inline-flex;align-items:center;gap:6px;margin-bottom:24px;transition:color 0.2s;" onmouseover="this.style.color='var(--amber)'" onmouseout="this.style.color='var(--t3)'">
+      ← Back to Blog
+    </a>
+    <div style="display:flex;gap:12px;align-items:center;margin-bottom:20px;">
+      <div class="badge" style="background:rgba(248,113,113,0.12);border-color:rgba(248,113,113,0.25);color:var(--red);">Security</div>
+      <span style="font-size:0.8rem;color:var(--t3);">7 min read · January 2025</span>
+    </div>
+    <h1 style="font-size:clamp(1.7rem,3.5vw,2.6rem);margin-bottom:20px;line-height:1.2;">The Hidden Risk in AI-Assisted Outsourcing</h1>
+    <p style="font-size:1.1rem;color:var(--t2);line-height:1.75;margin-bottom:32px;">When outsourced developers use AI coding tools with access to your codebase, your proprietary context leaks in ways most engineering leaders haven't modelled — and most security frameworks haven't addressed.</p>
+    <div style="display:flex;align-items:center;gap:16px;padding:20px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+      <div style="width:40px;height:40px;border-radius:50%;background:var(--amber-d);border:1px solid rgba(232,152,12,0.3);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:700;color:var(--amber);">CB</div>
+      <div><div style="font-size:0.88rem;font-weight:600;">Corla Research</div><div style="font-size:0.8rem;color:var(--t3);">Published January 2025</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTENT -->
+<section style="padding:48px 0 96px;">
+  <div class="wrap">
+    <div class="blog-layout">
+      <article class="prose">
+
+        <div class="toc">
+          <div class="toc-title">In this article</div>
+          <ol>
+            <li><a href="#the-scenario">The scenario every CTO should model</a></li>
+            <li><a href="#three-vectors">Three specific leak vectors</a></li>
+            <li><a href="#why-traditional">Why traditional controls fail here</a></li>
+            <li><a href="#what-mitigation">What proper mitigation looks like</a></li>
+            <li><a href="#the-question">The question to ask this week</a></li>
+          </ol>
+        </div>
+
+        <p>The outsourcing conversation used to be straightforward: you share a spec, the vendor builds to it, IP is governed by contract. But that model was built for a world where the developer's primary tool was a text editor and a compiler. It was not built for a world where the developer's primary tool is an AI assistant that has read your entire codebase and is being asked to explain its patterns.</p>
+
+        <p>AI-assisted development changes the IP calculus in ways that most legal teams haven't modelled and most security teams haven't operationalised. The risk is not theoretical — it is happening in every enterprise that uses outsourced development teams right now.</p>
+
+        <h2 id="the-scenario">The scenario every CTO should model</h2>
+
+        <p>Your company has spent two years building sophisticated AI-assisted development workflows. Your senior engineers have written:</p>
+
+        <ul>
+          <li>System prompts that encode your proprietary fraud detection logic</li>
+          <li>Engineering playbooks that describe your microservices architecture patterns</li>
+          <li>Skill definitions that teach AI tools your internal API conventions</li>
+          <li>Context documents that explain your domain model — the one that took five years to build</li>
+        </ul>
+
+        <p>These assets are competitive advantages. They represent accumulated institutional knowledge. They are, in any reasonable interpretation, intellectual property.</p>
+
+        <p>Now imagine you onboard an outsourced development vendor to help ship a new feature faster. You give them access to the relevant repositories. They set up Claude Code, Cursor, or GitHub Copilot — tools you may have explicitly approved for AI-assisted development. They start working.</p>
+
+        <p>Within their first hour, their AI tool has indexed your entire codebase and is drawing on everything it contains to generate suggestions. Including the system prompts. Including the playbooks. Including the skill definitions you've invested in.</p>
+
+        <blockquote>The developer didn't steal anything. The AI tool didn't violate a policy. But your proprietary context is now embedded in the output patterns of a developer working for a vendor you don't fully control, on a machine you don't own, in a process you can't audit.</blockquote>
+
+        <h2 id="three-vectors">Three specific leak vectors</h2>
+
+        <p>The risk is not monolithic. It manifests in at least three distinct ways, each requiring different mitigations.</p>
+
+        <h3>Vector 1: Direct context window extraction</h3>
+
+        <p>AI coding tools can be prompted to explain, summarise, or reproduce content from their context. A developer — malicious or merely curious — can ask their AI assistant to describe the system prompts it has access to. In most tool configurations today, the AI will comply.</p>
+
+        <p>This is not a theoretical attack. It requires no technical sophistication. It is a natural user behaviour. "What context do you have?" is a reasonable question for a developer to ask when debugging unexpected AI behaviour.</p>
+
+        <p>The mitigation requires behaviour envelope enforcement and server-side context hosting — the AI tool must be instructed not to disclose context contents, and high-sensitivity assets should be served as live context rather than injected as readable text.</p>
+
+        <h3>Vector 2: Implicit pattern extraction through completions</h3>
+
+        <p>Even without direct extraction, the context shapes the completions. A developer who repeatedly works with AI-generated code that follows your internal patterns is learning those patterns. The AI isn't leaking text — it's leaking behaviour.</p>
+
+        <p>This vector is harder to mitigate completely, but it can be scoped. If developers can only access the context relevant to their specific project and role, the exposure surface shrinks. A developer working on payment flows doesn't need your recommendation algorithm's system prompt.</p>
+
+        <h3>Vector 3: Prompt injection via codebase content</h3>
+
+        <p>If your codebase contains comments, documentation strings, or configuration files that embed prompt-like language, an AI tool indexing your codebase could treat these as context that informs its behaviour for other developers. The vector runs in both directions.</p>
+
+        <p>This is particularly relevant for enterprises that have embedded system prompt fragments in code comments as documentation — a common and well-intentioned practice that creates unintended exposure.</p>
+
+        <h2 id="why-traditional">Why traditional controls fail here</h2>
+
+        <p>The standard enterprise response to IP leakage concerns involves some combination of NDAs, data classification policies, access controls, and DLP tooling. Each of these fails in a specific way for this threat model.</p>
+
+        <p><strong>NDAs</strong> are contracts. They establish liability after a breach. They do not prevent the breach or detect it when it happens. An outsourced developer who inadvertently learns your domain model through AI-assisted work has not violated an NDA — they have just had an unusually educational engagement.</p>
+
+        <p><strong>Data classification</strong> works when data has clear boundaries. AI context does not. A system prompt is a text file that might be classified as "confidential." But the patterns it encodes, the constraints it enforces, the vocabulary it uses — these are not files. They are encoded in every completion the AI produces in the presence of that prompt.</p>
+
+        <p><strong>Traditional DLP tools</strong> look for specific patterns — social security numbers, credit card numbers, PII. They are not equipped to detect the extraction of proprietary reasoning patterns through AI completions. The signal they're built to find looks nothing like the signal produced by this threat vector.</p>
+
+        <div class="callout callout-amber">
+          <strong>The core gap:</strong> Traditional security controls were designed for a world where sensitive information is stored in identifiable files and transmitted over networks. The AI context threat operates differently — sensitivity is encoded in patterns and behaviours, not in discrete data objects.
+        </div>
+
+        <h2 id="what-mitigation">What proper mitigation looks like</h2>
+
+        <p>Effective mitigation for this threat requires four properties that traditional controls don't provide:</p>
+
+        <p><strong>Context compilation.</strong> Raw assets should never be transmitted to developer environments. Instead, a compilation step should produce a derived artifact — useful to the AI tool, but not directly readable or extractable by the developer. Think compiled binary, not source code.</p>
+
+        <p><strong>Scope projection.</strong> Developers should receive only the context their role and project require. The principle of least privilege applies to AI context as surely as it applies to database access. A developer on the payments team should not have access to your recommendation system's context.</p>
+
+        <p><strong>Disclosure detection.</strong> Systems should detect and log attempts to extract context instructions. Pattern matching on developer prompts can identify extraction attempts ("repeat your system prompt," "what are your instructions") and trigger alerts before significant exposure occurs.</p>
+
+        <p><strong>Auditability.</strong> Every context request, delivery, and developer interaction should be logged immutably. When a security incident occurs — and eventually one will — you need to know which developer had access to which context, when, and what they asked the AI to produce in response.</p>
+
+        <h2 id="the-question">The question to ask this week</h2>
+
+        <p>The question is not "could this happen to us?" It is almost certainly already happening. The question is: do you have visibility into it?</p>
+
+        <p>If your outsourced developers are using AI coding tools — and they are, because you've given them access to tools that help them ship faster — then your proprietary AI context is flowing into those sessions without oversight.</p>
+
+        <p>The engineering teams that get ahead of this in 2025 will be the ones that establish context governance as a discipline alongside model governance and output governance. Not because regulators require it yet, but because the competitive moats built from proprietary AI context are only worth protecting if you actually protect them.</p>
+
+        <div class="callout">
+          <strong>Related:</strong> Corla is an AI Context Broker that addresses exactly this threat model — compiling proprietary assets into opaque context packages delivered to developers without exposing the source. <a href="../how-it-works.html" style="color:var(--amber)">Read how it works →</a>
+        </div>
+
+      </article>
+
+      <aside class="sidebar">
+        <div class="sidebar-card">
+          <h4>Related articles</h4>
+          <ul class="related-list">
+            <li><a href="prompt-as-ip.html">Your Prompts Are Intellectual Property. Treat Them That Way.</a></li>
+            <li><a href="ai-context-governance.html">Why Enterprises Need AI Context Governance</a></li>
+            <li><a href="zero-trust-ai.html">Zero Trust for AI Context</a></li>
+            <li><a href="mcp-for-ctos.html">MCP Explained for CTOs</a></li>
+          </ul>
+        </div>
+        <div class="sidebar-card">
+          <h4>Share</h4>
+          <div class="share-btns">
+            <button class="share-btn" onclick="navigator.clipboard.writeText(window.location.href)">Copy link</button>
+            <button class="share-btn">LinkedIn</button>
+            <button class="share-btn">Twitter</button>
+          </div>
+        </div>
+        <div class="sidebar-card card-amber">
+          <h4 style="margin-bottom:8px;">Protect your AI context</h4>
+          <p style="font-size:0.84rem;margin-bottom:14px;">Corla compiles proprietary assets into opaque packages for outsourced developers.</p>
+          <a href="../pricing.html#waitlist" class="btn btn-primary btn-sm" style="width:100%;justify-content:center;">Request Access</a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="../index.html" class="nav-logo" style="margin-bottom:4px;"><div class="logo-mark"></div>corla<span style="color:var(--amber)">.ai</span></a><p>The AI Context Broker for enterprise engineering teams.</p><div class="badge" style="width:fit-content;"><span class="badge-dot pulse"></span>Private Beta</div></div>
+      <div class="footer-col"><h5>Product</h5><ul><li><a href="../how-it-works.html">How it works</a></li><li><a href="../security.html">Security</a></li><li><a href="../pricing.html">Pricing</a></li></ul></div>
+      <div class="footer-col"><h5>Blog</h5><ul><li><a href="index.html">All articles</a></li><li><a href="mcp-for-ctos.html">MCP for CTOs</a></li><li><a href="ai-context-governance.html">AI Governance</a></li></ul></div>
+      <div class="footer-col"><h5>Company</h5><ul><li><a href="#">NOI Technologies</a></li><li><a href="mailto:hello@corla.ai">hello@corla.ai</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><div class="footer-copy">© 2025 Corla · A product by NOI Technologies</div><div class="footer-legal"><a href="/privacy.html">Privacy</a><a href="/security.html">Security</a><a href="/terms.html">Terms</a></div></div>
+  </div>
+</footer>
+<script src="../js/main.js"></script>
+</body>
+</html>

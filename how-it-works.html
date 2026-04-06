@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>How It Works — Corla</title>
+<meta name="description" content="A technical walkthrough of Corla's three-zone architecture, compilation pipeline, and multi-agent coordination layer. Built on MCP. Agent-agnostic.">
+<meta property="og:title" content="How It Works — Corla">
+<meta property="og:description" content="A technical walkthrough of Corla's three-zone architecture, compilation pipeline, and multi-agent coordination layer. Built on MCP. Agent-agnostic.">
+<meta property="og:url" content="https://corla.ai/how-it-works">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Corla">
+<meta property="og:image" content="https://corla.ai/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="How It Works — Corla">
+<meta name="twitter:description" content="A technical walkthrough of Corla's three-zone architecture, compilation pipeline, and multi-agent coordination layer. Built on MCP. Agent-agnostic.">
+<link rel="canonical" href="https://corla.ai/how-it-works">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon.svg">
+<meta name="theme-color" content="#F7F5F0">
+<link rel="stylesheet" href="css/main.css">
+<style>
+.page-hero { padding:96px 0 72px; position:relative; overflow:hidden; }
+.page-hero .hero-glow { position:absolute; top:-160px; left:50%; transform:translateX(-50%); width:800px; height:500px; }
+.page-hero .hero-grid { position:absolute; inset:0; }
+
+/* Flow steps */
+.flow { display:flex; flex-direction:column; gap:0; position:relative; }
+.flow::before { content:''; position:absolute; left:27px; top:48px; bottom:48px; width:1px; background:linear-gradient(to bottom, var(--amber), var(--blue), transparent); }
+.flow-step { display:grid; grid-template-columns:56px 1fr; gap:24px; padding:0 0 40px; }
+.flow-num { width:56px; height:56px; border-radius:50%; background:var(--bg3); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; font-family:var(--mono); font-size:0.85rem; color:var(--amber); font-weight:500; flex-shrink:0; position:relative; z-index:1; }
+.flow-body { padding-top:12px; }
+.flow-body h3 { margin-bottom:8px; }
+.flow-body p { font-size:0.9rem; }
+.flow-tag { font-size:0.7rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--t3); margin-bottom:6px; font-family:var(--body); }
+.flow-detail { margin-top:14px; background:var(--bg3); border:1px solid var(--border); border-radius:var(--r); padding:16px 20px; font-size:0.85rem; color:var(--t2); line-height:1.65; }
+
+/* Compiler stages */
+.stages { display:grid; grid-template-columns:repeat(5,1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:var(--r2); overflow:hidden; }
+.stage { background:var(--bg2); padding:24px 18px; text-align:center; position:relative; }
+.stage:not(:last-child)::after { content:'→'; position:absolute; right:-10px; top:50%; transform:translateY(-50%); color:var(--amber); font-size:0.9rem; z-index:2; }
+.stage-num { width:32px; height:32px; border-radius:50%; background:var(--amber-d); border:1px solid rgba(232,152,12,0.25); color:var(--amber); font-size:0.78rem; font-weight:700; display:flex; align-items:center; justify-content:center; margin:0 auto 12px; font-family:var(--mono); }
+.stage h4 { font-size:0.85rem; margin-bottom:6px; }
+.stage p { font-size:0.78rem; line-height:1.5; }
+
+/* Trust boundaries */
+.boundary-table { width:100%; border-collapse:collapse; }
+.boundary-table td, .boundary-table th { padding:14px 20px; border-bottom:1px solid var(--border); }
+.boundary-table th { background:var(--bg3); font-size:0.78rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--t3); }
+.boundary-table td { font-size:0.88rem; color:var(--t2); }
+.boundary-table td:first-child { font-weight:600; color:var(--t1); font-size:0.9rem; }
+.green-dot { color:var(--green); }
+.red-dot   { color:var(--red); }
+.amber-dot { color:var(--amber); }
+
+/* Latency */
+.latency-row { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+.latency-card { background:var(--bg3); border:1px solid var(--border); border-radius:var(--r2); padding:24px; text-align:center; }
+.latency-val { font-family:var(--display); font-size:1.8rem; font-weight:800; color:var(--amber); letter-spacing:-0.03em; }
+.latency-label { font-size:0.82rem; color:var(--t3); margin-top:4px; }
+.latency-note { font-size:0.78rem; color:var(--t3); margin-top:6px; }
+
+@media (max-width:768px) {
+  .stages { grid-template-columns:1fr; }
+  .stage::after { display:none; }
+  .latency-row { grid-template-columns:1fr; }
+  .flow { padding-left: 0; }
+  .flow-step { grid-template-columns: 40px 1fr; gap: 14px; }
+  .flow-num { width:40px; height:40px; font-size:0.75rem; }
+}
+@media (max-width:600px) {
+  /* compiler before/after pre block */
+  .pre-grid { grid-template-columns: 1fr !important; }
+  .flow::before { left: 19px; }
+  .page-hero { padding: 64px 0 40px; }
+  pre { padding: 16px; font-size: 0.78rem; }
+  .zone { padding: 18px 16px; }
+}
+</style>
+<script>
+  (function(){var t=localStorage.getItem('corla-theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark');})();
+</script>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><div class="logo-mark"></div>corla<span style="color:var(--amber)">.ai</span></a>
+    <div class="nav-links">
+      <a href="how-it-works.html" class="active">How it works</a>
+      <a href="security.html">Security</a>
+      <a href="blog/index.html">Blog</a>
+      <a href="pricing.html">Pricing</a>
+    </div>
+    <div class="nav-right">
+      <a href="pricing.html#waitlist" class="btn btn-primary btn-sm">Get Access</a>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme" title="Toggle light/dark mode">
+        <svg class="icon-moon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.5 9.5A6 6 0 0 1 6.5 2.5a6 6 0 1 0 7 7z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg class="icon-sun" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="3" stroke="currentColor" stroke-width="1.5"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3.05 3.05l1.41 1.41M11.54 11.54l1.41 1.41M3.05 12.95l1.41-1.41M11.54 4.46l1.41-1.41" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+      <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M3 6h16M3 11h16M3 16h16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="use-cases.html">Use Cases</a>
+  <a href="how-it-works.html">How It Works</a>
+  <a href="agent-deliberation.html">Agent Deliberation</a>
+  <a href="security.html">Security</a>
+  <a href="blog/index.html">Blog</a>
+  <a href="pricing.html">Pricing</a>
+  <a href="pricing.html#waitlist" style="color:var(--amber);border-bottom:none;margin-top:8px;">Get Access →</a>
+</div>
+
+<section class="page-hero">
+  <div class="hero-glow" style="background:radial-gradient(ellipse at 50% 0%,rgba(232,152,12,0.09) 0%,rgba(79,126,255,0.04) 40%,transparent 70%);"></div>
+  <div class="hero-grid"></div>
+  <div class="wrap">
+    <div class="badge" style="margin-bottom:20px;"><span class="badge-dot"></span>Architecture</div>
+    <h1>How Corla works</h1>
+    <p style="font-size:1.05rem;max-width:600px;margin-top:16px;line-height:1.8;">From context compilation to multi-agent coordination — a technical walkthrough of the broker architecture, the MCP tool set, and how the security properties hold.</p>
+  </div>
+</section>
+
+<!-- THREE ZONES -->
+<section>
+  <div class="wrap">
+    <div class="reveal">
+      <div class="label">Zone Model</div>
+      <h2 class="section-head">One broker between enterprise knowledge and every agent.</h2>
+      <p class="section-sub">The three-zone model defines where assets live, where compilation happens, and what can cross each boundary. It is a security model, not just a deployment topology.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;" class="reveal" data-stagger>
+      <div class="card card-amber">
+        <div style="font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--amber);margin-bottom:12px;">Zone 1 · Enterprise</div>
+        <h3 style="margin-bottom:10px;">Your infrastructure</h3>
+        <p style="font-size:0.88rem;margin-bottom:16px;">On-premise or dedicated VPC. You own and operate this zone. Corla never requires direct access to it — assets are fetched by secure content reference only.</p>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:7px;">
+          <li style="font-size:0.83rem;color:var(--t2);display:flex;gap:8px;align-items:flex-start;"><span style="color:var(--green);flex-shrink:0">✓</span>Raw asset content (prompts, playbooks, skills)</li>
+          <li style="font-size:0.83rem;color:var(--t2);display:flex;gap:8px;align-items:flex-start;"><span style="color:var(--green);flex-shrink:0">✓</span>Policy definitions (RBAC roles, scopes)</li>
+          <li style="font-size:0.83rem;color:var(--t2);display:flex;gap:8px;align-items:flex-start;"><span style="color:var(--green);flex-shrink:0">✓</span>Enterprise signing key (encrypted at rest)</li>
+          <li style="font-size:0.83rem;color:var(--t2);display:flex;gap:8px;align-items:flex-start;"><span style="color:var(--green);flex-shrink:0">✓</span>Immutable audit sink (append-only)</li>
+          <li style="font-size:0.83rem;color:var(--t2);display:flex;gap:8px;align-items:flex-start;"><span style="color:var(--green);flex-shrink:0">✓</span>Admin console (grant management)</li>
+        </ul>
+      </div>
+      <div class="card" style="border-color:rgba(79,126,255,0.25);background:linear-gradient(135deg,var(--blue-d),var(--bg2));position:relative;">
+        <div style="font-size:0.68rem;font-weight:600;color:var(--blue);background:var(--blue-d);padding:2px 7px;border-radius:4px;font-family:var(--mono);position:absolute;top:14px;right:14px;">this product</div>
+        <div style="font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--blue);margin-bottom:12px;">Zone 2 · Broker</div>
+        <h3 style="margin-bottom:10px;">Corla managed SaaS</h3>
+        <p style="font-size:0.88rem;margin-bottom:16px;">Corla lives here. It fetches asset references (not content) from Zone 1, loads content from secure storage, compiles, signs, and serves. It never persists raw content.</p>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:7px;">
+          <li style="font-size:0.83rem;color:var(--t2);display:flex;gap:8px;align-items:flex-start;"><span style="color:var(--blue);flex-shrink:0">✓</span>OAuth 2.1 token service</li>
+          <li style="font-size:0.83rem;color:var(--t2);display:flex;gap:8px;align-items:flex-start;"><span style="color:var(--blue);flex-shrink:0">✓</span>Policy engine (RBAC evaluation)</li>
+          <li style="font-size:0.83rem;color:var(--t2);display:flex;gap:8px;align-items:flex-start;"><span style="color:var(--blue);flex-shrink:0">✓</span>Compilation pipeline (5 stages)</li>
+          <li style="font-size:0.83rem;color:var(--t2);display:flex;gap:8px;align-items:flex-start;"><span style="color:var(--blue);flex-shrink:0">✓</span>Audit engine + disclosure detection</li>
+          <li style="font-size:0.83rem;color:var(--t2);display:flex;gap:8px;align-items:flex-start;"><span style="color:var(--blue);flex-shrink:0">✓</span>Package cache (Redis, encrypted)</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div style="font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--t3);margin-bottom:12px;">Zone 3 · Developer</div>
+        <h3 style="margin-bottom:10px;">Developer's machine</h3>
+        <p style="font-size:0.88rem;margin-bottom:16px;">Untrusted by default. Receives only compiled derivatives — signed, scoped, TTL-bounded. Content is injected into the AI tool's in-memory context only. Never written to disk.</p>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:7px;">
+          <li style="font-size:0.83rem;color:var(--t2);display:flex;gap:8px;align-items:flex-start;"><span style="color:var(--t3);flex-shrink:0">·</span>MCP adapter (one config file)</li>
+          <li style="font-size:0.83rem;color:var(--t2);display:flex;gap:8px;align-items:flex-start;"><span style="color:var(--t3);flex-shrink:0">·</span>AI coding tool (Claude Code, Cursor, etc.)</li>
+          <li style="font-size:0.83rem;color:var(--t2);display:flex;gap:8px;align-items:flex-start;"><span style="color:var(--t3);flex-shrink:0">·</span>Compiled package (opaque derivative)</li>
+          <li style="font-size:0.83rem;color:var(--t2);display:flex;gap:8px;align-items:flex-start;"><span style="color:var(--t3);flex-shrink:0">·</span>Local repository</li>
+          <li style="font-size:0.83rem;color:var(--t2);display:flex;gap:8px;align-items:flex-start;"><span style="color:var(--red);flex-shrink:0">✗</span>No raw asset content. Ever.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REQUEST FLOW -->
+<section class="section-dark">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="label">Request Flow</div>
+      <h2 class="section-head">14 steps. Developer sees 3.</h2>
+      <p class="section-sub">The developer opens their IDE, uses their AI tool, and gets better output. Everything else is invisible infrastructure.</p>
+    </div>
+    <div class="flow reveal">
+      <div class="flow-step">
+        <div class="flow-num">01</div>
+        <div class="flow-body"><div class="flow-tag">Developer Zone</div><h3>IDE opens, adapter reads <code>.mcp.json</code></h3><p>The MCP adapter discovers the Corla broker endpoint from the project config file written by <code>corla init</code>. No user action required after initial setup.</p></div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">02</div>
+        <div class="flow-body"><div class="flow-tag">Zone 2→3 Boundary</div><h3>OAuth 2.1 PKCE authentication</h3><p>The adapter presents the developer's bearer token. The broker validates it against the Redis revocation list. If revoked or expired, the request is rejected immediately — fail closed.</p><div class="flow-detail">Token validation always hits Redis. Caching the validation result is explicitly prohibited — it would break the &lt;30s revocation guarantee.</div></div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">03–04</div>
+        <div class="flow-body"><div class="flow-tag">Zone 2 · Broker</div><h3>Policy evaluation</h3><p>The policy engine loads the developer's grant from the database and checks: Is the grant still active? Is it expired? Does the project match the token's project claim? Does the role have the required permissions?</p></div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">05</div>
+        <div class="flow-body"><div class="flow-tag">Zone 1→2 Boundary</div><h3>Asset content fetched by reference</h3><p>The broker resolves content references (S3 keys or vault paths) and loads raw content. This is the <strong>only</strong> point where raw content exists in Zone 2 — in memory, never persisted, never transmitted further in raw form.</p></div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">06–07</div>
+        <div class="flow-body"><div class="flow-tag">Zone 2 · Compiler</div><h3>Compilation pipeline (5 stages)</h3><p>The raw content passes through the full compilation pipeline: intent extraction → redaction → scope projection → signing → package emission. See the compiler diagram below.</p></div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">08–09</div>
+        <div class="flow-body"><div class="flow-tag">Zone 2→3 Boundary</div><h3>Signed package delivered to adapter</h3><p>The compiled package crosses the trust boundary. The adapter verifies the HMAC signature before accepting it. An invalid signature is a critical security event, logged and reported.</p></div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">10–11</div>
+        <div class="flow-body"><div class="flow-tag">Developer Zone</div><h3>Context injected in-memory into AI tool</h3><p>The adapter injects the compiled package into the AI tool's context window. In-memory only — never written to disk, never in a temp file, never in a log.</p></div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">12–14</div>
+        <div class="flow-body"><div class="flow-tag">Audit · All Zones</div><h3>Output filtered, events logged</h3><p>The AI response passes through an output policy filter. Input and output are hashed (not stored raw) and logged immutably. The audit event is written to the enterprise's audit sink within 5 seconds.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPILER -->
+<section>
+  <div class="wrap">
+    <div class="reveal">
+      <div class="label">The Compiler</div>
+      <h2 class="section-head">Five stages. Clean structured output.</h2>
+      <p class="section-sub">Raw asset content goes in. A signed, scoped, redacted derivative comes out — useful for AI-assisted work, not reconstructable into the original.</p>
+    </div>
+    <div class="stages reveal">
+      <div class="stage"><div class="stage-num">1</div><h4>Intent extract</h4><p>Goal, constraints, domain keywords — the metadata safe to expose.</p></div>
+      <div class="stage"><div class="stage-num">2</div><h4>Redact</h4><p>PII and secrets stripped. Emails, API keys, JWTs, connection strings.</p></div>
+      <div class="stage"><div class="stage-num">3</div><h4>Scope project</h4><p>RBAC role ceiling applied. Internal sections removed. Sensitivity filtered.</p></div>
+      <div class="stage"><div class="stage-num">4</div><h4>Sign &amp; seal</h4><p>HMAC-SHA256 with enterprise key. TTL embedded. Canonical JSON.</p></div>
+      <div class="stage"><div class="stage-num">5</div><h4>Emit package</h4><p>Signed <code>CompiledPackage</code> JSON. Cached in Redis. Audited.</p></div>
+    </div>
+    <div class="divider divider-amber" style="margin:32px 0"></div>
+    <div class="reveal" style="display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start;">
+      <div>
+        <h3 style="margin-bottom:12px;">What goes in</h3>
+        <pre style="font-size:0.8rem;">// RawAsset — stays in Zone 1/2 only
+{
+  id: "asset_abc123",
+  type: "SYSTEM_PROMPT",
+  content: `You are a payment processing
+    assistant for Acme Corp. Always use
+    our internal idempotency key format:
+    ACM-{timestamp}-{uuid}. Never log
+    card numbers. Contact john@acme.com
+    for escalations. API key: sk-prod-...`,
+  sensitivity: "HIGH"
+}</pre>
+      </div>
+      <div>
+        <h3 style="margin-bottom:12px;">What comes out</h3>
+        <pre style="font-size:0.8rem;">// CompiledPackage — crosses boundary
+{
+  packageId: "pkg_xyz789",
+  expiresAt: 1735000000,
+  artifacts: [{
+    assetType: "system_prompt",
+    content: `You are a payment processing
+      assistant. Always use idempotency
+      keys. Never log card numbers.
+      [EMAIL] [SECRET_REDACTED]`,
+    role: "system"
+  }],
+  signature: "a3f9b2c1...",
+  behaviourEnvelope: {
+    disclosureRestriction: true
+  }
+}</pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LATENCY -->
+<section class="section-dark">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="label">Performance</div>
+      <h2 class="section-head">Fast enough to be invisible.</h2>
+      <p class="section-sub">Context delivery adds negligible latency to the AI tool's response time. The developer never notices the security infrastructure working.</p>
+    </div>
+    <div class="latency-row reveal">
+      <div class="latency-card">
+        <div class="latency-val">&lt;50ms</div>
+        <div class="latency-label">Warm cache delivery</div>
+        <div class="latency-note">Package already compiled, Redis hit</div>
+      </div>
+      <div class="latency-card">
+        <div class="latency-val">&lt;400ms</div>
+        <div class="latency-label">Cold compile</div>
+        <div class="latency-note">First request or cache miss</div>
+      </div>
+      <div class="latency-card">
+        <div class="latency-val">&lt;30s</div>
+        <div class="latency-label">Revocation propagation</div>
+        <div class="latency-note">Atomic Redis pipeline, no polling</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BOUNDARY TABLE -->
+<section>
+  <div class="wrap">
+    <div class="reveal">
+      <div class="label">Boundary Rules</div>
+      <h2 class="section-head">What can and cannot cross each boundary.</h2>
+    </div>
+    <div class="table-wrap reveal">
+      <table class="boundary-table">
+        <thead><tr><th>Data type</th><th>Zone 1 → Zone 2</th><th>Zone 2 → Zone 3</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td>Raw asset content</td><td class="green-dot">✓ In memory only</td><td class="red-dot">✗ Never</td><td style="font-size:0.83rem;color:var(--t3)">Loaded, compiled, then discarded in Zone 2</td></tr>
+          <tr><td>Compiled package</td><td class="red-dot">✗ N/A</td><td class="green-dot">✓ Signed + TTL</td><td style="font-size:0.83rem;color:var(--t3)">Signature verified by adapter before use</td></tr>
+          <tr><td>Enterprise signing key</td><td class="green-dot">✓ Encrypted</td><td class="red-dot">✗ Never</td><td style="font-size:0.83rem;color:var(--t3)">Used in Zone 2 for signing only</td></tr>
+          <tr><td>Bearer token (JWT)</td><td class="red-dot">✗ N/A</td><td class="amber-dot">↔ Auth only</td><td style="font-size:0.83rem;color:var(--t3)">JTI validated against Redis; token not logged</td></tr>
+          <tr><td>Audit events</td><td class="green-dot">✓ Written to sink</td><td class="red-dot">✗ Never</td><td style="font-size:0.83rem;color:var(--t3)">Hashes only — input/output content never stored</td></tr>
+          <tr><td>Policy rules</td><td class="green-dot">✓ Read-only</td><td class="red-dot">✗ Never</td><td style="font-size:0.83rem;color:var(--t3)">Used for scope projection; not transmitted</td></tr>
+          <tr><td>Content references (S3 keys)</td><td class="green-dot">✓ Internal only</td><td class="red-dot">✗ Never</td><td style="font-size:0.83rem;color:var(--t3)">Never exposed to developer zone</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- DEVELOPER SETUP -->
+<section class="section-dark">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="label">Developer Setup</div>
+      <h2 class="section-head">Three commands. Enterprise context, automatically.</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;" class="reveal">
+      <div>
+        <div style="display:flex;flex-direction:column;gap:16px;">
+          <div class="card"><div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--amber);margin-bottom:8px;">Step 1</div><h4 style="margin-bottom:6px;">Install the adapter</h4><p style="font-size:0.85rem;"><code>npm install -g @corla/adapter</code></p></div>
+          <div class="card"><div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--amber);margin-bottom:8px;">Step 2</div><h4 style="margin-bottom:6px;">Initialise the project</h4><p style="font-size:0.85rem;"><code>corla init</code> — writes <code>.mcp.json</code> and appends a Corla behaviour block to <code>CLAUDE.md</code> (auto-loaded by Claude Code as genuine system context). Works with Claude Code, Cursor, and Windsurf automatically.</p></div>
+          <div class="card"><div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--amber);margin-bottom:8px;">Step 3</div><h4 style="margin-bottom:6px;">Authenticate once</h4><p style="font-size:0.85rem;"><code>corla login</code> — OAuth 2.1 PKCE browser flow. Set <code>CORLA_TOKEN</code> in your <code>.env</code> file. Done.</p></div>
+        </div>
+      </div>
+      <div>
+        <h3 style="margin-bottom:16px;">From that point, zero friction.</h3>
+        <p style="margin-bottom:16px;">Every subsequent AI tool invocation in the project directory automatically pulls enterprise context. The developer types <code>claude</code> or opens Cursor and their AI tool already knows the enterprise's patterns, conventions, and constraints.</p>
+        <p>No flags. No prompts. No selecting context. No copy-pasting playbooks. The context is just there — compiled, scoped, and injected before the first token is generated.</p>
+        <div class="card" style="margin-top:24px;background:var(--bg3);">
+          <p style="font-size:0.85rem;color:var(--t2);font-family:var(--mono);line-height:1.7;"><span style="color:var(--amber)">$</span> claude "implement the payment webhook handler"<br><span style="color:var(--t3)">[corla] ✓ Context: payments-playbook-v3 (Platform Eng)</span><br><span style="color:var(--t3)">[corla] ✓ Standards: typescript-strict, auth-service-v2</span><br><span style="color:var(--t3)">[corla] ✓ Scope: senior / payments / internal</span><br><span style="color:var(--green)">Claude is thinking...</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</section>
+
+<!-- MULTI-AGENT COORDINATION -->
+<section>
+  <div class="wrap">
+    <div class="reveal">
+      <div class="label">Multi-Agent Coordination</div>
+      <h2 class="section-head">Agents that work together. Grounded in the same context.</h2>
+      <p class="section-sub">Corla extends beyond context delivery into a coordination layer for multi-agent workflows. Agents across separate machines and teams can collaborate through the broker — no human relay, no shared codebases, every exchange audited.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:40px;" class="reveal" data-stagger>
+      <div class="card">
+        <div class="feat-icon fi-b" style="margin-bottom:16px;">🔗</div>
+        <h3 style="margin-bottom:10px;">Broker-mediated</h3>
+        <p style="font-size:0.87rem;">All agent-to-agent communication passes through Corla. The broker enforces access control, applies token scoping, and logs every exchange — no message bypasses the audit trail.</p>
+      </div>
+      <div class="card">
+        <div class="feat-icon fi-a" style="margin-bottom:16px;">🌐</div>
+        <h3 style="margin-bottom:10px;">Cross-machine, cross-team</h3>
+        <p style="font-size:0.87rem;">A frontend developer's agent and a backend developer's agent can coordinate on API contracts without sharing codebases. A vendor's agent and an internal security agent can collaborate without exposing raw architecture.</p>
+      </div>
+      <div class="card">
+        <div class="feat-icon fi-g" style="margin-bottom:16px;">📐</div>
+        <h3 style="margin-bottom:10px;">Same ground truth</h3>
+        <p style="font-size:0.87rem;">Every agent in a workflow loads enterprise context from the same broker at session start. Their coordination is grounded in the same standards — not each team's local interpretation of them.</p>
+      </div>
+    </div>
+    <div class="reveal">
+      <h3 style="margin-bottom:20px;font-size:1rem;color:var(--t2);font-weight:500;font-family:var(--body);">What becomes possible</h3>
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px;">
+        <div class="card" style="padding:22px 24px;">
+          <h4 style="margin-bottom:8px;">API contract alignment</h4>
+          <p style="font-size:0.85rem;">Frontend and backend agents surface contract mismatches through the broker before either side ships — without sharing codebases.</p>
+        </div>
+        <div class="card" style="padding:22px 24px;">
+          <h4 style="margin-bottom:8px;">Automated PR review</h4>
+          <p style="font-size:0.85rem;">A broker-side review agent checks every PR against architecture standards, approved dependencies, and current failure modes — before a human reviewer sees it.</p>
+        </div>
+        <div class="card" style="padding:22px 24px;">
+          <h4 style="margin-bottom:8px;">Incident investigation</h4>
+          <p style="font-size:0.85rem;">An on-call agent and an SRE agent work a shared thread, correlating symptoms and recent deploys. Root cause surfaces faster because both agents share the same enterprise context.</p>
+        </div>
+        <div class="card" style="padding:22px 24px;">
+          <h4 style="margin-bottom:8px;">Async onboarding handoff</h4>
+          <p style="font-size:0.85rem;">A senior developer's agent posts architectural decisions and rationale. A new joiner's agent reads the thread, builds context, and asks questions — no synchronous scheduling required.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<section style="padding:72px 0;">
+  <div class="wrap">
+    <div class="cta-band reveal" style="background:var(--bg3);border:1px solid var(--border);border-radius:var(--r3);padding:56px;text-align:center;position:relative;overflow:hidden;">
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 50% 100%,rgba(232,152,12,0.06),transparent);pointer-events:none;"></div>
+      <h2 style="margin-bottom:12px;">Questions about the architecture?</h2>
+      <p style="max-width:480px;margin:0 auto 28px;">We publish detailed technical documentation for enterprise security reviews. SOC 2 report available under NDA.</p>
+      <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+        <a href="pricing.html#waitlist" class="btn btn-primary">Request Access</a>
+        <a href="security.html" class="btn btn-secondary">Security deep dive →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo" style="margin-bottom:4px;"><div class="logo-mark"></div>corla<span style="color:var(--amber)">.ai</span></a>
+        <p>The AI Context Broker for enterprise engineering teams.</p>
+        <div class="badge" style="width:fit-content;"><span class="badge-dot pulse"></span>Private Beta</div>
+      </div>
+      <div class="footer-col"><h5>Product</h5><ul><li><a href="how-it-works.html">How it works</a></li><li><a href="security.html">Security</a></li><li><a href="pricing.html">Pricing</a></li></ul></div>
+      <div class="footer-col"><h5>Resources</h5><ul><li><a href="blog/index.html">Blog</a></li><li><a href="#">Documentation</a></li></ul></div>
+      <div class="footer-col"><h5>Company</h5><ul><li><a href="#">NOI Technologies</a></li><li><a href="mailto:hello@corla.ai">hello@corla.ai</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2025 Corla · A product by NOI Technologies</div>
+      <div class="footer-legal"><a href="/privacy.html">Privacy</a><a href="/security.html">Security</a><a href="/terms.html">Terms</a></div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

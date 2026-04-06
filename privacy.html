@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Privacy Policy — Corla</title>
+<meta name="description" content="Privacy Policy for Corla, the enterprise AI context broker by NOI Technologies. How we collect, process, and protect your data.">
+<meta property="og:title" content="Privacy Policy — Corla">
+<meta property="og:url" content="https://corla.ai/privacy">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Corla">
+<link rel="canonical" href="https://corla.ai/privacy">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta name="theme-color" content="#F7F5F0">
+<link rel="stylesheet" href="css/main.css">
+<style>
+.legal-content { max-width:780px; margin:0 auto; }
+.legal-content h2 { font-family:var(--display); font-size:1.15rem; font-weight:700; margin:40px 0 12px; color:var(--t1); }
+.legal-content h3 { font-size:0.95rem; font-weight:600; margin:24px 0 8px; color:var(--t1); }
+.legal-content p, .legal-content li { font-size:0.88rem; line-height:1.75; color:var(--t2); margin-bottom:12px; }
+.legal-content ul { padding-left:24px; margin-bottom:16px; }
+.legal-content li { margin-bottom:6px; }
+.legal-content strong { color:var(--t1); }
+.legal-meta { font-size:0.82rem; color:var(--t3); margin-bottom:32px; }
+.data-table { width:100%; border-collapse:collapse; margin:16px 0 24px; font-size:0.84rem; }
+.data-table th, .data-table td { text-align:left; padding:10px 14px; border:1px solid var(--border); }
+.data-table th { background:var(--bg2); color:var(--t1); font-weight:600; font-size:0.78rem; text-transform:uppercase; letter-spacing:0.04em; }
+.data-table td { color:var(--t2); }
+</style>
+<script>
+  (function(){var t=localStorage.getItem('corla-theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark');})();
+</script>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><div class="logo-mark"></div>corla<span style="color:var(--amber)">.ai</span></a>
+    <div class="nav-links">
+      <a href="how-it-works.html">How it works</a>
+      <a href="security.html">Security</a>
+      <a href="blog/index.html">Blog</a>
+      <a href="pricing.html">Pricing</a>
+    </div>
+    <div class="nav-right">
+      <a href="pricing.html#waitlist" class="btn btn-primary btn-sm">Get Access</a>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme" title="Toggle light/dark mode">
+        <svg class="icon-moon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.5 9.5A6 6 0 0 1 6.5 2.5a6 6 0 1 0 7 7z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg class="icon-sun" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="3" stroke="currentColor" stroke-width="1.5"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3.05 3.05l1.41 1.41M11.54 11.54l1.41 1.41M3.05 12.95l1.41-1.41M11.54 4.46l1.41-1.41" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+      <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M3 6h16M3 11h16M3 16h16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="use-cases.html">Use Cases</a>
+  <a href="how-it-works.html">How It Works</a>
+  <a href="security.html">Security</a>
+  <a href="blog/index.html">Blog</a>
+  <a href="pricing.html">Pricing</a>
+</div>
+
+<section style="padding:96px 0 72px;">
+  <div class="wrap legal-content">
+    <h1 style="font-family:var(--display);font-size:clamp(1.5rem,3vw,2.2rem);font-weight:800;margin-bottom:8px;">Privacy Policy</h1>
+    <p class="legal-meta">Last updated: April 6, 2026 &middot; Effective immediately</p>
+
+    <p>This Privacy Policy explains how NOI Technologies ("Company", "we", "us") collects, uses, and protects information when you use the Corla platform ("Service"). We are committed to protecting your privacy and handling your data with transparency.</p>
+
+    <h2>1. Information We Collect</h2>
+
+    <h3>1.1 Account Information</h3>
+    <p>When you create an account, we collect:</p>
+    <ul>
+      <li>Name and email address</li>
+      <li>Enterprise name and organisation details</li>
+      <li>Password (stored as a bcrypt hash — we never store plaintext passwords)</li>
+    </ul>
+
+    <h3>1.2 Enterprise Asset Content</h3>
+    <p>Enterprises upload proprietary assets (system prompts, skills, playbooks, knowledge documents) to the Service. Important distinctions about how we handle this content:</p>
+    <ul>
+      <li><strong>Raw asset content is never stored in our database.</strong> Content is stored in secure external storage (S3 or encrypted vault) and referenced by cryptographic content hash.</li>
+      <li><strong>Content is processed in memory only.</strong> During compilation, content passes through our redaction, scope-projection, and signing pipeline entirely in memory.</li>
+      <li><strong>Compiled packages are derivative works</strong> — processed, redacted, and scope-projected. They are not copies of the original content.</li>
+    </ul>
+
+    <h3>1.3 Audit and Usage Data</h3>
+    <p>We collect operational data to provide the Service and ensure security:</p>
+
+    <table class="data-table">
+      <thead>
+        <tr><th>Data</th><th>What we store</th><th>What we do NOT store</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Developer prompts</td><td>SHA-256 hash only</td><td>The actual prompt text</td></tr>
+        <tr><td>AI responses</td><td>SHA-256 hash only</td><td>The actual response text</td></tr>
+        <tr><td>Authentication tokens</td><td>Token ID (JTI) only</td><td>The actual JWT token value</td></tr>
+        <tr><td>Session activity</td><td>Timestamps, developer ID, project ID</td><td>IP addresses (not logged)</td></tr>
+        <tr><td>Disclosure attempts</td><td>Pattern match result, timestamp, developer ID</td><td>The triggering prompt</td></tr>
+      </tbody>
+    </table>
+
+    <h3>1.4 Technical Data</h3>
+    <p>We collect standard technical data necessary for operating the Service:</p>
+    <ul>
+      <li>Server logs (request method, URL path, response status, latency)</li>
+      <li>Error reports for debugging</li>
+      <li>Usage metrics (context deliveries, active developers, asset counts) for billing</li>
+    </ul>
+
+    <h2>2. How We Use Information</h2>
+    <ul>
+      <li><strong>Service delivery:</strong> Processing assets, compiling context packages, authenticating users, enforcing access policies</li>
+      <li><strong>Security:</strong> Detecting disclosure attempts, anomaly detection, audit logging, rate limiting</li>
+      <li><strong>Billing:</strong> Usage metering, invoice generation, subscription management</li>
+      <li><strong>Communication:</strong> Account notifications, security alerts, service updates (no marketing without consent)</li>
+      <li><strong>Improvement:</strong> Aggregated, anonymised usage patterns to improve the Service (never individual content)</li>
+    </ul>
+
+    <h2>3. Data Protection</h2>
+    <h3>3.1 Encryption</h3>
+    <ul>
+      <li><strong>At rest:</strong> Sensitive fields (OAuth tokens, signing keys, thread messages) are encrypted using AES-256-GCM with a dedicated encryption key</li>
+      <li><strong>In transit:</strong> All data is transmitted over TLS 1.2 or higher</li>
+      <li><strong>Package signing:</strong> Compiled packages are cryptographically signed with HMAC-SHA256 to prevent tampering</li>
+    </ul>
+
+    <h3>3.2 Access Control</h3>
+    <ul>
+      <li>Enterprise data is isolated — one enterprise cannot access another's data</li>
+      <li>Developer access is scoped by project, role, and grant expiration</li>
+      <li>Token revocation propagates within 30 seconds via Redis</li>
+      <li>Admin actions require separate authentication from developer actions</li>
+    </ul>
+
+    <h3>3.3 Audit Trail</h3>
+    <p>All significant events are recorded in an append-only audit log. Audit events are never updated or deleted. Enterprise admins can export audit logs in CSV or JSON format for compliance purposes.</p>
+
+    <h2>4. Data Sharing</h2>
+    <p>We do not sell, rent, or trade your personal information. We share data only in these circumstances:</p>
+    <ul>
+      <li><strong>Service providers:</strong> Infrastructure providers (hosting, database, email) that process data on our behalf under strict data processing agreements</li>
+      <li><strong>Legal requirements:</strong> When required by law, regulation, or legal process</li>
+      <li><strong>Enterprise admins:</strong> Enterprise administrators can view audit logs, session activity, and developer grant information for their own enterprise</li>
+      <li><strong>SIEM integration:</strong> If configured by the enterprise, security events are forwarded to the enterprise's designated SIEM endpoint</li>
+    </ul>
+
+    <h2>5. Data Retention</h2>
+    <ul>
+      <li><strong>Account data:</strong> Retained while your account is active, deleted within 30 days of account termination upon request</li>
+      <li><strong>Asset content:</strong> Stored in external storage while the asset is active, removed when the enterprise deletes the asset or terminates service</li>
+      <li><strong>Audit logs:</strong> Retained for the duration required by applicable law or the enterprise's compliance requirements (minimum 1 year)</li>
+      <li><strong>Compiled packages:</strong> Cached temporarily (duration based on grant TTL), then automatically purged</li>
+      <li><strong>Session tokens:</strong> Automatically expire per the configured TTL, revoked tokens are purged after 24 hours</li>
+    </ul>
+
+    <h2>6. Your Rights</h2>
+    <p>Depending on your jurisdiction, you may have the following rights:</p>
+    <ul>
+      <li><strong>Access:</strong> Request a copy of your personal data</li>
+      <li><strong>Correction:</strong> Request correction of inaccurate data</li>
+      <li><strong>Deletion:</strong> Request deletion of your personal data (subject to legal retention requirements)</li>
+      <li><strong>Portability:</strong> Request your data in a structured, machine-readable format</li>
+      <li><strong>Objection:</strong> Object to processing of your data for specific purposes</li>
+    </ul>
+    <p>To exercise these rights, contact <a href="mailto:privacy@corla.ai" style="color:var(--amber);">privacy@corla.ai</a>.</p>
+
+    <h2>7. International Data Transfers</h2>
+    <p>The Service is hosted on infrastructure that may process data in multiple regions. Where data is transferred internationally, we ensure appropriate safeguards are in place, including standard contractual clauses where applicable.</p>
+
+    <h2>8. Cookies and Tracking</h2>
+    <p>The admin console uses browser local storage for authentication state (JWT token, enterprise ID). We do not use tracking cookies, analytics pixels, or third-party advertising trackers on the admin console or the API.</p>
+    <p>The marketing website (corla.ai) may use analytics cookies — refer to the cookie banner on the website for details.</p>
+
+    <h2>9. Children's Privacy</h2>
+    <p>The Service is not directed to individuals under 16. We do not knowingly collect personal information from children.</p>
+
+    <h2>10. Changes to This Policy</h2>
+    <p>We may update this Privacy Policy from time to time. Material changes will be communicated via email to account holders. The "Last updated" date at the top of this page reflects the most recent revision.</p>
+
+    <h2>11. Contact</h2>
+    <p>For privacy-related questions or requests:</p>
+    <ul>
+      <li>Email: <a href="mailto:privacy@corla.ai" style="color:var(--amber);">privacy@corla.ai</a></li>
+      <li>Company: NOI Technologies</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="index.html" class="nav-logo" style="margin-bottom:4px;"><div class="logo-mark"></div>corla<span style="color:var(--amber)">.ai</span></a><p>The AI Context Broker for enterprise engineering teams.</p><div class="badge" style="width:fit-content;"><span class="badge-dot pulse"></span>Private Beta</div></div>
+      <div class="footer-col"><h5>Product</h5><ul><li><a href="how-it-works.html">How it works</a></li><li><a href="security.html">Security</a></li><li><a href="pricing.html">Pricing</a></li></ul></div>
+      <div class="footer-col"><h5>Resources</h5><ul><li><a href="blog/index.html">Blog</a></li><li><a href="#">Documentation</a></li></ul></div>
+      <div class="footer-col"><h5>Company</h5><ul><li><a href="#">NOI Technologies</a></li><li><a href="mailto:hello@corla.ai">hello@corla.ai</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><div class="footer-copy">&copy; 2025 Corla &middot; A product by NOI Technologies</div><div class="footer-legal"><a href="privacy.html">Privacy</a><a href="security.html">Security</a><a href="terms.html">Terms</a></div></div>
+  </div>
+</footer>
+<script src="js/main.js"></script>
+</body>
+</html>

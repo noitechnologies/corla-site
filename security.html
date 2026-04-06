@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Security — Corla</title>
+<meta name="description" content="Corla's security model: four independent layers, IP protection through compilation, cooperative compliance, and server-side audit that cannot be bypassed.">
+<meta property="og:title" content="Security — Corla">
+<meta property="og:description" content="Corla's security model: four independent layers, IP protection through compilation, cooperative compliance, and server-side audit that cannot be bypassed.">
+<meta property="og:url" content="https://corla.ai/security">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Corla">
+<meta property="og:image" content="https://corla.ai/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Security — Corla">
+<meta name="twitter:description" content="Corla's security model: four independent layers, IP protection through compilation, cooperative compliance, and server-side audit that cannot be bypassed.">
+<link rel="canonical" href="https://corla.ai/security">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon.svg">
+<meta name="theme-color" content="#F7F5F0">
+<link rel="stylesheet" href="css/main.css">
+<style>
+.page-hero { padding:96px 0 72px; position:relative; overflow:hidden; }
+.layers { display:flex; flex-direction:column; gap:2px; }
+.layer-row {
+  display:grid; grid-template-columns:200px 1fr; gap:0;
+  border:1px solid var(--border); border-radius:var(--r2); overflow:hidden;
+  transition: border-color 0.2s;
+}
+.layer-row:hover { border-color:var(--border-h); }
+.layer-label {
+  padding:28px 24px; display:flex; flex-direction:column; justify-content:center;
+  border-right:1px solid var(--border);
+}
+.layer-num { font-family:var(--mono); font-size:0.72rem; color:var(--t3); margin-bottom:6px; }
+.layer-name { font-family:var(--display); font-size:1rem; font-weight:700; }
+.layer-body { padding:28px 32px; background:var(--bg2); }
+.layer-body h3 { font-size:0.95rem; margin-bottom:8px; }
+.layer-controls { display:flex; flex-wrap:wrap; gap:8px; margin-top:14px; }
+.ctrl { font-size:0.78rem; color:var(--t2); padding:5px 12px; border:1px solid var(--border); border-radius:100px; }
+.l1 .layer-label { background:rgba(34,197,94,0.05); }
+.l1 .layer-name { color:var(--green); }
+.l2 .layer-label { background:rgba(79,126,255,0.05); }
+.l2 .layer-name { color:var(--blue); }
+.l3 .layer-label { background:rgba(232,152,12,0.05); }
+.l3 .layer-name { color:var(--amber); }
+.l4 .layer-label { background:rgba(167,139,250,0.05); }
+.l4 .layer-name { color:var(--purple); }
+
+/* Threat model */
+.threat-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:20px; }
+.threat-card { background:var(--bg2); border:1px solid var(--border); border-radius:var(--r2); padding:28px; }
+.threat-header { display:flex; align-items:flex-start; gap:14px; margin-bottom:14px; }
+.threat-badge { padding:4px 10px; border-radius:6px; font-size:0.7rem; font-weight:700; white-space:nowrap; flex-shrink:0; margin-top:2px; }
+.tb-high { background:rgba(248,113,113,0.15); color:var(--red); border:1px solid rgba(248,113,113,0.2); }
+.tb-med  { background:rgba(232,152,12,0.15); color:var(--amber); border:1px solid rgba(232,152,12,0.2); }
+.threat-card h3 { font-size:0.95rem; margin-bottom:6px; }
+.threat-card p { font-size:0.84rem; margin-bottom:12px; }
+.mitigation { background:var(--bg3); border-radius:var(--r); padding:12px 16px; font-size:0.82rem; color:var(--t2); }
+.mitigation strong { color:var(--green); }
+
+/* Invariants */
+.invariant { display:flex; gap:16px; padding:20px 24px; border:1px solid var(--border); border-radius:var(--r2); background:var(--bg2); margin-bottom:12px; transition:border-color 0.2s; }
+.invariant:hover { border-color:var(--border-h); }
+.inv-num { font-family:var(--mono); font-size:0.8rem; color:var(--amber); font-weight:500; flex-shrink:0; width:28px; padding-top:2px; }
+.inv-body h4 { font-size:0.92rem; margin-bottom:5px; }
+.inv-body p { font-size:0.84rem; line-height:1.65; }
+
+@media (max-width:768px) {
+  .layer-row { grid-template-columns:1fr; }
+  .layer-label { border-right:none; border-bottom:1px solid var(--border); }
+  .threat-grid { grid-template-columns:1fr; }
+}
+@media (max-width:600px) {
+  /* compliance 3-col */
+  .compliance-grid { grid-template-columns: 1fr !important; }
+  .layer-body { padding: 20px 18px; }
+  .layer-label { padding: 18px 18px; }
+  .layer-controls { gap: 6px; }
+  .ctrl { font-size: 0.74rem; padding: 4px 10px; }
+  .invariant { padding: 16px 16px; gap: 12px; }
+  .cta-inline-grid { grid-template-columns: 1fr !important; gap: 20px !important; }
+}
+</style>
+<script>
+  (function(){var t=localStorage.getItem('corla-theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark');})();
+</script>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><div class="logo-mark"></div>corla<span style="color:var(--amber)">.ai</span></a>
+    <div class="nav-links">
+      <a href="how-it-works.html">How it works</a>
+      <a href="security.html" class="active">Security</a>
+      <a href="blog/index.html">Blog</a>
+      <a href="pricing.html">Pricing</a>
+    </div>
+    <div class="nav-right">
+      <a href="pricing.html#waitlist" class="btn btn-primary btn-sm">Get Access</a>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme" title="Toggle light/dark mode">
+        <svg class="icon-moon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.5 9.5A6 6 0 0 1 6.5 2.5a6 6 0 1 0 7 7z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg class="icon-sun" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="3" stroke="currentColor" stroke-width="1.5"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3.05 3.05l1.41 1.41M11.54 11.54l1.41 1.41M3.05 12.95l1.41-1.41M11.54 4.46l1.41-1.41" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+      <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M3 6h16M3 11h16M3 16h16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="use-cases.html">Use Cases</a>
+  <a href="how-it-works.html">How It Works</a>
+  <a href="agent-deliberation.html">Agent Deliberation</a>
+  <a href="security.html">Security</a>
+  <a href="blog/index.html">Blog</a>
+  <a href="pricing.html">Pricing</a>
+  <a href="pricing.html#waitlist" style="color:var(--amber);border-bottom:none;margin-top:8px;">Get Access →</a>
+</div>
+
+<section class="page-hero">
+  <div style="position:absolute;top:-160px;left:50%;transform:translateX(-50%);width:700px;height:500px;background:radial-gradient(ellipse at 50% 0%,rgba(34,197,94,0.08) 0%,rgba(79,126,255,0.04) 40%,transparent 70%);pointer-events:none;"></div>
+  <div class="hero-grid" style="position:absolute;inset:0;"></div>
+  <div class="wrap">
+    <div class="badge badge-green" style="margin-bottom:20px;"><span class="badge-dot" style="background:var(--green)"></span>Security</div>
+    <h1>Cooperative compliance. Unbypassable audit.</h1>
+    <p style="font-size:1.05rem;max-width:660px;margin-top:16px;line-height:1.8;">Corla protects two things simultaneously: your intellectual property through a compilation layer that ensures raw assets never cross a trust boundary, and your organisation's integrity through server-side accountability that cannot be bypassed.</p>
+  </div>
+</section>
+
+<!-- FOUR LAYERS -->
+<section>
+  <div class="wrap">
+    <div class="reveal">
+      <div class="label">Security Model</div>
+      <h2 class="section-head">Four independent layers.</h2>
+      <p class="section-sub">Each layer is enforced independently. A compromise at one layer does not cascade to others.</p>
+    </div>
+    <div class="layers reveal">
+      <div class="layer-row l1">
+        <div class="layer-label"><div class="layer-num">L1</div><div class="layer-name">Identity &amp; Auth</div></div>
+        <div class="layer-body">
+          <h3>Every session is authenticated, bounded, and revocable.</h3>
+          <p style="font-size:0.88rem;">OAuth 2.1 with PKCE — no implicit flows, no long-lived credentials. JWTs with 15-minute default TTL. Every token validated against a Redis revocation list on every single request. Revocation propagates in under 30 seconds via atomic pipeline operation.</p>
+          <div class="layer-controls">
+            <span class="ctrl">OAuth 2.1 PKCE</span><span class="ctrl">SAML / OIDC</span><span class="ctrl">JWT (15m TTL)</span><span class="ctrl">Redis revocation list</span><span class="ctrl">&lt;30s propagation</span><span class="ctrl">Fail closed on auth error</span>
+          </div>
+        </div>
+      </div>
+      <div class="layer-row l2">
+        <div class="layer-label"><div class="layer-num">L2</div><div class="layer-name">Access Control</div></div>
+        <div class="layer-body">
+          <h3>RBAC with project scope and sensitivity ceiling.</h3>
+          <p style="font-size:0.88rem;">Grants are per-developer, per-project, per-role — created explicitly by enterprise admins. Roles carry permission sets and sensitivity ceilings. The policy engine checks grant validity, expiry, project match, and permission scope on every compile request. Instant revocation propagates via session kill.</p>
+          <div class="layer-controls">
+            <span class="ctrl">Role-based access</span><span class="ctrl">Project scoping</span><span class="ctrl">Sensitivity ceiling</span><span class="ctrl">Grant expiry</span><span class="ctrl">Admin-controlled</span><span class="ctrl">Instant session kill</span>
+          </div>
+        </div>
+      </div>
+      <div class="layer-row l3">
+        <div class="layer-label"><div class="layer-num">L3</div><div class="layer-name">Context Protection</div></div>
+        <div class="layer-body">
+          <h3>CLAUDE.md + visible deterrence + signed packages.</h3>
+          <p style="font-size:0.88rem;">The setup script appends a Corla behaviour block to <code>CLAUDE.md</code> — the transparent, developer-visible file that Claude Code loads as genuine system context. The <code>report_policy_violation</code> tool is a visible deterrent: the developer knows it exists and knows it fires when extraction is attempted. Packages are HMAC-signed; the adapter verifies the signature before use. Context is in-memory only — never written to disk.</p>
+          <div class="layer-controls">
+            <span class="ctrl">CLAUDE.md behaviour block</span><span class="ctrl">report_policy_violation</span><span class="ctrl">HMAC signing</span><span class="ctrl">Visible deterrence</span><span class="ctrl">In-memory only</span><span class="ctrl">No disk writes</span>
+          </div>
+        </div>
+      </div>
+      <div class="layer-row l4">
+        <div class="layer-label"><div class="layer-num">L4</div><div class="layer-name">Output &amp; Audit</div></div>
+        <div class="layer-body">
+          <h3>Server-side logging is the only unbypassable layer.</h3>
+          <p style="font-size:0.88rem;">Every MCP call is logged at the broker — this is the ground truth for audit, compliance, and anomaly detection. It does not depend on the AI agent cooperating or the developer not circumventing client-side mechanisms. Input and output are stored as SHA-256 hashes, never as raw content. The audit log is append-only at the database level. Anomaly detection flags unusual access patterns automatically.</p>
+          <div class="layer-controls">
+            <span class="ctrl">Output policy filter</span><span class="ctrl">Immutable audit log</span><span class="ctrl">Hash-only storage</span><span class="ctrl">Anomaly detection</span><span class="ctrl">SOC 2 export</span><span class="ctrl">ISO 27001 ready</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- IP PROTECTION -->
+<section style="padding:72px 0;">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="label">Intellectual Property</div>
+      <h2 class="section-head">The source never travels. Only derivatives do.</h2>
+      <p class="section-sub">Corla's compilation layer is an IP protection mechanism as much as a security one. The distinction matters: access controls can be misconfigured. The compilation guarantee is architectural — the source simply never travels.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;" class="reveal">
+      <div style="display:flex;flex-direction:column;gap:16px;">
+        <div class="card">
+          <h3 style="font-size:0.95rem;margin-bottom:8px;">What counts as enterprise IP in this context</h3>
+          <p style="font-size:0.87rem;line-height:1.7;">A system prompt encoding proprietary domain reasoning. A playbook refined over years of production incidents. An architecture document capturing decisions your best engineers made. These aren't generic documents — they're competitive advantages encoded in text. Corla treats them as such.</p>
+        </div>
+        <div class="card">
+          <h3 style="font-size:0.95rem;margin-bottom:8px;">Why compilation is stronger than access control alone</h3>
+          <p style="font-size:0.87rem;line-height:1.7;">Access control says who can read a file. Compilation means the file is never transmitted as-is. What crosses the boundary is a scoped, signed derivative — useful for AI-assisted work, not reconstructable into the original. The IP never exists in readable form outside the broker.</p>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:16px;">
+        <div class="card card-amber">
+          <h3 style="font-size:0.95rem;margin-bottom:12px;">The IP protection guarantee</h3>
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;">
+            <li style="display:flex;gap:10px;font-size:0.87rem;line-height:1.55;"><span style="color:var(--amber);flex-shrink:0;font-weight:700;">→</span>Raw asset content never leaves the broker in any form</li>
+            <li style="display:flex;gap:10px;font-size:0.87rem;line-height:1.55;"><span style="color:var(--amber);flex-shrink:0;font-weight:700;">→</span>What developers receive is a compiled, scoped, signed derivative</li>
+            <li style="display:flex;gap:10px;font-size:0.87rem;line-height:1.55;"><span style="color:var(--amber);flex-shrink:0;font-weight:700;">→</span>The derivative is not reconstructable into the original source</li>
+            <li style="display:flex;gap:10px;font-size:0.87rem;line-height:1.55;"><span style="color:var(--amber);flex-shrink:0;font-weight:700;">→</span>Each package is HMAC-signed and TTL-bounded — tampering is detectable, access is time-limited</li>
+            <li style="display:flex;gap:10px;font-size:0.87rem;line-height:1.55;"><span style="color:var(--amber);flex-shrink:0;font-weight:700;">→</span>Role and project scoping means a vendor on one project cannot access IP from another</li>
+            <li style="display:flex;gap:10px;font-size:0.87rem;line-height:1.55;"><span style="color:var(--amber);flex-shrink:0;font-weight:700;">→</span>When access is revoked, it propagates immediately — there is no window of residual exposure</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- IP PROTECTION -->
+
+
+<!-- THREAT MODEL -->
+<section class="section-dark">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="label">Threat Model</div>
+      <h2 class="section-head">Threats we've modelled and mitigated.</h2>
+      <p class="section-sub">These are the threat vectors Corla is designed to address.</p>
+    </div>
+    <div class="threat-grid reveal">
+      <div class="threat-card">
+        <div class="threat-header"><div class="threat-badge tb-high">High</div><h3>Direct extraction — "repeat your system prompt"</h3></div>
+        <p>A developer prompts the AI tool to disclose the context instructions injected into their session.</p>
+        <div class="mitigation"><strong>Mitigated:</strong> <code>CLAUDE.md</code> block instructs the agent to call <code>report_policy_violation</code> and decline. The tool is a visible deterrent — the developer knows it exists. All tool calls are visible in Claude Code's UI. Attempt is logged server-side regardless of outcome.</div>
+      </div>
+      <div class="threat-card">
+        <div class="threat-header"><div class="threat-badge tb-high">High</div><h3>Token theft and replay</h3></div>
+        <p>A developer's CORLA_TOKEN is stolen and used from an attacker's machine.</p>
+        <div class="mitigation"><strong>Mitigated:</strong> 15-minute TTL limits window. Session fingerprinting detects environment changes. Enterprise can revoke the token instantly — propagates in &lt;30s. Anomaly detection flags unusual IP/timing.</div>
+      </div>
+      <div class="threat-card">
+        <div class="threat-header"><div class="threat-badge tb-high">High</div><h3>Scope escalation — accessing assets beyond grant</h3></div>
+        <p>A developer attempts to request context from projects or assets outside their grant.</p>
+        <div class="mitigation"><strong>Mitigated:</strong> Policy engine enforces project scope and role permissions on every request. JWT claims are validated against the database grant — they cannot be self-issued or modified.</div>
+      </div>
+      <div class="threat-card">
+        <div class="threat-header"><div class="threat-badge tb-med">Medium</div><h3>Package tampering in transit</h3></div>
+        <p>A MITM attack attempts to modify the compiled package between the broker and the developer's adapter.</p>
+        <div class="mitigation"><strong>Mitigated:</strong> HMAC-SHA256 signature verified by adapter before use. TLS in transit. Invalid signature is a critical security event — logged and reported immediately.</div>
+      </div>
+      <div class="threat-card">
+        <div class="threat-header"><div class="threat-badge tb-med">Medium</div><h3>Indirect extraction via AI output</h3></div>
+        <p>A developer engineers prompts to get the AI to produce output that reveals proprietary patterns, even without quoting context directly.</p>
+        <div class="mitigation"><strong>Mitigated:</strong> Output policy filter. Behaviour envelope constrains response patterns. Scope projection means the developer never receives high-sensitivity content if their role ceiling is lower.</div>
+      </div>
+      <div class="threat-card">
+        <div class="threat-header"><div class="threat-badge tb-med">Medium</div><h3>Stale access after engagement ends</h3></div>
+        <p>A vendor engagement ends but the developer's token remains valid, allowing continued access.</p>
+        <div class="mitigation"><strong>Mitigated:</strong> Enterprise admin revokes the grant in the admin console. Revocation propagates in &lt;30 seconds. Grant expiry can also be set at creation time for automatic termination.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INVARIANTS -->
+<section>
+  <div class="wrap">
+    <div class="reveal">
+      <div class="label">Security Invariants</div>
+      <h2 class="section-head">Rules that cannot be broken.</h2>
+      <p class="section-sub">These invariants are enforced at the code level, not just the policy level. Violating them is not a misconfiguration — it is a build-time or runtime error.</p>
+    </div>
+    <div class="reveal">
+      <div class="invariant"><div class="inv-num">I1</div><div class="inv-body"><h4>Raw asset content never crosses a trust boundary</h4><p>Assets are loaded, compiled, and discarded inside Zone 2. The <code>RawAsset.content</code> field never appears in any network response, log entry, or database record outside Zone 2.</p></div></div>
+      <div class="invariant"><div class="inv-num">I2</div><div class="inv-body"><h4>Audit events are append-only</h4><p>The <code>AuditEvent</code> table has no UPDATE or DELETE permissions at the database level. Not even for administrators. Not even for cleanup jobs. Every event is permanent.</p></div></div>
+      <div class="invariant"><div class="inv-num">I3</div><div class="inv-body"><h4>Token validation always hits Redis</h4><p>The revocation check is never skipped and never cached. If Redis is unavailable, the request is rejected (fail closed). Caching the validation result would make revocation meaningless.</p></div></div>
+      <div class="invariant"><div class="inv-num">I4</div><div class="inv-body"><h4>Package signatures are verified before use</h4><p>The adapter verifies the HMAC-SHA256 signature of every compiled package before injecting it. An invalid signature is a critical security event, logged immediately.</p></div></div>
+      <div class="invariant"><div class="inv-num">I5</div><div class="inv-body"><h4>Tokens are never logged</h4><p>Bearer tokens, signing keys, and encryption keys must never appear in logs, error messages, or audit events. Only the JTI (token ID) is logged.</p></div></div>
+      <div class="invariant"><div class="inv-num">I6</div><div class="inv-body"><h4>Context injection is in-memory only</h4><p>Compiled package content must never be written to disk, temp files, or any persistent storage on the developer's machine. If the process exits, the context is gone.</p></div></div>
+      <div class="invariant"><div class="inv-num">I7</div><div class="inv-body"><h4>Fail closed on auth errors</h4><p>When in doubt about a token's validity, the request is rejected with 401. No default-allow fallback. Every auth error path is explicit.</p></div></div>
+      <div class="invariant"><div class="inv-num">I8</div><div class="inv-body"><h4>Server-side logging cannot be bypassed by client-side action</h4><p>Client-side mechanisms (CLAUDE.md, MCP prompts, <code>report_policy_violation</code>) are cooperative tooling and visible deterrence. They improve compliance but depend on agent cooperation. Server-side logging does not. It is the ground truth and cannot be overridden by content in any context window.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- DESIGN PHILOSOPHY -->
+<section style="padding:72px 0;">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="label">Design Philosophy</div>
+      <h2 class="section-head">Designed for cooperation, not covert control.</h2>
+      <p class="section-sub">Corla does not try to enforce behaviour against a developer's interests through hidden mechanisms. It doesn't need to.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;" class="reveal" data-stagger>
+      <div class="card">
+        <h3 style="margin-bottom:10px;">All tool calls are visible</h3>
+        <p style="font-size:0.88rem;">Claude Code shows every MCP tool call in its UI. A developer can see — and deny — any tool call. Corla is designed with this transparency in mind. Deterrence comes from visibility, not hidden execution.</p>
+      </div>
+      <div class="card">
+        <h3 style="margin-bottom:10px;">CLAUDE.md is transparent</h3>
+        <p style="font-size:0.88rem;">The behaviour constraints written to <code>CLAUDE.md</code> are visible to the developer. Deletion is detectable via git diff and the absence of expected <code>get_context</code> calls server-side. Deletion is not silent — it is just transparent.</p>
+      </div>
+      <div class="card">
+        <h3 style="margin-bottom:10px;">Server-side is the ground truth</h3>
+        <p style="font-size:0.88rem;">Every MCP call is logged at the broker regardless of what happens client-side. This is the enforcement layer that cannot be bypassed. Compliance infrastructure is built on it — not on assumptions about AI agent behaviour.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPLIANCE -->
+<section class="section-dark">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="label">Compliance</div>
+      <h2 class="section-head">Compliance readiness.</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;" class="reveal compliance-grid" data-stagger>
+      <div class="card"><h3 style="margin-bottom:10px;">SOC 2 Type II</h3><p style="font-size:0.88rem;">Audit-ready event logs with searchable export. Available under NDA for enterprise customers. Report covers security, availability, and confidentiality trust service criteria.</p></div>
+      <div class="card"><h3 style="margin-bottom:10px;">ISO/IEC 42001</h3><p style="font-size:0.88rem;">Alignment with the AI management system standard. Governance framework documentation, risk assessments, and control mappings available for Enterprise tier customers.</p></div>
+      <div class="card"><h3 style="margin-bottom:10px;">GDPR / CCPA</h3><p style="font-size:0.88rem;">Personal data minimisation by design. Input and output stored as hashes — not raw content. Data residency options available. DPA provided for all customers.</p></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding:72px 0;">
+  <div class="wrap">
+    <div class="card card-amber reveal cta-inline-grid" style="display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center;padding:40px 48px;">
+      <div><h3 style="margin-bottom:8px;">Security review or penetration test planned?</h3><p style="font-size:0.9rem;">We welcome security reviews. Documentation, architecture diagrams, threat model, and SOC 2 report are available under NDA. Contact our security team directly.</p></div>
+      <div style="flex-shrink:0;display:flex;flex-direction:column;gap:10px;">
+        <a href="mailto:security@corla.ai" class="btn btn-primary">security@corla.ai</a>
+        <a href="pricing.html#waitlist" class="btn btn-secondary">Request Access</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="index.html" class="nav-logo" style="margin-bottom:4px;"><div class="logo-mark"></div>corla<span style="color:var(--amber)">.ai</span></a><p>The AI Context Broker for enterprise engineering teams.</p><div class="badge" style="width:fit-content;"><span class="badge-dot pulse"></span>Private Beta</div></div>
+      <div class="footer-col"><h5>Product</h5><ul><li><a href="how-it-works.html">How it works</a></li><li><a href="security.html">Security</a></li><li><a href="pricing.html">Pricing</a></li></ul></div>
+      <div class="footer-col"><h5>Resources</h5><ul><li><a href="blog/index.html">Blog</a></li><li><a href="#">Documentation</a></li></ul></div>
+      <div class="footer-col"><h5>Company</h5><ul><li><a href="#">NOI Technologies</a></li><li><a href="mailto:hello@corla.ai">hello@corla.ai</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><div class="footer-copy">© 2025 Corla · A product by NOI Technologies</div><div class="footer-legal"><a href="/privacy.html">Privacy</a><a href="/security.html">Security</a><a href="/terms.html">Terms</a></div></div>
+  </div>
+</footer>
+<script src="js/main.js"></script>
+</body>
+</html>

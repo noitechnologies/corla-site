@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Platform Engineering's New Job: Publishing Organisational Knowledge for AI Agents — Corla Blog</title>
+<meta name="description" content="Platform Engineering teams already own the developer experience. In the age of AI agents, that means owning the context layer too — publishing standards once so every agent in the organisation works from the same ground truth.">
+<meta property="og:title" content="Platform Engineering's New Job: Publishing Organisational Knowledge for AI Agents — Corla Blog">
+<meta property="og:description" content="Platform Engineering teams already own the developer experience. In the age of AI agents, that means owning the context layer — publishing standards once so every agent works from the same ground truth.">
+<meta property="og:url" content="https://corla.ai/blog/platform-engineering-ai-agents">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Corla">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Platform Engineering's New Job: Publishing Organisational Knowledge for AI Agents — Corla Blog">
+<meta name="twitter:description" content="In the age of AI agents, Platform Engineering's remit extends to the context layer. Publish once — every agent works from the same ground truth.">
+<link rel="canonical" href="https://corla.ai/blog/platform-engineering-ai-agents">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="apple-touch-icon" href="../favicon.svg">
+<meta name="theme-color" content="#F7F5F0">
+<link rel="stylesheet" href="../css/main.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Platform Engineering's New Job: Publishing Organisational Knowledge for AI Agents",
+  "description": "Platform Engineering teams already own the developer experience. In the age of AI agents, that means owning the context layer too.",
+  "datePublished": "2025-03-25",
+  "dateModified": "2025-03-25",
+  "author": { "@type": "Organization", "name": "Corla Research", "url": "https://corla.ai" },
+  "publisher": { "@type": "Organization", "name": "Corla", "url": "https://corla.ai" },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://corla.ai/blog/platform-engineering-ai-agents" }
+}
+</script>
+<script>(function(){var t=localStorage.getItem('corla-theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark');})();</script>
+<style>
+.blog-layout { display:grid; grid-template-columns:1fr 280px; gap:64px; align-items:start; }
+.sidebar { position:sticky; top:90px; }
+.sidebar-card { background:var(--bg2); border:1px solid var(--border); border-radius:var(--r2); padding:24px; margin-bottom:20px; }
+.sidebar-card h4 { font-size:0.85rem; margin-bottom:14px; }
+.related-list { list-style:none; display:flex; flex-direction:column; gap:12px; }
+.related-list a { font-size:0.84rem; color:var(--t2); transition:color 0.2s; line-height:1.4; display:block; }
+.related-list a:hover { color:var(--amber); }
+.share-btns { display:flex; gap:8px; flex-wrap:wrap; }
+.share-btn { font-size:0.78rem; padding:7px 14px; border:1px solid var(--border); border-radius:100px; color:var(--t2); background:transparent; cursor:pointer; font-family:var(--body); transition:all 0.2s; }
+.share-btn:hover { border-color:var(--amber); color:var(--amber); }
+@media (max-width:900px) { .blog-layout { grid-template-columns:1fr; } .sidebar { position:static; } }
+</style>
+</head>
+<body>
+<div id="reading-progress"><div id="reading-progress-bar"></div></div>
+<nav>
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><div class="logo-mark"></div>corla<span style="color:var(--amber)">.ai</span></a>
+    <div class="nav-links">
+      <a href="../use-cases.html">Use Cases</a>
+      <a href="../how-it-works.html">How It Works</a>
+      <a href="../agent-deliberation.html">Agent Deliberation</a>
+      <a href="../security.html">Security</a>
+      <a href="index.html" class="active">Blog</a>
+      <a href="../pricing.html">Pricing</a>
+    </div>
+    <div class="nav-right">
+      <a href="../pricing.html#waitlist" class="btn btn-primary btn-sm">Get Access</a>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+        <svg class="icon-moon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.5 9.5A6 6 0 0 1 6.5 2.5a6 6 0 1 0 7 7z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg class="icon-sun" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="3" stroke="currentColor" stroke-width="1.5"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3.05 3.05l1.41 1.41M11.54 11.54l1.41 1.41M3.05 12.95l1.41-1.41M11.54 4.46l1.41-1.41" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+      <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M3 6h16M3 11h16M3 16h16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="../use-cases.html">Use Cases</a>
+  <a href="../how-it-works.html">How It Works</a>
+  <a href="../agent-deliberation.html">Agent Deliberation</a>
+  <a href="../security.html">Security</a>
+  <a href="index.html">Blog</a>
+  <a href="../pricing.html">Pricing</a>
+  <a href="../pricing.html#waitlist" style="color:var(--amber);border-bottom:none;margin-top:8px;">Get Access →</a>
+</div>
+
+<section style="padding:80px 0 48px;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:600px;height:400px;background:radial-gradient(ellipse at 50% 0%,rgba(34,197,94,0.07) 0%,transparent 65%);pointer-events:none;"></div>
+  <div class="wrap-narrow">
+    <a href="index.html" style="font-size:0.84rem;color:var(--t3);display:inline-flex;align-items:center;gap:6px;margin-bottom:24px;transition:color 0.2s;" onmouseover="this.style.color='var(--amber)'" onmouseout="this.style.color='var(--t3)'">← Back to Blog</a>
+    <div style="display:flex;gap:12px;align-items:center;margin-bottom:20px;">
+      <div class="badge badge-green" style="background:var(--green-d);border-color:rgba(34,197,94,0.25);color:var(--green);">Platform Engineering</div>
+      <span style="font-size:0.8rem;color:var(--t3);">8 min read · March 2025</span>
+    </div>
+    <h1 style="font-size:clamp(1.7rem,3.5vw,2.6rem);margin-bottom:20px;line-height:1.2;">Platform Engineering's New Job: Publishing Organisational Knowledge for AI Agents</h1>
+    <p style="font-size:1.1rem;color:var(--t2);line-height:1.75;margin-bottom:32px;">Platform Engineering teams already own the developer experience infrastructure — CI/CD, observability, internal tooling. In the age of AI agents, that remit extends to the context layer. The team best positioned to ensure every AI agent in the organisation works from the same ground truth is the one that already owns the ground truth.</p>
+    <div style="display:flex;align-items:center;gap:16px;padding:20px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+      <div style="width:40px;height:40px;border-radius:50%;background:var(--green-d);border:1px solid rgba(34,197,94,0.3);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:700;color:var(--green);">CR</div>
+      <div><div style="font-size:0.88rem;font-weight:600;">Corla Research</div><div style="font-size:0.8rem;color:var(--t3);">Published March 2025</div></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding:48px 0 96px;">
+  <div class="wrap">
+    <div class="blog-layout">
+      <article class="prose">
+        <div class="toc">
+          <div class="toc-title">In this article</div>
+          <ol>
+            <li><a href="#what-pe-owns">What Platform Engineering already owns</a></li>
+            <li><a href="#the-gap">The gap AI agents expose</a></li>
+            <li><a href="#the-new-job">The new job: context publisher</a></li>
+            <li><a href="#what-to-publish">What to publish — and how to structure it</a></li>
+            <li><a href="#the-multiplier">The multiplier effect</a></li>
+          </ol>
+        </div>
+
+        <p>Platform Engineering emerged as a discipline to solve a specific problem: the cognitive overhead of building and operating software was growing faster than individual teams could absorb it. Rather than every team solving the same infrastructure problems independently, Platform Engineering centralised that expertise and exposed it as internal products — paved paths that made the right way also the easy way.</p>
+
+        <p>The shift to AI-assisted development creates a new version of the same problem. Every team is now configuring its own AI agent context — system prompts, local knowledge, tool configurations — independently. The same organisational standards get encoded differently in each team's setup, or not at all. The institutional knowledge that Platform Engineering worked hard to codify in runbooks and architecture docs isn't reaching the AI agents that are now doing a significant share of the coding.</p>
+
+        <p>The team best positioned to fix this is the same team that fixed the original problem.</p>
+
+        <h2 id="what-pe-owns">What Platform Engineering already owns</h2>
+
+        <p>Platform Engineering teams, in most mature engineering organisations, own several things that are directly relevant to AI agent context:</p>
+
+        <p><strong>The architecture reference.</strong> The documented understanding of how the organisation's systems fit together — service boundaries, data flows, integration patterns, current deprecations. This is exactly what an AI agent needs to produce architecture-aligned code.</p>
+
+        <p><strong>The standards library.</strong> Approved languages, frameworks, and libraries. Coding conventions. The rationale behind key decisions. What's recommended, what's permitted, what's prohibited. An AI agent with no access to this will reinvent it imperfectly, or violate it unknowingly.</p>
+
+        <p><strong>The incident history.</strong> Post-incident reviews, known failure modes, patterns to avoid. The organisation's hard-won experience with what breaks and why. This is some of the most valuable context an AI agent could have — and it's almost universally absent from current AI deployments.</p>
+
+        <p><strong>The security baseline.</strong> Often in collaboration with the security team — approved authentication patterns, known vulnerabilities in dependencies, data handling constraints. Security knowledge that should be present in every agent session but typically isn't.</p>
+
+        <h2 id="the-gap">The gap AI agents expose</h2>
+
+        <p>The problem isn't that this knowledge doesn't exist. Platform Engineering teams have invested significant effort in documenting it. The problem is that it lives in formats — Confluence pages, runbooks, architecture decision records — that AI agents don't naturally access.</p>
+
+        <p>A developer's AI coding assistant doesn't read Confluence before each session. It doesn't check the architecture decision record for the service it's about to modify. It doesn't know what was learned in last quarter's incident retrospective. It knows what it was trained on, and it knows what the developer tells it in the current session.</p>
+
+        <p>The result is that all the knowledge Platform Engineering has carefully curated exists in a layer that AI agents can't reach. The agents operate below that layer — capable and fast, but organisationally unaware. The gap between what the organisation knows and what its agents know is, in most cases, enormous.</p>
+
+        <blockquote>Platform Engineering has spent years making the right way the easy way for human developers. The same work is now needed for AI agents — and it's the same team's job to do it.</blockquote>
+
+        <h2 id="the-new-job">The new job: context publisher</h2>
+
+        <p>Adding "AI context publisher" to Platform Engineering's remit doesn't require a wholesale change in what the team does. It requires a new output channel for work they're largely already doing.</p>
+
+        <p>The architectural decisions that get written up in ADRs also need to be packaged as AI agent context. The incident lessons that go into PIRs also need to feed the "what not to do" context package. The approved library list that lives in a wiki page also needs to be structured in a form agents can act on.</p>
+
+        <p>The key shift is treating AI context as a first-class artefact of Platform Engineering work — not a downstream application of it. When a new architectural standard is adopted, the context package update happens at the same time as the documentation update, not weeks later when someone gets around to it.</p>
+
+        <p>This matters for the same reason that keeping CI/CD configurations in code matters: it makes the knowledge live where it's used, rather than in a separate system that requires manual synchronisation.</p>
+
+        <h2 id="what-to-publish">What to publish — and how to structure it</h2>
+
+        <p>The practical question for Platform Engineering teams starting this work: what goes into the context layer, and how should it be structured?</p>
+
+        <p>The most immediately valuable categories are:</p>
+
+        <p><strong>Architecture context.</strong> Current service topology, team ownership boundaries, approved integration patterns. The information a developer would need to orient themselves in the codebase — expressed directly, not as a document to be read but as facts to be acted on. "The auth service is at auth.internal. It uses service tokens, not user JWTs, for service-to-service calls."</p>
+
+        <p><strong>What not to do.</strong> The most actionable category and the easiest to build incrementally. After each significant incident, one sentence: what the failure mode was and what pattern to avoid. These accumulate quickly and have immediate value. An agent that knows "don't use synchronous calls to the inventory service from the checkout flow — it caused the November 2024 outage" is a meaningfully safer AI assistant.</p>
+
+        <p><strong>Approved library list.</strong> Not just the list, but the status of each library: current recommended version, any known issues, whether the team is planning to migrate away. Agents that know the current approved state don't suggest deprecated dependencies or libraries under evaluation.</p>
+
+        <p><strong>Security baseline.</strong> Developed with the security team, but owned by Platform Engineering for distribution. Current authentication patterns, known vulnerability categories to avoid, data handling constraints. This should reach every agent in every session, not just when a security review catches something in code review.</p>
+
+        <h2 id="the-multiplier">The multiplier effect</h2>
+
+        <p>The reason Platform Engineering is the right team for this work is the same reason it was the right team for internal developer platforms: the work multiplies across every developer who uses the output.</p>
+
+        <p>A senior architect who documents an architecture decision in a context package spends an hour doing it. That hour of work reaches every developer's AI agent in the organisation — including new hires who join six months later, including vendors who are onboarded next year, including junior engineers who would never have thought to ask the right question. The knowledge doesn't fade or get lost in a Slack thread. It's ambient in every session, for everyone, indefinitely.</p>
+
+        <p>This is Platform Engineering's core value proposition applied to a new layer. The team that makes the right way the easy way for human developers is the same team that should make the right way the default for AI agents. The infrastructure is different. The mission is the same.</p>
+
+        <div class="callout callout-amber">
+          <strong>Corla is the infrastructure layer that makes this possible.</strong> Platform Engineering publishes context packages to the broker once. Every agent across the organisation — internal teams, new hires, external vendors — draws from the same packages on every session start. Update once; the entire org's agents get it. <a href="../use-cases.html#internal" style="color:var(--amber)">See the internal org use case →</a>
+        </div>
+
+      </article>
+
+      <aside class="sidebar">
+        <div class="sidebar-card">
+          <h4>Related articles</h4>
+          <ul class="related-list">
+            <li><a href="organisational-memory.html">Why AI Agents Forget Everything</a></li>
+            <li><a href="agent-deliberation-enterprise.html">From Task Execution to Conclusions</a></li>
+            <li><a href="ai-context-governance.html">Why Enterprises Need AI Context Governance</a></li>
+            <li><a href="zero-trust-ai.html">Zero Trust for AI Context</a></li>
+          </ul>
+        </div>
+        <div class="sidebar-card">
+          <h4>Share</h4>
+          <div class="share-btns">
+            <button class="share-btn" onclick="navigator.clipboard.writeText(window.location.href)">Copy link</button>
+            <button class="share-btn">LinkedIn</button>
+          </div>
+        </div>
+        <div class="sidebar-card card-amber">
+          <h4 style="margin-bottom:8px;">The publisher's infrastructure</h4>
+          <p style="font-size:0.84rem;margin-bottom:14px;">Corla gives Platform Engineering the layer to publish organisational knowledge once — and have it reach every agent automatically.</p>
+          <a href="../pricing.html#waitlist" class="btn btn-primary btn-sm" style="width:100%;justify-content:center;">Request Access</a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="../index.html" class="nav-logo" style="margin-bottom:4px;"><div class="logo-mark"></div>corla<span style="color:var(--amber)">.ai</span></a><p>Enterprise AI Context Broker.</p><div class="badge" style="width:fit-content;margin-top:8px;"><span class="badge-dot pulse"></span>Private Beta</div></div>
+      <div class="footer-col"><h5>Product</h5><ul><li><a href="../use-cases.html">Use Cases</a></li><li><a href="../how-it-works.html">How It Works</a></li><li><a href="../agent-deliberation.html">Agent Deliberation</a></li><li><a href="../security.html">Security</a></li><li><a href="../pricing.html">Pricing</a></li></ul></div>
+      <div class="footer-col"><h5>Blog</h5><ul><li><a href="index.html">All articles</a></li><li><a href="ai-context-governance.html">AI Governance</a></li><li><a href="organisational-memory.html">Organisational Memory</a></li></ul></div>
+      <div class="footer-col"><h5>Company</h5><ul><li><a href="#">NOI Technologies</a></li><li><a href="mailto:hello@corla.ai">hello@corla.ai</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><div class="footer-copy">© 2025 Corla · A product by NOI Technologies</div><div class="footer-legal"><a href="/privacy.html">Privacy</a><a href="/security.html">Security</a><a href="/terms.html">Terms</a></div></div>
+  </div>
+</footer>
+<script src="../js/main.js"></script>
+</body>
+</html>

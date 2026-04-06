@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Why Enterprises Need AI Context Governance — Corla Blog</title>
+<meta name="description" content="Teams govern models, outputs, and cost — but almost none govern the context layer that shapes all three. The framework for AI context governance, and why it matters now.">
+<meta property="og:title" content="Why Enterprises Need AI Context Governance — Corla Blog">
+<meta property="og:description" content="Teams govern models, outputs, and cost — but almost none govern the context layer that shapes all three. The framework for AI context governance, and why it matters now.">
+<meta property="og:url" content="https://corla.ai/blog/ai-context-governance">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Corla">
+<meta property="og:image" content="https://corla.ai/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Why Enterprises Need AI Context Governance — Corla Blog">
+<meta name="twitter:description" content="Teams govern models, outputs, and cost — but almost none govern the context layer that shapes all three. The framework for AI context governance, and why it matters now.">
+<link rel="canonical" href="https://corla.ai/blog/ai-context-governance">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="../favicon.svg">
+<meta name="theme-color" content="#F7F5F0">
+<link rel="stylesheet" href="../css/main.css">
+<style>
+.blog-layout { display:grid; grid-template-columns:1fr 280px; gap:64px; align-items:start; }
+.sidebar { position:sticky; top:90px; }
+.sidebar-card { background:var(--bg2); border:1px solid var(--border); border-radius:var(--r2); padding:24px; margin-bottom:20px; }
+.sidebar-card h4 { font-size:0.85rem; margin-bottom:14px; }
+.related-list { list-style:none; display:flex; flex-direction:column; gap:12px; }
+.related-list a { font-size:0.84rem; color:var(--t2); transition:color 0.2s; line-height:1.4; display:block; }
+.related-list a:hover { color:var(--amber); }
+.share-btns { display:flex; gap:8px; flex-wrap:wrap; }
+.share-btn { font-size:0.78rem; padding:7px 14px; border:1px solid var(--border); border-radius:100px; color:var(--t2); background:transparent; cursor:pointer; font-family:var(--body); transition:all 0.2s; }
+.share-btn:hover { border-color:var(--amber); color:var(--amber); }
+@media (max-width:900px) { .blog-layout { grid-template-columns:1fr; } .sidebar { position:static; } }
+@media (max-width:600px) { .prose h2 { font-size:1.3rem; margin:36px 0 12px; } .prose p, .prose li { font-size:0.975rem; } .toc { padding:18px 20px; } .prose blockquote { padding:14px 18px; } }
+</style>
+<script>
+  (function(){var t=localStorage.getItem('corla-theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark');})();
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Why Enterprises Need AI Context Governance",
+  "description": "Context governance is the missing piece in most enterprise AI strategies.",
+  "datePublished": "2025-03-05",
+  "dateModified": "2025-03-05",
+  "author": {
+    "@type": "Organization",
+    "name": "Corla Research",
+    "url": "https://corla.ai"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Corla",
+    "url": "https://corla.ai"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://corla.ai/blog/ai-context-governance"
+  }
+}
+</script>
+</head>
+<body>
+<div id="reading-progress"><div id="reading-progress-bar"></div></div>
+<nav>
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><div class="logo-mark"></div>corla<span style="color:var(--amber)">.ai</span></a>
+    <div class="nav-links">
+      <a href="../use-cases.html">Use Cases</a>
+      <a href="../how-it-works.html">How It Works</a>
+      <a href="../agent-deliberation.html">Agent Deliberation</a>
+      <a href="../security.html">Security</a>
+      <a href="index.html" class="active">Blog</a>
+      <a href="../pricing.html">Pricing</a>
+    </div>
+    <div class="nav-right">
+      <a href="../pricing.html#waitlist" class="btn btn-primary btn-sm">Get Access</a>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme" title="Toggle light/dark mode">
+        <svg class="icon-moon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.5 9.5A6 6 0 0 1 6.5 2.5a6 6 0 1 0 7 7z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg class="icon-sun" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="3" stroke="currentColor" stroke-width="1.5"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3.05 3.05l1.41 1.41M11.54 11.54l1.41 1.41M3.05 12.95l1.41-1.41M11.54 4.46l1.41-1.41" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+      <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M3 6h16M3 11h16M3 16h16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="../use-cases.html">Use Cases</a>
+  <a href="../how-it-works.html">How It Works</a>
+  <a href="../agent-deliberation.html">Agent Deliberation</a>
+  <a href="../security.html">Security</a>
+  <a href="index.html">Blog</a>
+  <a href="../pricing.html">Pricing</a>
+  <a href="../pricing.html#waitlist" style="color:var(--amber);border-bottom:none;margin-top:8px;">Get Access →</a>
+</div>
+
+<section style="padding:80px 0 48px;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:600px;height:400px;background:radial-gradient(ellipse at 50% 0%,rgba(167,139,250,0.08) 0%,transparent 65%);pointer-events:none;"></div>
+  <div class="wrap-narrow">
+    <a href="index.html" style="font-size:0.84rem;color:var(--t3);display:inline-flex;align-items:center;gap:6px;margin-bottom:24px;transition:color 0.2s;" onmouseover="this.style.color='var(--amber)'" onmouseout="this.style.color='var(--t3)'">← Back to Blog</a>
+    <div style="display:flex;gap:12px;align-items:center;margin-bottom:20px;">
+      <div class="badge" style="background:rgba(167,139,250,0.12);border-color:rgba(167,139,250,0.25);color:var(--purple);">Governance</div>
+      <span style="font-size:0.8rem;color:var(--t3);">9 min read · March 2025</span>
+    </div>
+    <h1 style="font-size:clamp(1.7rem,3.5vw,2.6rem);margin-bottom:20px;line-height:1.2;">Why Enterprises Need AI Context Governance — and What It Actually Means</h1>
+    <p style="font-size:1.1rem;color:var(--t2);line-height:1.75;margin-bottom:32px;">Context governance is the missing piece in most enterprise AI strategies. Teams govern models, govern outputs, govern cost — but not the context layer that shapes all three. Here's the framework for thinking about it.</p>
+    <div style="display:flex;align-items:center;gap:16px;padding:20px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+      <div style="width:40px;height:40px;border-radius:50%;background:rgba(167,139,250,0.15);border:1px solid rgba(167,139,250,0.3);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:700;color:var(--purple);">CB</div>
+      <div><div style="font-size:0.88rem;font-weight:600;">Corla Research</div><div style="font-size:0.8rem;color:var(--t3);">Published March 2025</div></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding:48px 0 96px;">
+  <div class="wrap">
+    <div class="blog-layout">
+      <article class="prose">
+        <div class="toc">
+          <div class="toc-title">In this article</div>
+          <ol>
+            <li><a href="#three-layers">The three governance layers most enterprises have</a></li>
+            <li><a href="#missing">The missing fourth layer</a></li>
+            <li><a href="#why-now">Why context governance matters now</a></li>
+            <li><a href="#framework">A framework for enterprise context governance</a></li>
+            <li><a href="#starting">Where to start</a></li>
+          </ol>
+        </div>
+
+        <p>Ask an enterprise CTO how they govern their AI systems and you'll typically hear a structured answer. There's a model governance program — managing which models are approved, how they're evaluated, what data they can be trained on. There's output governance — review processes for high-stakes AI outputs, hallucination detection, accuracy monitoring. There's cost governance — budgets, rate limits, FinOps for AI spend.</p>
+
+        <p>These are real, important, mature disciplines. But they share a common blind spot: they all focus on what happens at the model and the output — and largely ignore the context layer that shapes both.</p>
+
+        <h2 id="three-layers">The three governance layers most enterprises have</h2>
+
+        <p>Before defining what's missing, it's worth being precise about what good enterprises do have:</p>
+
+        <p><strong>Model governance</strong> answers: which models can we use, for which purposes, with which data? It addresses procurement risk (vendor lock-in, data training provisions), capability risk (which model is appropriate for which use case), and compliance risk (GDPR, HIPAA, sector-specific requirements). Most large enterprises have some version of this.</p>
+
+        <p><strong>Output governance</strong> answers: are the outputs our AI systems produce appropriate, accurate, and safe? It includes human review requirements for high-stakes decisions, factual verification processes, bias and fairness monitoring, and legal review for AI-generated content. Regulated industries tend to have mature output governance frameworks.</p>
+
+        <p><strong>Cost governance</strong> answers: how much are we spending on AI, and is it producing value? Token budgets, rate limiting, model tier selection, ROI measurement. This is increasingly mature as AI spending scales.</p>
+
+        <p>Together, these three layers address real risks. But they share a common assumption: that the context being fed into AI systems is either unimportant or already governed by other means. That assumption is increasingly wrong.</p>
+
+        <h2 id="missing">The missing fourth layer</h2>
+
+        <p><strong>Context governance</strong> answers: what proprietary knowledge is flowing into our AI systems, with what controls, with what visibility, and with what ability to revoke or modify it?</p>
+
+        <p>This is different from model governance (which is about the AI itself) and different from output governance (which is about what the AI produces). Context governance is about the input layer — specifically, the layer of institutional knowledge, system prompts, and internal context that shapes AI behaviour before the first output token is generated.</p>
+
+        <p>The context layer is where:</p>
+        <ul>
+          <li>Competitive advantages are encoded (your domain knowledge, your proprietary reasoning patterns)</li>
+          <li>Compliance obligations are embedded (your legal constraints, your approved language)</li>
+          <li>Brand voice and quality standards live</li>
+          <li>Security policies are enforced (or not)</li>
+        </ul>
+
+        <p>Govern the context layer well, and you get consistent, high-quality, compliant AI outputs across all tools and all users. Govern it poorly — or not at all — and you get inconsistency, exposure, and a context-shaped attack surface that most security frameworks don't even model.</p>
+
+        <blockquote>The context layer is the most powerful input to an AI system and the least governed one. That's an unusual combination in enterprise infrastructure, and it won't stay that way for long.</blockquote>
+
+        <h2 id="why-now">Why context governance matters now specifically</h2>
+
+        <p>Context governance has always been a latent concern, but two developments in 2024–2025 made it urgent:</p>
+
+        <p><strong>The agentic shift.</strong> AI tools have moved from chat interfaces (where context is conversational and ephemeral) to agentic coding assistants (where context is persistent, loaded from files, and applied across entire codebases). When a developer's AI coding assistant indexes their repository, it's ingesting organisational context at scale — not just answering a single question.</p>
+
+        <p><strong>The outsourcing dynamic.</strong> Enterprise AI adoption is running ahead of enterprise hiring. Most large organisations are accelerating delivery by expanding outsourced development teams alongside internal teams. These outsourced developers are using the same AI tools, which means enterprise context is flowing to people who are not employees, on machines that are not owned by the enterprise, in processes that are not audited by the enterprise.</p>
+
+        <p>Together, these two developments create a scenario where institutional knowledge is being systematically encoded into AI context, distributed across a wider developer population (including external parties), and applied in automated processes — all without the governance infrastructure that any of those properties would typically trigger if applied to other types of sensitive information.</p>
+
+        <h2 id="framework">A framework for enterprise context governance</h2>
+
+        <p>Context governance, properly conceived, has five dimensions:</p>
+
+        <p><strong>1. Inventory.</strong> What context assets does the organisation have? System prompts, engineering playbooks, skill definitions, knowledge documents. Where do they live? What's their business value? What's their sensitivity? This is the prerequisite to everything else, and most organisations have not done it.</p>
+
+        <p><strong>2. Classification.</strong> Not all context is equally sensitive. A system prompt encoding proprietary fraud detection logic is not in the same category as a general coding style guide. Classification determines which governance controls apply. Sensitivity should be based on competitive value and harm potential if disclosed, not just on regulatory category.</p>
+
+        <p><strong>3. Access control.</strong> Who can use which context, for which purposes, in which tools? This maps to the same principles as data access control: least privilege, role-based, time-bounded, audited. A vendor developer should not have access to the same context as a senior internal engineer. A developer on one project should not receive context from another.</p>
+
+        <p><strong>4. Transmission control.</strong> How is context delivered to AI tools, and with what protection? Raw context delivered to AI tools can be extracted, replayed, or exfiltrated. Governed context should be compiled, redacted, scoped, signed, and delivered in a form that supports the AI's work without creating unacceptable exposure.</p>
+
+        <p><strong>5. Auditability.</strong> What is the complete record of context delivery and usage? Who received what context, when, and what did they ask the AI to produce in the presence of that context? This is the foundation for incident response, for compliance review, and for continuous improvement of the governance framework.</p>
+
+        <h2 id="starting">Where to start</h2>
+
+        <p>The governance frameworks with the highest ROI are the ones that address the highest-risk exposures first. For most enterprises, that means starting with the outsourced developer use case — because it combines high context value (you want outsourced developers to be productive with enterprise AI context) with high exposure risk (they are not employees and you cannot fully control their environment).</p>
+
+        <p>The control objective for this scenario is precise: outsourced developers should receive the benefit of enterprise AI context — better, more aligned outputs — without receiving the context itself. The same outcome, without the exposure.</p>
+
+        <p>This is technically achievable today. It requires a compilation layer that transforms raw context into opaque, scoped, signed artifacts. It requires an access control layer that governs who receives which artifacts. It requires an audit layer that records the complete delivery and usage record. None of these are novel requirements — they are standard data governance concepts applied to a new asset type.</p>
+
+        <p>The organisations that build this infrastructure in 2025 will have a structural advantage: they can extend enterprise AI advantages to a larger developer population without the IP risk that currently constrains most organisations from doing so. That's a material competitive advantage, and it's available to the organisations that move first.</p>
+
+        <div class="callout callout-amber">
+          <strong>Corla is built to address this specific governance gap.</strong> It provides context compilation, access control, and auditability for enterprise AI context in outsourced developer environments. <a href="../pricing.html#waitlist" style="color:var(--amber)">Request early access →</a>
+        </div>
+      </article>
+
+      <aside class="sidebar">
+        <div class="sidebar-card">
+          <h4>Related articles</h4>
+          <ul class="related-list">
+            <li><a href="outsourcing-ai-risk.html">The Hidden Risk in AI-Assisted Outsourcing</a></li>
+            <li><a href="mcp-for-ctos.html">MCP Explained for CTOs</a></li>
+            <li><a href="zero-trust-ai.html">Zero Trust for AI Context</a></li>
+            <li><a href="prompt-as-ip.html">Your Prompts Are Intellectual Property</a></li>
+          </ul>
+        </div>
+        <div class="sidebar-card">
+          <h4>Share</h4>
+          <div class="share-btns">
+            <button class="share-btn" onclick="navigator.clipboard.writeText(window.location.href)">Copy link</button>
+            <button class="share-btn">LinkedIn</button>
+          </div>
+        </div>
+        <div class="sidebar-card card-amber">
+          <h4 style="margin-bottom:8px;">Build your context governance</h4>
+          <p style="font-size:0.84rem;margin-bottom:14px;">Corla is the configuration management layer for AI context — organisationally coherent, audit-ready, compounding in value.</p>
+          <a href="../pricing.html#waitlist" class="btn btn-primary btn-sm" style="width:100%;justify-content:center;">Request Access</a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="../index.html" class="nav-logo" style="margin-bottom:4px;"><div class="logo-mark"></div>corla<span style="color:var(--amber)">.ai</span></a><p>The AI Context Broker for enterprise engineering teams.</p><div class="badge" style="width:fit-content;"><span class="badge-dot pulse"></span>Private Beta</div></div>
+      <div class="footer-col"><h5>Product</h5><ul><li><a href="../how-it-works.html">How it works</a></li><li><a href="../security.html">Security</a></li><li><a href="../pricing.html">Pricing</a></li></ul></div>
+      <div class="footer-col"><h5>Blog</h5><ul><li><a href="index.html">All articles</a></li></ul></div>
+      <div class="footer-col"><h5>Company</h5><ul><li><a href="#">NOI Technologies</a></li><li><a href="mailto:hello@corla.ai">hello@corla.ai</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><div class="footer-copy">© 2025 Corla · A product by NOI Technologies</div><div class="footer-legal"><a href="/privacy.html">Privacy</a><a href="/security.html">Security</a><a href="/terms.html">Terms</a></div></div>
+  </div>
+</footer>
+<script src="../js/main.js"></script>
+</body>
+</html>

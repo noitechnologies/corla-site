@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Corla — Enterprise AI Context Broker</title>
+<meta name="description" content="Your AI agents are powerful. They just don't know your organisation. Corla is the context layer that connects what your org knows to every AI agent — consistent, role-scoped, and audited.">
+<meta property="og:title" content="Corla — Enterprise AI Context Broker">
+<meta property="og:description" content="Your AI agents are powerful. They just don't know your organisation. Corla is the context layer that connects what your org knows to every AI agent — consistent, role-scoped, and audited.">
+<meta property="og:url" content="https://corla.ai/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Corla">
+<meta property="og:image" content="https://corla.ai/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Corla — Enterprise AI Context Broker">
+<meta name="twitter:description" content="Your AI agents are powerful. They just don't know your organisation. Corla is the context layer that connects what your org knows to every AI agent — consistent, role-scoped, and audited.">
+<link rel="canonical" href="https://corla.ai/">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="favicon.svg">
+<meta name="theme-color" content="#F7F5F0">
+<link rel="stylesheet" href="css/main.css">
+<style>
+.hero { padding:112px 0 96px; position:relative; overflow:hidden; }
+.hero-glow { position:absolute; top:-200px; left:50%; transform:translateX(-50%); width:1000px; height:700px; pointer-events:none; background:radial-gradient(ellipse at 50% 0%, rgba(232,152,12,0.09) 0%, rgba(79,126,255,0.05) 40%, transparent 68%); }
+.hero-grid { position:absolute; inset:0; }
+.hero h1 { max-width:900px; margin-bottom:24px; font-size:clamp(1.6rem, 3.5vw, 2.7rem); }
+.hero h1 .amber { color:var(--amber); }
+.hero-sub { font-size:1.1rem; color:var(--t2); max-width:600px; margin-bottom:44px; line-height:1.8; }
+.hero-actions { display:flex; gap:14px; flex-wrap:wrap; margin-bottom:64px; }
+.hero-proof { display:flex; gap:0; border:1px solid var(--border); border-radius:var(--r2); overflow:hidden; background:var(--bg2); }
+.proof-item { flex:1; padding:20px 24px; text-align:center; border-right:1px solid var(--border); }
+.proof-item:last-child { border-right:none; }
+.proof-num { font-family:var(--display); font-size:1.6rem; font-weight:800; color:var(--amber); letter-spacing:-0.03em; }
+.proof-label { font-size:0.76rem; color:var(--t3); margin-top:3px; line-height:1.4; }
+
+/* problem */
+.problem-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:var(--r2); overflow:hidden; margin-bottom:16px; }
+.problem-card { background:var(--bg2); padding:28px 26px; transition:background 0.2s; }
+.problem-card:hover { background:var(--bg3); }
+.problem-icon { font-size:1.5rem; margin-bottom:14px; }
+.problem-card h3 { font-size:0.95rem; margin-bottom:8px; }
+.problem-card p { font-size:0.84rem; line-height:1.65; }
+.problem-note { font-size:0.84rem; color:var(--t3); text-align:center; padding:12px; font-style:italic; }
+
+/* before/after */
+.ba-grid { display:grid; grid-template-columns:1fr 1fr; gap:2px; border:1px solid var(--border); border-radius:var(--r3); overflow:hidden; }
+.ba-col { padding:40px 36px; }
+.ba-before { background:var(--bg2); }
+.ba-after { background:linear-gradient(135deg, rgba(232,152,12,0.06), var(--bg2)); border-left:1px solid var(--border); }
+.ba-label { font-size:0.68rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; margin-bottom:20px; display:flex; align-items:center; gap:8px; }
+.ba-before .ba-label { color:var(--t3); }
+.ba-after  .ba-label { color:var(--amber); }
+.ba-before .ba-label::before { content:''; display:block; width:8px; height:8px; border-radius:50%; background:var(--t3); }
+.ba-after  .ba-label::before { content:''; display:block; width:8px; height:8px; border-radius:50%; background:var(--amber); }
+.ba-items { list-style:none; display:flex; flex-direction:column; gap:13px; }
+.ba-items li { font-size:0.9rem; line-height:1.55; display:flex; align-items:flex-start; gap:10px; }
+.ba-before .ba-items li { color:var(--t2); }
+.ba-after  .ba-items li { color:var(--t1); }
+.ba-before .ba-items li::before { content:'·'; color:var(--t3); flex-shrink:0; margin-top:1px; }
+.ba-after  .ba-items li::before { content:'✓'; color:var(--amber); flex-shrink:0; font-size:0.78rem; margin-top:3px; }
+
+/* pillars */
+.pillars { display:grid; grid-template-columns:repeat(4,1fr); gap:20px; }
+.pillar { background:var(--bg2); border:1px solid var(--border); border-radius:var(--r3); padding:36px 30px; display:flex; flex-direction:column; transition:border-color 0.2s,transform 0.2s; text-decoration:none; }
+.pillar:hover { border-color:var(--border-h); transform:translateY(-2px); }
+.pillar-num { font-family:var(--mono); font-size:0.7rem; color:var(--t3); margin-bottom:20px; }
+.pillar-icon { width:44px; height:44px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:20px; margin-bottom:20px; }
+.pi-amber { background:var(--amber-d); }
+.pi-blue  { background:var(--blue-d); }
+.pi-green { background:var(--green-d); }
+.pillar h3 { font-size:1.1rem; margin-bottom:10px; }
+.pillar p { font-size:0.87rem; line-height:1.7; flex:1; }
+.pillar-link { display:inline-flex; align-items:center; gap:6px; font-size:0.82rem; color:var(--amber); font-weight:600; margin-top:20px; }
+
+/* 3 steps */
+.steps { display:grid; grid-template-columns:repeat(3,1fr); gap:0; position:relative; }
+.steps::before { content:''; position:absolute; top:27px; left:calc(8.333% + 28px); width:calc(83.333% - 56px); height:1px; background:linear-gradient(90deg, var(--amber), var(--blue)); }
+.step { padding:0 28px 0 0; }
+.step:last-child { padding-right:0; }
+.step-num { width:56px; height:56px; border-radius:50%; background:var(--bg3); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; font-family:var(--mono); font-size:0.82rem; color:var(--amber); margin-bottom:20px; position:relative; z-index:1; }
+.step h3 { font-size:0.95rem; margin-bottom:8px; }
+.step p { font-size:0.85rem; line-height:1.65; }
+
+/* learning loop */
+.loop-grid { display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center; }
+.loop-stages { display:flex; flex-direction:column; gap:0; position:relative; }
+.loop-stages::before { content:''; position:absolute; left:19px; top:32px; bottom:32px; width:2px; background:linear-gradient(to bottom, var(--amber), var(--blue), var(--green), var(--amber)); }
+.loop-stage { display:flex; gap:20px; align-items:flex-start; padding:0 0 32px; }
+.loop-stage:last-child { padding-bottom:0; }
+.loop-dot { width:40px; height:40px; border-radius:50%; background:var(--bg3); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; position:relative; z-index:1; }
+.loop-body { padding-top:8px; }
+.loop-body h4 { font-size:0.9rem; margin-bottom:4px; }
+.loop-body p { font-size:0.83rem; line-height:1.6; }
+
+/* multi-agent */
+.ma-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
+.ma-card { background:var(--bg2); border:1px solid var(--border); border-radius:var(--r2); padding:24px; transition:border-color 0.2s; }
+.ma-card:hover { border-color:var(--border-h); }
+.ma-card h4 { font-size:0.92rem; margin-bottom:8px; }
+.ma-card p { font-size:0.84rem; line-height:1.6; }
+
+/* blog */
+.blog-row { display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:20px; }
+.bcard { background:var(--bg2); border:1px solid var(--border); border-radius:var(--r2); padding:28px; display:flex; flex-direction:column; text-decoration:none; transition:border-color 0.2s,transform 0.2s; }
+.bcard:hover { border-color:var(--border-h); transform:translateY(-2px); }
+.bcard-tag { font-size:0.68rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--amber); margin-bottom:12px; }
+.bcard h3 { font-size:1rem; margin-bottom:9px; line-height:1.35; }
+.bcard p { font-size:0.84rem; line-height:1.65; flex:1; }
+.bcard-meta { margin-top:16px; font-size:0.76rem; color:var(--t3); display:flex; gap:8px; }
+.bcard.featured { background:linear-gradient(145deg, rgba(232,152,12,0.05), var(--bg2)); border-color:rgba(232,152,12,0.18); }
+.bcard.featured h3 { font-size:1.1rem; }
+
+/* cta */
+.cta-final { position:relative; overflow:hidden; border:1px solid rgba(232,152,12,0.25); border-radius:var(--r3); padding:80px 72px; background:linear-gradient(135deg, rgba(232,152,12,0.055), rgba(79,126,255,0.03)); text-align:center; }
+.cta-final::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg, transparent 5%, var(--amber) 50%, transparent 95%); }
+.cta-final h2 { margin-bottom:14px; }
+.cta-final p { max-width:480px; margin:0 auto 36px; font-size:1rem; }
+.cta-actions { display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
+
+@media (max-width:960px) {
+  .ba-grid { grid-template-columns:1fr; }
+  .ba-after { border-left:none; border-top:1px solid var(--border); }
+  .pillars { grid-template-columns:1fr; }
+  .loop-grid { grid-template-columns:1fr; gap:40px; }
+  .blog-row { grid-template-columns:1fr; }
+}
+@media (max-width:768px) {
+  .hero-proof { flex-wrap:wrap; }
+  .proof-item { flex:1 1 40%; border-bottom:1px solid var(--border); }
+  .problem-grid { grid-template-columns:1fr; }
+  .steps { grid-template-columns:1fr; gap:32px; }
+  .steps::before { display:none; }
+  .ma-grid { grid-template-columns:1fr; }
+  .cta-final { padding:48px 28px; }
+}
+@media (max-width:600px) {
+  .hero { padding:80px 0 64px; }
+  .hero-actions { flex-direction:column; }
+  .hero-actions .btn { justify-content:center; }
+  .ba-col { padding:28px 20px; }
+}
+</style>
+<script>
+  (function(){var t=localStorage.getItem('corla-theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark');})();
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Corla",
+  "description": "Enterprise AI Context Broker. One source of truth for every AI agent in your organisation — consistent, role-scoped, and audited.",
+  "url": "https://corla.ai",
+  "applicationCategory": "BusinessApplication",
+  "offers": {
+    "@type": "Offer",
+    "price": "39",
+    "priceCurrency": "USD"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "NOI Technologies",
+    "url": "https://corla.ai"
+  }
+}
+</script>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><div class="logo-mark"></div>corla<span style="color:var(--amber)">.ai</span></a>
+    <div class="nav-links">
+      <a href="use-cases.html">Use Cases</a>
+      <a href="how-it-works.html">How It Works</a>
+      <a href="agent-deliberation.html">Agent Deliberation</a>
+      <a href="security.html">Security</a>
+      <a href="blog/index.html">Blog</a>
+      <a href="pricing.html">Pricing</a>
+    </div>
+    <div class="nav-right">
+      <a href="pricing.html#waitlist" class="btn btn-primary btn-sm">Get Access</a>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme" title="Toggle light/dark mode">
+        <svg class="icon-moon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.5 9.5A6 6 0 0 1 6.5 2.5a6 6 0 1 0 7 7z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg class="icon-sun" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="3" stroke="currentColor" stroke-width="1.5"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3.05 3.05l1.41 1.41M11.54 11.54l1.41 1.41M3.05 12.95l1.41-1.41M11.54 4.46l1.41-1.41" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+      <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M3 6h16M3 11h16M3 16h16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="use-cases.html">Use Cases</a>
+  <a href="how-it-works.html">How It Works</a>
+  <a href="agent-deliberation.html">Agent Deliberation</a>
+  <a href="security.html">Security</a>
+  <a href="blog/index.html">Blog</a>
+  <a href="pricing.html">Pricing</a>
+  <a href="pricing.html#waitlist" style="color:var(--amber);border-bottom:none;margin-top:8px;">Get Access →</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-grid"></div>
+  <div class="wrap">
+    <div class="badge" style="margin-bottom:28px;"><span class="badge-dot pulse"></span>Enterprise AI Infrastructure · Private Beta</div>
+    <h1>Your AI agents are powerful.<br>They just don't know your organisation.<br><span class="amber">Corla changes that.</span></h1>
+    <p class="hero-sub">Corla is the context layer between what your organisation knows and what your AI agents do. Publish once. Every agent — across every team, every role, every vendor — works from the same ground truth. Consistent, scoped, and audited.</p>
+    <div class="hero-actions">
+      <a href="pricing.html#waitlist" class="btn btn-primary btn-lg">Request Early Access <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <a href="use-cases.html" class="btn btn-secondary btn-lg">See use cases</a>
+    </div>
+    <div class="hero-proof reveal">
+      <div class="proof-item"><div class="proof-num">Day&nbsp;1</div><div class="proof-label">New hire AI productivity</div></div>
+      <div class="proof-item"><div class="proof-num">&lt;30s</div><div class="proof-label">Context update propagation</div></div>
+      <div class="proof-item"><div class="proof-num">0</div><div class="proof-label">Raw assets transmitted</div></div>
+      <div class="proof-item"><div class="proof-num">∞</div><div class="proof-label">Agents served per update</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- THE PROBLEM -->
+<section style="background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="label">The Problem</div>
+      <h2 class="section-head">The current state of enterprise AI agents.</h2>
+      <p class="section-sub">Most engineering organisations have deployed AI coding tools. What they haven't done — because there was no infrastructure for it — is made those agents consistent, current, or organisationally aware.</p>
+    </div>
+    <div class="problem-grid reveal" data-stagger>
+      <div class="problem-card">
+        <div class="problem-icon">🗂️</div>
+        <h3>Configured in isolation</h3>
+        <p>Each team sets up their own agent context in local files, maintained by nobody, going stale immediately. The same standards get copy-pasted across dozens of projects with no single source of truth.</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-icon">🔄</div>
+        <h3>Amnesiac every session</h3>
+        <p>Agents have no persistent organisational memory. A developer spends a session building context for their AI tool. Tomorrow they start from scratch. The organisation's hard-won knowledge doesn't accumulate.</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-icon">🚪</div>
+        <h3>Ungoverned with vendors</h3>
+        <p>External developers need your context to do quality work. Sharing raw documentation exposes IP. Withholding it produces misaligned output. There has been no governed middle ground.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BEFORE / AFTER -->
+<section>
+  <div class="wrap">
+    <div class="reveal">
+      <div class="label">What Changes</div>
+      <h2 class="section-head">The same organisation. With Corla.</h2>
+    </div>
+    <div class="ba-grid reveal">
+      <div class="ba-col ba-before">
+        <div class="ba-label">Without Corla</div>
+        <ul class="ba-items">
+          <li>TypeScript strict mode enforced in some teams, ignored in others</li>
+          <li>The payments agent doesn't know the auth service was deprecated last sprint</li>
+          <li>A new engineer's agent suggests a logging pattern that stores PII</li>
+          <li>An incident is reviewed. The lesson fades. Six months later an AI agent makes the same mistake</li>
+          <li>Vendor developers have AI tools that index your internal docs and learn your proprietary patterns</li>
+          <li>When an engineer leaves, the context they encoded in local configs goes with them</li>
+        </ul>
+      </div>
+      <div class="ba-col ba-after">
+        <div class="ba-label">With Corla</div>
+        <ul class="ba-items">
+          <li>TypeScript strict mode is in the company-wide context package — every agent gets it</li>
+          <li>The deprecation is published to the broker — it reaches every team on their next session</li>
+          <li>The PII failure mode is in the "what not to do" package from the last PIR</li>
+          <li>Platform Engineering updates the context package — from next session, no agent makes that mistake again</li>
+          <li>Vendors receive compiled context — the guidance without the source — scoped, audited, revocable</li>
+          <li>Institutional knowledge lives in the broker. It compounds. It doesn't walk out the door.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THREE PILLARS -->
+<section style="background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="label">Platform Pillars</div>
+      <h2 class="section-head">Four pillars. One broker.</h2>
+    </div>
+    <div class="pillars reveal" data-stagger>
+      <a href="use-cases.html#internal" class="pillar">
+        <div class="pillar-num">01</div>
+        <div class="pillar-icon pi-amber">🏢</div>
+        <h3>Internal Consistency</h3>
+        <p>Platform Engineering publishes standards once. Every team's AI agents pull from the same source. Architecture changes, deprecations, approved libraries — propagated to every agent automatically, on every session start.</p>
+        <div class="pillar-link">Internal teams →</div>
+      </a>
+      <a href="use-cases.html#external" class="pillar">
+        <div class="pillar-num">02</div>
+        <div class="pillar-icon pi-blue">🔐</div>
+        <h3>IP Protection</h3>
+        <p>Your system prompts, playbooks, and architecture knowledge are intellectual property. Corla ensures that what reaches any developer — internal or external — is a compiled derivative. The source never crosses the boundary. Ever.</p>
+        <div class="pillar-link">How protection works →</div>
+      </a>
+      <a href="use-cases.html#learning" class="pillar">
+        <div class="pillar-num">03</div>
+        <div class="pillar-icon pi-green">🧠</div>
+        <h3>Organisational Learning</h3>
+        <p>Incidents happen. Lessons get encoded into context packages. From the next session, every engineer's AI agent — including new hires and vendors — operates with awareness of that failure mode. It compounds.</p>
+        <div class="pillar-link">The learning loop →</div>
+      </a>
+      <a href="agent-deliberation.html" class="pillar">
+        <div class="pillar-num">04</div>
+        <div class="pillar-icon" style="background:rgba(79,126,255,0.1);">🤝</div>
+        <h3>Agent Deliberation</h3>
+        <p>Agents that reason together and reach conclusions — grounded in shared enterprise context, scoped by role, and fully auditable. Not task execution. Structured deliberation that produces judgements the enterprise can act on.</p>
+        <div class="pillar-link">How deliberation works →</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS: 3 steps -->
+<section>
+  <div class="wrap">
+    <div class="reveal">
+      <div class="label">How It Works</div>
+      <h2 class="section-head">Three commands for the developer. Invisible after that.</h2>
+      <p class="section-sub">The system is designed to disappear after setup. Developers use the tools they already use. Enterprise context flows in automatically.</p>
+    </div>
+    <div class="steps reveal">
+      <div class="step">
+        <div class="step-num">01</div>
+        <h3>Platform Engineering publishes</h3>
+        <p>Standards, architecture context, approved libraries, and "what not to do" packages are authored once and published to the broker. Versioned. Role-scoped. Instantly available to every agent across the org.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <h3>Developer runs <code>corla&nbsp;init</code></h3>
+        <p>One command configures the project. The broker adapter writes to the IDE config. OAuth authenticates the developer. Role and project scope are established. Done once per project — then invisible.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <h3>Every session is context-loaded</h3>
+        <p>The developer opens their IDE. Their AI agent already knows what the organisation knows — the current standards, the approved patterns, the latest deprecations. No manual steps. No stale local files.</p>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:44px;">
+      <a href="how-it-works.html" class="btn btn-secondary">Full technical walkthrough →</a>
+    </div>
+  </div>
+</section>
+
+<!-- THE LEARNING LOOP -->
+<section style="background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div class="wrap">
+    <div class="loop-grid">
+      <div class="reveal-left">
+        <div class="label">The Compounding Advantage</div>
+        <h2 class="section-head">The broker gets smarter with every incident.</h2>
+        <p style="font-size:1rem;line-height:1.8;margin-bottom:20px;">Most organisations have a post-incident review process. Very few have a mechanism to turn those lessons into something every AI agent actually acts on. Corla closes that loop.</p>
+        <p style="font-size:0.9rem;color:var(--t2);line-height:1.8;margin-bottom:28px;">An organisation using Corla for a year has a context broker that encodes every architecture decision, every deprecated pattern, every hard-won production lesson — live, in every agent's context window, automatically for every new engineer from their first session.</p>
+        <a href="use-cases.html#learning" class="btn btn-secondary btn-sm">See the full picture →</a>
+      </div>
+      <div class="reveal-right">
+        <div class="loop-stages">
+          <div class="loop-stage">
+            <div class="loop-dot">🔥</div>
+            <div class="loop-body"><h4>An incident happens in production</h4><p>A failure mode surfaces. The team runs a retrospective and writes the PIR.</p></div>
+          </div>
+          <div class="loop-stage">
+            <div class="loop-dot">📝</div>
+            <div class="loop-body"><h4>The lesson is structured</h4><p>Platform Engineering distils it into a context update — a new entry in the "what not to do" package.</p></div>
+          </div>
+          <div class="loop-stage">
+            <div class="loop-dot">📡</div>
+            <div class="loop-body"><h4>Published to the broker</h4><p>The package is versioned and published. Takes minutes. No individual needs to update anything locally.</p></div>
+          </div>
+          <div class="loop-stage">
+            <div class="loop-dot">✅</div>
+            <div class="loop-body"><h4>Every agent knows, next session</h4><p>From the next working session, every engineer's AI agent — including new hires and vendors — operates with awareness of the failure mode. It doesn't happen again.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MULTI-AGENT -->
+<section>
+  <div class="wrap">
+    <div class="reveal">
+      <div class="label">Multi-Agent Coordination</div>
+      <h2 class="section-head">Agents that work together. Grounded in the same context.</h2>
+      <p class="section-sub">Corla extends beyond context delivery into a coordination layer for multi-agent workflows — across teams, machines, and vendor boundaries. Every exchange is scoped, logged, and grounded in shared enterprise standards.</p>
+    </div>
+    <div class="ma-grid reveal" data-stagger>
+      <div class="ma-card">
+        <h4>API contract alignment</h4>
+        <p>A frontend team's agent and a backend team's agent surface contract mismatches before either side ships — without sharing codebases, without a synchronous meeting, without a human relay.</p>
+      </div>
+      <div class="ma-card">
+        <h4>Automated standards review</h4>
+        <p>A coordinated review agent checks every PR against current architecture standards, approved libraries, and the latest "what not to do" package — consistently, before a human reviewer opens it.</p>
+      </div>
+      <div class="ma-card">
+        <h4>Incident investigation</h4>
+        <p>An on-call agent and an SRE agent work a shared investigation. Both are grounded in the same enterprise context. Findings accumulate. Root cause surfaces faster, without a human relay between machines.</p>
+      </div>
+      <div class="ma-card">
+        <h4>Vendor team coordination</h4>
+        <p>Multiple vendor teams on the same engagement align on interfaces through the broker. Neither team sees the other's codebase. The enterprise controls what each party can see. Every exchange is audited.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ROLES & COLLABORATION -->
+<section style="background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="label">Roles &amp; Collaboration</div>
+      <h2 class="section-head">Every role gets exactly what it needs. Nothing more.</h2>
+      <p class="section-sub">Corla isn't just about what agents receive — it's about how the humans behind them interact with a shared layer of institutional knowledge. Different roles publish, review, consume, and coordinate through the same broker. The context that reaches each person's agent is scoped precisely to their role and project.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--r2);overflow:hidden;" class="reveal" data-stagger>
+      <div style="background:var(--bg);padding:30px 26px;">
+        <div style="font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--amber);margin-bottom:12px;">Platform Engineering</div>
+        <h3 style="font-size:0.95rem;margin-bottom:10px;">Publishes the ground truth</h3>
+        <p style="font-size:0.84rem;line-height:1.65;">Authors and maintains company-wide context packages — standards, approved patterns, architecture references, the "what not to do" list. Updates once; the entire organisation's AI agents get it on their next session.</p>
+      </div>
+      <div style="background:var(--bg);padding:30px 26px;">
+        <div style="font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--blue);margin-bottom:12px;">Senior Engineers</div>
+        <h3 style="font-size:0.95rem;margin-bottom:10px;">Encode domain expertise</h3>
+        <p style="font-size:0.84rem;line-height:1.65;">Contribute team-scoped context packages — domain models, service boundaries, integration conventions. Their expertise becomes available to every engineer's AI agent on the team, without requiring their direct involvement in every session.</p>
+      </div>
+      <div style="background:var(--bg);padding:30px 26px;">
+        <div style="font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--green);margin-bottom:12px;">Security Teams</div>
+        <h3 style="font-size:0.95rem;margin-bottom:10px;">Set the guardrails</h3>
+        <p style="font-size:0.84rem;line-height:1.65;">Publish security context packages — approved patterns, known vulnerabilities, data handling constraints. Security expertise flows into every AI-assisted development session automatically, not through manual review gates at the end.</p>
+      </div>
+      <div style="background:var(--bg);padding:30px 26px;">
+        <div style="font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--purple);margin-bottom:12px;">New Engineers</div>
+        <h3 style="font-size:0.95rem;margin-bottom:10px;">Onboard through the broker</h3>
+        <p style="font-size:0.84rem;line-height:1.65;">From their first session, their AI agent loads company standards, team context, approved libraries, and production lessons. They start contributing with organisational awareness that used to take weeks of osmosis to build.</p>
+      </div>
+      <div style="background:var(--bg);padding:30px 26px;">
+        <div style="font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--t2);margin-bottom:12px;">External Vendors</div>
+        <h3 style="font-size:0.95rem;margin-bottom:10px;">Receive compiled guidance</h3>
+        <p style="font-size:0.84rem;line-height:1.65;">Get the actionable benefit of enterprise context — without the source. Their agents are guided by your standards, constrained to their project scope, and audited throughout. IP stays inside the broker. Alignment reaches the developer.</p>
+      </div>
+      <div style="background:var(--bg);padding:30px 26px;background:linear-gradient(135deg,rgba(232,152,12,0.04),var(--bg));">
+        <div style="font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--amber);margin-bottom:12px;">The result</div>
+        <h3 style="font-size:0.95rem;margin-bottom:10px;">Everyone works from the same ground truth</h3>
+        <p style="font-size:0.84rem;line-height:1.65;">Not the same raw documents — the same <em>structured, role-appropriate, current</em> organisational knowledge. The expertise of your best engineers reaches every AI agent across the org, without requiring their presence in every session.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOG -->
+<section style="background:var(--bg2);border-top:1px solid var(--border);">
+  <div class="wrap">
+    <div class="reveal" style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:40px;">
+      <div><div class="label">From the blog</div><h2>The thinking behind Corla.</h2></div>
+      <a href="blog/index.html" class="btn btn-secondary btn-sm">All articles →</a>
+    </div>
+    <div class="blog-row reveal" data-stagger>
+      <a href="blog/ai-context-governance.html" class="bcard featured">
+        <div class="bcard-tag">Governance · Featured</div>
+        <h3>Why Enterprises Need AI Context Governance — and What It Actually Means</h3>
+        <p>Teams govern models, govern outputs, govern cost — but almost none govern the context layer that shapes all three. Here's the framework, and why it's the most important gap most engineering organisations haven't addressed.</p>
+        <div class="bcard-meta"><span>9 min read</span><span>·</span><span>Mar 2025</span></div>
+      </a>
+      <a href="blog/outsourcing-ai-risk.html" class="bcard">
+        <div class="bcard-tag">Security</div>
+        <h3>The Hidden Risk in AI-Assisted Outsourcing</h3>
+        <p>When outsourced developers use AI tools with access to your codebase, proprietary context leaks in ways most security frameworks haven't modelled.</p>
+        <div class="bcard-meta"><span>7 min read</span><span>·</span><span>Jan 2025</span></div>
+      </a>
+      <a href="blog/mcp-for-ctos.html" class="bcard">
+        <div class="bcard-tag">Technology</div>
+        <h3>MCP Explained for CTOs: The Protocol That Changes Everything</h3>
+        <p>The most important enterprise AI infrastructure standard of 2025 — what it creates in terms of both opportunity and new governance risk.</p>
+        <div class="bcard-meta"><span>8 min read</span><span>·</span><span>Feb 2025</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section style="padding:80px 0;">
+  <div class="wrap">
+    <div class="cta-final reveal">
+      <div class="badge badge-green" style="display:inline-flex;margin-bottom:24px;"><span class="badge-dot" style="background:var(--green)"></span>Private Beta Open</div>
+      <h2>Give your AI agents what your organisation knows.</h2>
+      <p>We onboard in cohorts with dedicated support. First 10 developer seats are free during the pilot period.</p>
+      <div class="cta-actions">
+        <a href="pricing.html#waitlist" class="btn btn-primary btn-lg">Request Early Access</a>
+        <a href="use-cases.html" class="btn btn-secondary btn-lg">See use cases</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo" style="margin-bottom:4px;"><div class="logo-mark"></div>corla<span style="color:var(--amber)">.ai</span></a>
+        <p>Enterprise AI Context Broker. One source of truth for every AI agent in your organisation.</p>
+        <div class="badge" style="width:fit-content;margin-top:8px;"><span class="badge-dot pulse"></span>Private Beta</div>
+      </div>
+      <div class="footer-col"><h5>Product</h5><ul><li><a href="use-cases.html">Use Cases</a></li><li><a href="how-it-works.html">How It Works</a></li><li><a href="security.html">Security</a></li><li><a href="pricing.html">Pricing</a></li></ul></div>
+      <div class="footer-col"><h5>Resources</h5><ul><li><a href="blog/index.html">Blog</a></li><li><a href="blog/ai-context-governance.html">AI Governance</a></li><li><a href="blog/mcp-for-ctos.html">MCP for CTOs</a></li><li><a href="#">Documentation</a></li></ul></div>
+      <div class="footer-col"><h5>Company</h5><ul><li><a href="#">NOI Technologies</a></li><li><a href="#">About</a></li><li><a href="mailto:hello@corla.ai">hello@corla.ai</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2025 Corla · A product by NOI Technologies</div>
+      <div class="footer-legal"><a href="/privacy.html">Privacy</a><a href="/security.html">Security</a><a href="/terms.html">Terms</a></div>
+    </div>
+  </div>
+</footer>
+<script src="js/main.js"></script>
+</body>
+</html>

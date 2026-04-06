@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Your Prompts Are Intellectual Property. Treat Them That Way. — Corla Blog</title>
+<meta name="description" content="Engineering teams spend months refining system prompts and playbooks. Most have no mechanism to protect them. The gap between IP law and AI tooling, explained.">
+<meta property="og:title" content="Your Prompts Are Intellectual Property. Treat Them That Way. — Corla Blog">
+<meta property="og:description" content="Engineering teams spend months refining system prompts and playbooks. Most have no mechanism to protect them. The gap between IP law and AI tooling, explained.">
+<meta property="og:url" content="https://corla.ai/blog/prompt-as-ip">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Corla">
+<meta property="og:image" content="https://corla.ai/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Your Prompts Are Intellectual Property. Treat Them That Way. — Corla Blog">
+<meta name="twitter:description" content="Engineering teams spend months refining system prompts and playbooks. Most have no mechanism to protect them. The gap between IP law and AI tooling, explained.">
+<link rel="canonical" href="https://corla.ai/blog/prompt-as-ip">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="../favicon.svg">
+<meta name="theme-color" content="#F7F5F0">
+<link rel="stylesheet" href="../css/main.css">
+<style>
+.blog-layout { display:grid; grid-template-columns:1fr 280px; gap:64px; align-items:start; }
+.sidebar { position:sticky; top:90px; }
+.sidebar-card { background:var(--bg2); border:1px solid var(--border); border-radius:var(--r2); padding:24px; margin-bottom:20px; }
+.sidebar-card h4 { font-size:0.85rem; margin-bottom:14px; }
+.related-list { list-style:none; display:flex; flex-direction:column; gap:12px; }
+.related-list a { font-size:0.84rem; color:var(--t2); transition:color 0.2s; line-height:1.4; display:block; }
+.related-list a:hover { color:var(--amber); }
+.share-btns { display:flex; gap:8px; flex-wrap:wrap; }
+.share-btn { font-size:0.78rem; padding:7px 14px; border:1px solid var(--border); border-radius:100px; color:var(--t2); background:transparent; cursor:pointer; font-family:var(--body); transition:all 0.2s; }
+.share-btn:hover { border-color:var(--amber); color:var(--amber); }
+@media (max-width:900px) { .blog-layout { grid-template-columns:1fr; } .sidebar { position:static; } }
+@media (max-width:600px) { .prose h2 { font-size:1.3rem; margin:36px 0 12px; } .prose p, .prose li { font-size:0.975rem; } .toc { padding:18px 20px; } .prose blockquote { padding:14px 18px; } }
+</style>
+<script>
+  (function(){var t=localStorage.getItem('corla-theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark');})();
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Your Prompts Are Intellectual Property. Treat Them That Way.",
+  "description": "Engineering teams spend months refining system prompts. Most have no mechanism to protect them when shared with vendors.",
+  "datePublished": "2025-02-10",
+  "dateModified": "2025-02-10",
+  "author": {
+    "@type": "Organization",
+    "name": "Corla Research",
+    "url": "https://corla.ai"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Corla",
+    "url": "https://corla.ai"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://corla.ai/blog/prompt-as-ip"
+  }
+}
+</script>
+</head>
+<body>
+<div id="reading-progress"><div id="reading-progress-bar"></div></div>
+<nav>
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><div class="logo-mark"></div>corla<span style="color:var(--amber)">.ai</span></a>
+    <div class="nav-links">
+      <a href="../use-cases.html">Use Cases</a>
+      <a href="../how-it-works.html">How It Works</a>
+      <a href="../agent-deliberation.html">Agent Deliberation</a>
+      <a href="../security.html">Security</a>
+      <a href="index.html" class="active">Blog</a>
+      <a href="../pricing.html">Pricing</a>
+    </div>
+    <div class="nav-right">
+      <a href="../pricing.html#waitlist" class="btn btn-primary btn-sm">Get Access</a>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme" title="Toggle light/dark mode">
+        <svg class="icon-moon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.5 9.5A6 6 0 0 1 6.5 2.5a6 6 0 1 0 7 7z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg class="icon-sun" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="3" stroke="currentColor" stroke-width="1.5"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3.05 3.05l1.41 1.41M11.54 11.54l1.41 1.41M3.05 12.95l1.41-1.41M11.54 4.46l1.41-1.41" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+      <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M3 6h16M3 11h16M3 16h16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="../use-cases.html">Use Cases</a>
+  <a href="../how-it-works.html">How It Works</a>
+  <a href="../agent-deliberation.html">Agent Deliberation</a>
+  <a href="../security.html">Security</a>
+  <a href="index.html">Blog</a>
+  <a href="../pricing.html">Pricing</a>
+  <a href="../pricing.html#waitlist" style="color:var(--amber);border-bottom:none;margin-top:8px;">Get Access →</a>
+</div>
+
+<section style="padding:80px 0 48px;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:600px;height:400px;background:radial-gradient(ellipse at 50% 0%,rgba(232,152,12,0.08) 0%,transparent 65%);pointer-events:none;"></div>
+  <div class="wrap-narrow">
+    <a href="index.html" style="font-size:0.84rem;color:var(--t3);display:inline-flex;align-items:center;gap:6px;margin-bottom:24px;transition:color 0.2s;" onmouseover="this.style.color='var(--amber)'" onmouseout="this.style.color='var(--t3)'">← Back to Blog</a>
+    <div style="display:flex;gap:12px;align-items:center;margin-bottom:20px;">
+      <div class="badge">Strategy</div>
+      <span style="font-size:0.8rem;color:var(--t3);">6 min read · February 2025</span>
+    </div>
+    <h1 style="font-size:clamp(1.7rem,3.5vw,2.6rem);margin-bottom:20px;line-height:1.2;">Your Prompts Are Intellectual Property. Treat Them That Way.</h1>
+    <p style="font-size:1.1rem;color:var(--t2);line-height:1.75;margin-bottom:32px;">Engineering teams spend months refining system prompts and playbooks. Most have no mechanism to protect them when they need to be shared. The gap between IP law and AI tooling is wider than most legal teams realise.</p>
+    <div style="display:flex;align-items:center;gap:16px;padding:20px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+      <div style="width:40px;height:40px;border-radius:50%;background:var(--amber-d);border:1px solid rgba(232,152,12,0.3);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:700;color:var(--amber);">CB</div>
+      <div><div style="font-size:0.88rem;font-weight:600;">Corla Research</div><div style="font-size:0.8rem;color:var(--t3);">Published February 2025</div></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding:48px 0 96px;">
+  <div class="wrap">
+    <div class="blog-layout">
+      <article class="prose">
+        <div class="toc">
+          <div class="toc-title">In this article</div>
+          <ol>
+            <li><a href="#what-is">What a prompt actually is, legally</a></li>
+            <li><a href="#the-investment">The investment you're not accounting for</a></li>
+            <li><a href="#how-it-leaks">How prompt IP leaks today</a></li>
+            <li><a href="#what-protection">What protection actually looks like</a></li>
+            <li><a href="#practical">Practical steps for this quarter</a></li>
+          </ol>
+        </div>
+
+        <p>In 2023, a consulting firm spent four months and significant senior engineering time building a system prompt for their AI-assisted due diligence workflow. The prompt encoded proprietary analytical frameworks, risk heuristics developed over years of deals, and a structured reasoning pattern that consistently outperformed their competitors' outputs.</p>
+
+        <p>In 2024, they noticed a competitor producing strikingly similar outputs. They had no way to know how, or when the exposure happened, because they had no audit trail. The prompt had been shared with an outsourced development team during an integration project. Beyond that, they had no visibility.</p>
+
+        <p>This is not an unusual story. It is becoming common. And the legal and technical frameworks to address it have not kept pace.</p>
+
+        <h2 id="what-is">What a prompt actually is, legally</h2>
+
+        <p>The intellectual property status of AI prompts is genuinely unsettled law. As of early 2025, there is no clear judicial precedent in most jurisdictions. But several legal frameworks offer partial protection, and understanding them clarifies where the real risk lies.</p>
+
+        <p>A system prompt is most naturally analysed as a <strong>trade secret</strong> under frameworks like the US Defend Trade Secrets Act or the EU Trade Secrets Directive. To qualify, the information must derive economic value from not being generally known, and you must take reasonable measures to keep it secret. The second requirement is where most organisations fail — they have valuable prompts but no mechanism for "reasonable measures."</p>
+
+        <p>Prompts may also contain protectable expression as <strong>literary works</strong> under copyright law, though the threshold for originality is contested for short, functional texts. More interesting is the trade secret angle applied not to the text of a prompt, but to the reasoning patterns and heuristics it encodes — these are closer to algorithms than to documents, and algorithmic trade secrets are well-established.</p>
+
+        <blockquote>The legal question "is this prompt protected IP?" is less important than the practical question "if this prompt were extracted by a competitor, what would we have lost?" For sophisticated domain-specific prompts, the answer is often: significant competitive advantage.</blockquote>
+
+        <h2 id="the-investment">The investment you're not accounting for</h2>
+
+        <p>Consider how a high-value enterprise prompt gets built. It starts with a vague goal — "make our AI assistant better at analysing contracts." Then there are weeks of iteration: testing, measuring, refining. Senior domain experts are pulled in to encode their knowledge. Edge cases are discovered and handled. The prompt develops structure, then nuance, then something that starts to feel like institutional intelligence.</p>
+
+        <p>The cost of building a sophisticated system prompt for a complex domain is often measured in months and senior engineering time. The prompt for a fraud detection workflow might represent six months of work by a team that combines ML expertise with deep domain knowledge. That is not a text file — that is an asset.</p>
+
+        <p>But it is usually stored and managed like a text file. In a repository, probably. Maybe with some version control. Shared freely within the engineering team. And when vendors are onboarded, shared with them too — because what choice is there? You need the vendor to produce outputs consistent with your standards, which means they need the context that produces those outputs.</p>
+
+        <p>The gap between the asset's value and its protection is striking. Most enterprises have more rigorous controls around their AWS credentials than around their most valuable AI prompts.</p>
+
+        <h2 id="how-it-leaks">How prompt IP leaks today</h2>
+
+        <p>There are four primary leak vectors, each operating differently:</p>
+
+        <p><strong>Direct transmission to vendors.</strong> The most obvious. You share the prompt because the vendor needs it to do their work. The NDA you have in place is the only protection, and NDAs are reactive — they establish liability after a breach, they do not prevent or detect it.</p>
+
+        <p><strong>AI tool context indexing.</strong> A developer's AI coding assistant indexes everything in the repository, including prompt files. The developer may not have consciously shared the prompt — the tool did it automatically. The vendor developer is now working with an AI assistant that understands your proprietary patterns.</p>
+
+        <p><strong>Output pattern extraction.</strong> Even if a developer never sees a prompt directly, working extensively with AI outputs shaped by that prompt teaches them the patterns. This is harder to characterise as a traditional IP violation, but the economic harm is the same.</p>
+
+        <p><strong>Embedding in code and documentation.</strong> Prompt fragments embedded in code comments, configuration files, or documentation are often more accessible than the prompt itself. Teams routinely embed abbreviated versions of prompts as inline documentation — a practice that serves clarity but creates unintended exposure.</p>
+
+        <h2 id="what-protection">What protection actually looks like</h2>
+
+        <p>Effective protection for prompt IP requires addressing the transmission problem, not just the legal problem. A more aggressive NDA does not fix any of the technical leak vectors described above.</p>
+
+        <p>The key insight is that you need to separate <em>the benefit of the context</em> from <em>the context itself</em>. The vendor's developers need AI-assisted development that is aligned with your standards. They do not need to know what your standards are, or how you've encoded them.</p>
+
+        <p>This separation requires a compilation step — the same way you might provide a vendor with a compiled library rather than source code. The compiled form is useful; it does what the source does. But it cannot be trivially reverse-engineered into the original.</p>
+
+        <p>For AI context, this means: compile the prompt into a form that informs AI completions without being readable or extractable by the developer or their tools. Scope the compiled form to the project and role. Sign it so tampering is detectable. Expire it so the exposure window is bounded.</p>
+
+        <h2 id="practical">Practical steps for this quarter</h2>
+
+        <p>Without getting into vendor recommendations, there are four things any engineering leader can do immediately to improve prompt IP hygiene:</p>
+
+        <p><strong>Inventory your prompt assets.</strong> Most organisations don't know exactly where their prompts are, which are high-value, and which are shared with vendors. A one-day audit across repositories and AI tool configurations usually produces surprises. Start there.</p>
+
+        <p><strong>Apply data classification.</strong> Prompts should be classified with the same rigour as other sensitive assets. A system prompt encoding your fraud detection logic is not a "medium" sensitivity document — it is likely "high" or "critical." Your DLP policies should reflect this.</p>
+
+        <p><strong>Audit vendor access.</strong> For any vendor who has touched your AI tooling configurations or prompt files, document what they had access to and for how long. This is the baseline you need before you can start improving.</p>
+
+        <p><strong>Establish a transmission policy.</strong> Before the next vendor onboarding, decide: what context should vendors receive, in what form, with what controls? The answer "the same way we've always done it" is no longer acceptable for high-value assets.</p>
+
+        <div class="callout callout-amber">
+          <strong>The bottom line:</strong> Prompt engineering is becoming a core enterprise capability. The organisations that treat their prompt assets with the same rigour as their source code and their customer data will retain their AI-driven competitive advantages. Those that don't will discover what they've lost only when it's too late to matter.
+        </div>
+      </article>
+
+      <aside class="sidebar">
+        <div class="sidebar-card">
+          <h4>Related articles</h4>
+          <ul class="related-list">
+            <li><a href="outsourcing-ai-risk.html">The Hidden Risk in AI-Assisted Outsourcing</a></li>
+            <li><a href="ai-context-governance.html">Why Enterprises Need AI Context Governance</a></li>
+            <li><a href="zero-trust-ai.html">Zero Trust for AI Context</a></li>
+          </ul>
+        </div>
+        <div class="sidebar-card">
+          <h4>Share</h4>
+          <div class="share-btns">
+            <button class="share-btn" onclick="navigator.clipboard.writeText(window.location.href)">Copy link</button>
+            <button class="share-btn">LinkedIn</button>
+          </div>
+        </div>
+        <div class="sidebar-card card-amber">
+          <h4 style="margin-bottom:8px;">Protect your prompts</h4>
+          <p style="font-size:0.84rem;margin-bottom:14px;">Corla is the governance layer between enterprise knowledge and every AI agent — internal or external.</p>
+          <a href="../pricing.html#waitlist" class="btn btn-primary btn-sm" style="width:100%;justify-content:center;">Request Access</a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="../index.html" class="nav-logo" style="margin-bottom:4px;"><div class="logo-mark"></div>corla<span style="color:var(--amber)">.ai</span></a><p>The AI Context Broker for enterprise engineering teams.</p><div class="badge" style="width:fit-content;"><span class="badge-dot pulse"></span>Private Beta</div></div>
+      <div class="footer-col"><h5>Product</h5><ul><li><a href="../how-it-works.html">How it works</a></li><li><a href="../security.html">Security</a></li><li><a href="../pricing.html">Pricing</a></li></ul></div>
+      <div class="footer-col"><h5>Blog</h5><ul><li><a href="index.html">All articles</a></li><li><a href="outsourcing-ai-risk.html">Outsourcing Risk</a></li></ul></div>
+      <div class="footer-col"><h5>Company</h5><ul><li><a href="#">NOI Technologies</a></li><li><a href="mailto:hello@corla.ai">hello@corla.ai</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><div class="footer-copy">© 2025 Corla · A product by NOI Technologies</div><div class="footer-legal"><a href="/privacy.html">Privacy</a><a href="/security.html">Security</a><a href="/terms.html">Terms</a></div></div>
+  </div>
+</footer>
+<script src="../js/main.js"></script>
+</body>
+</html>
