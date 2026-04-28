@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Admin Quick-Start Guide — Corla</title>
+<meta name="description" content="Set up your Corla enterprise in under 10 minutes. Create assets, roles, members, and grants to start delivering AI context to your team.">
+<meta property="og:title" content="Admin Quick-Start Guide — Corla">
+<meta property="og:description" content="Set up your Corla enterprise in under 10 minutes.">
+<meta property="og:url" content="https://corla.ai/docs/admin-quickstart">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Corla">
+<meta property="og:image" content="https://corla.ai/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://corla.ai/docs/admin-quickstart">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta name="theme-color" content="#F7F5F0">
+<link rel="stylesheet" href="../css/main.css">
+<style>
+.page-hero { padding:96px 0 72px; position:relative; overflow:hidden; }
+.step { margin-bottom:48px; }
+.step-header { display:flex; align-items:center; gap:16px; margin-bottom:16px; }
+.step-num { width:40px; height:40px; border-radius:50%; background:var(--amber-d,rgba(232,152,12,0.12)); border:1px solid rgba(232,152,12,0.25); color:var(--amber); font-size:0.85rem; font-weight:700; display:flex; align-items:center; justify-content:center; font-family:var(--mono); flex-shrink:0; }
+.step h3 { margin:0; font-size:1.1rem; }
+.step-content { margin-left:56px; }
+.step-content p { font-size:0.92rem; color:var(--t2); line-height:1.7; margin-bottom:12px; }
+.step-content ul { list-style:none; padding:0; margin:0 0 12px; }
+.step-content li { font-size:0.88rem; color:var(--t2); line-height:1.7; padding:4px 0 4px 20px; position:relative; }
+.step-content li::before { content:''; position:absolute; left:0; top:12px; width:6px; height:6px; border-radius:50%; background:var(--amber); }
+.info-box { background:var(--bg3); border:1px solid var(--border); border-radius:var(--r); padding:16px 20px; font-size:0.85rem; color:var(--t2); line-height:1.65; margin:16px 0; }
+.info-box strong { color:var(--t1); }
+.code-block { background:var(--bg3); border:1px solid var(--border); border-radius:var(--r); padding:16px 20px; font-family:var(--mono); font-size:0.82rem; color:var(--t1); line-height:1.7; overflow-x:auto; margin:12px 0; white-space:pre; }
+.nav-back { display:inline-flex; align-items:center; gap:6px; font-size:0.85rem; color:var(--t3); text-decoration:none; margin-bottom:24px; }
+.nav-back:hover { color:var(--amber); }
+@media (max-width:768px) {
+  .page-hero { padding:64px 0 40px; }
+  .step-content { margin-left:0; margin-top:12px; }
+}
+</style>
+<script>
+  (function(){var t=localStorage.getItem('corla-theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark');})();
+</script>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><div class="logo-mark"></div>corla<span style="color:var(--amber)">.ai</span></a>
+    <div class="nav-links">
+      <a href="../use-cases.html">Use Cases</a>
+      <a href="../how-it-works.html">How It Works</a>
+      <a href="../agent-deliberation.html">Agent Deliberation</a>
+      <a href="../security.html">Security</a>
+      <a href="../blog/index.html">Blog</a>
+      <a href="index.html" class="active">Docs</a>
+      <a href="../pricing.html">Pricing</a>
+    </div>
+    <div class="nav-right">
+      <a href="https://admin.corla.ai/login" class="btn btn-secondary btn-sm">Login</a>
+      <a href="https://admin.corla.ai/signup" class="btn btn-primary btn-sm">Get Started</a>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme" title="Toggle light/dark mode">
+        <svg class="icon-moon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.5 9.5A6 6 0 0 1 6.5 2.5a6 6 0 1 0 7 7z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg class="icon-sun" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="3" stroke="currentColor" stroke-width="1.5"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3.05 3.05l1.41 1.41M11.54 11.54l1.41 1.41M3.05 12.95l1.41-1.41M11.54 4.46l1.41-1.41" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+      <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M3 6h16M3 11h16M3 16h16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="../use-cases.html">Use Cases</a>
+  <a href="../how-it-works.html">How It Works</a>
+  <a href="../agent-deliberation.html">Agent Deliberation</a>
+  <a href="../security.html">Security</a>
+  <a href="../blog/index.html">Blog</a>
+  <a href="index.html">Docs</a>
+  <a href="../pricing.html">Pricing</a>
+  <a href="https://admin.corla.ai/login" style="color:var(--t2);border-bottom:none;margin-top:8px;">Login</a>
+  <a href="https://admin.corla.ai/signup" style="color:var(--amber);border-bottom:none;">Get Started &rarr;</a>
+</div>
+
+<section class="page-hero">
+  <div style="position:absolute;top:-160px;left:50%;transform:translateX(-50%);width:800px;height:500px;background:radial-gradient(ellipse at 50% 0%,rgba(232,152,12,0.09) 0%,rgba(79,126,255,0.04) 40%,transparent 70%);pointer-events:none;"></div>
+  <div class="wrap">
+    <div class="badge" style="margin-bottom:20px;"><span class="badge-dot"></span>Admin Guide</div>
+    <h1>Admin Quick-Start Guide</h1>
+    <p style="font-size:1.05rem;max-width:600px;margin-top:16px;line-height:1.8;">Set up your Corla enterprise, upload your first context assets, and invite a developer &mdash; all in under 10 minutes.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap" style="max-width:780px;">
+    <a href="index.html" class="nav-back">&larr; Back to Documentation</a>
+
+    <!-- Step 1 -->
+    <div class="step reveal">
+      <div class="step-header">
+        <div class="step-num">1</div>
+        <h3>Create your enterprise account</h3>
+      </div>
+      <div class="step-content">
+        <p>Go to <a href="https://admin.corla.ai/signup" style="color:var(--amber);">admin.corla.ai/signup</a> and create your account. You'll need:</p>
+        <ul>
+          <li>Your name and email address</li>
+          <li>Enterprise name (e.g. "Acme Engineering")</li>
+          <li>A unique slug (e.g. <code>acme-engineering</code>) &mdash; this identifies your enterprise</li>
+          <li>A password (min 8 characters, must include uppercase, lowercase, and a number)</li>
+        </ul>
+        <p>After signing up, check your email for a verification link. Click it to activate your account, then log in.</p>
+        <div class="info-box">
+          <strong>Free tier:</strong> You start with 1 member and 5 active grants at no cost. Upgrade to Pro ($9/user/month) when you need more.
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="step reveal">
+      <div class="step-header">
+        <div class="step-num">2</div>
+        <h3>Upload your context assets</h3>
+      </div>
+      <div class="step-content">
+        <p>Navigate to <strong>Assets</strong> in the sidebar. Assets are the proprietary context you want to share with developers. Click <strong>Upload Asset</strong> and provide:</p>
+        <ul>
+          <li><strong>Name</strong> &mdash; a descriptive title (e.g. "TypeScript Review Standards")</li>
+          <li><strong>Type</strong> &mdash; System Prompt, Skill, Playbook, or Knowledge Doc</li>
+          <li><strong>Sensitivity</strong> &mdash; Low, Medium, High, or Critical</li>
+          <li><strong>File</strong> &mdash; upload a Markdown, PDF, DOCX, XLSX, or plain text file</li>
+        </ul>
+        <p>You can also <strong>connect a GitHub or GitLab repository</strong> as an asset source. Go to <strong>Assets &rarr; Connect Repo</strong>, authorize access, and select the files or folders to sync. Changes pushed to the repo are automatically synced.</p>
+        <div class="info-box">
+          <strong>What makes a good asset?</strong> System prompts, coding standards, architecture decision records, security playbooks, onboarding guides, domain glossaries &mdash; anything that makes your AI tools more effective when they have it as context.
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="step reveal">
+      <div class="step-header">
+        <div class="step-num">3</div>
+        <h3>Create a project</h3>
+      </div>
+      <div class="step-content">
+        <p>Go to <strong>Projects</strong> in the sidebar and create a project. Projects scope access &mdash; a developer granted access to "frontend-app" can only receive context relevant to that project.</p>
+        <ul>
+          <li><strong>Name</strong> &mdash; e.g. "Frontend App" or "API Platform"</li>
+          <li><strong>Slug</strong> &mdash; e.g. <code>frontend-app</code></li>
+          <li><strong>Description</strong> &mdash; optional, helps you organise</li>
+        </ul>
+        <p>When uploading assets, assign them to the relevant project(s) so grants can be scoped correctly.</p>
+      </div>
+    </div>
+
+    <!-- Step 4 -->
+    <div class="step reveal">
+      <div class="step-header">
+        <div class="step-num">4</div>
+        <h3>Set up roles</h3>
+      </div>
+      <div class="step-content">
+        <p>Go to <strong>Roles</strong> in the sidebar. Roles define what a developer can access. Create a role with:</p>
+        <ul>
+          <li><strong>Name</strong> &mdash; e.g. "contractor" or "senior-dev"</li>
+          <li><strong>Permissions</strong> &mdash; select which asset types they can access (System Prompts, Skills, Playbooks, Knowledge Docs)</li>
+        </ul>
+        <p>You can create multiple roles with different permission levels &mdash; for example, a "contractor" role with access to Playbooks only, and a "senior-dev" role with access to everything.</p>
+      </div>
+    </div>
+
+    <!-- Step 5 -->
+    <div class="step reveal">
+      <div class="step-header">
+        <div class="step-num">5</div>
+        <h3>Add a member</h3>
+      </div>
+      <div class="step-content">
+        <p>Go to <strong>Members</strong> in the sidebar. Add a member profile for each developer:</p>
+        <ul>
+          <li><strong>Member ID</strong> &mdash; a unique identifier (their email, username, or external ID)</li>
+          <li><strong>Email</strong> &mdash; for sending onboarding instructions</li>
+          <li><strong>Name</strong> &mdash; display name</li>
+          <li><strong>Specialty</strong> &mdash; Frontend, Backend, Fullstack, Security, etc. (used for role-based asset filtering)</li>
+        </ul>
+        <p>The developer will receive a welcome email with setup instructions.</p>
+      </div>
+    </div>
+
+    <!-- Step 6 -->
+    <div class="step reveal">
+      <div class="step-header">
+        <div class="step-num">6</div>
+        <h3>Create a grant</h3>
+      </div>
+      <div class="step-content">
+        <p>Go to <strong>Grants</strong> in the sidebar. A grant is an explicit authorisation for a developer to access context within a specific project. Click <strong>New Grant</strong> and select:</p>
+        <ul>
+          <li><strong>Member</strong> &mdash; the developer you just added</li>
+          <li><strong>Role</strong> &mdash; the role that defines their permissions</li>
+          <li><strong>Project</strong> &mdash; which project they're working on</li>
+          <li><strong>TTL</strong> &mdash; how long each session token lasts (default: 8 hours)</li>
+          <li><strong>Expiry</strong> &mdash; optional date when the grant itself expires</li>
+        </ul>
+        <p>After creating the grant, you'll see a one-time <strong>invite secret</strong>. Share this with the developer &mdash; they need it for their first login. If the developer has an email on file, they'll also receive it by email.</p>
+        <div class="info-box">
+          <strong>Security note:</strong> The invite secret is shown only once and is single-use. After the developer's first login, it's consumed. If they lose it, revoke the grant and create a new one.
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 7 -->
+    <div class="step reveal">
+      <div class="step-header">
+        <div class="step-num">7</div>
+        <h3>Monitor and manage</h3>
+      </div>
+      <div class="step-content">
+        <p>Your admin console gives you full visibility and control:</p>
+        <ul>
+          <li><strong>Sessions</strong> &mdash; see active developer sessions, revoke access instantly</li>
+          <li><strong>Audit Log</strong> &mdash; every context delivery, login, and access event is logged</li>
+          <li><strong>Compliance</strong> &mdash; export audit data as CSV/JSON, configure SIEM webhook alerts</li>
+          <li><strong>Settings</strong> &mdash; manage billing, configure SSO (coming soon)</li>
+        </ul>
+        <p>Revoking a grant or session takes effect within 30 seconds &mdash; the developer's token is invalidated immediately.</p>
+      </div>
+    </div>
+
+    <!-- Next step -->
+    <div style="margin-top:56px;padding:32px 28px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2);" class="reveal">
+      <h3 style="margin-bottom:8px;">What's next?</h3>
+      <p style="font-size:0.92rem;color:var(--t2);line-height:1.7;margin-bottom:16px;">Share the <a href="developer-setup.html" style="color:var(--amber);">Developer Setup Guide</a> with your developer along with their invite secret. They'll be receiving enterprise context in their AI tools within minutes.</p>
+      <a href="developer-setup.html" class="btn btn-primary btn-sm">Developer Setup Guide &rarr;</a>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="../index.html" class="nav-logo" style="margin-bottom:4px;"><div class="logo-mark"></div>corla<span style="color:var(--amber)">.ai</span></a>
+        <p>The AI Context Broker for enterprise engineering teams.</p>
+        <div class="badge" style="width:fit-content;"><span class="badge-dot pulse"></span>Now Available</div>
+      </div>
+      <div class="footer-col"><h5>Product</h5><ul><li><a href="../use-cases.html">Use Cases</a></li><li><a href="../how-it-works.html">How It Works</a></li><li><a href="../agent-deliberation.html">Agent Deliberation</a></li><li><a href="../security.html">Security</a></li><li><a href="../pricing.html">Pricing</a></li></ul></div>
+      <div class="footer-col"><h5>Resources</h5><ul><li><a href="../blog/index.html">Blog</a></li><li><a href="index.html">Documentation</a></li></ul></div>
+      <div class="footer-col"><h5>Company</h5><ul><li><a href="#">NOI Technologies</a></li><li><a href="mailto:hello@corla.ai">hello@corla.ai</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">&copy; 2025 Corla &middot; A product by NOI Technologies</div>
+      <div class="footer-legal"><a href="/privacy.html">Privacy</a><a href="/security.html">Security</a><a href="/terms.html">Terms</a></div>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>

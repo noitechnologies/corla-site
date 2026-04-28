@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Developer Setup Guide — Corla</title>
+<meta name="description" content="Install the Corla adapter, authenticate with your grant, and start receiving enterprise AI context in Claude Code, Cursor, or VS Code.">
+<meta property="og:title" content="Developer Setup Guide — Corla">
+<meta property="og:description" content="Start receiving enterprise AI context in your dev tools in under 5 minutes.">
+<meta property="og:url" content="https://corla.ai/docs/developer-setup">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Corla">
+<meta property="og:image" content="https://corla.ai/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://corla.ai/docs/developer-setup">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta name="theme-color" content="#F7F5F0">
+<link rel="stylesheet" href="../css/main.css">
+<style>
+.page-hero { padding:96px 0 72px; position:relative; overflow:hidden; }
+.step { margin-bottom:48px; }
+.step-header { display:flex; align-items:center; gap:16px; margin-bottom:16px; }
+.step-num { width:40px; height:40px; border-radius:50%; background:var(--amber-d,rgba(232,152,12,0.12)); border:1px solid rgba(232,152,12,0.25); color:var(--amber); font-size:0.85rem; font-weight:700; display:flex; align-items:center; justify-content:center; font-family:var(--mono); flex-shrink:0; }
+.step h3 { margin:0; font-size:1.1rem; }
+.step-content { margin-left:56px; }
+.step-content p { font-size:0.92rem; color:var(--t2); line-height:1.7; margin-bottom:12px; }
+.step-content ul { list-style:none; padding:0; margin:0 0 12px; }
+.step-content li { font-size:0.88rem; color:var(--t2); line-height:1.7; padding:4px 0 4px 20px; position:relative; }
+.step-content li::before { content:''; position:absolute; left:0; top:12px; width:6px; height:6px; border-radius:50%; background:var(--amber); }
+.info-box { background:var(--bg3); border:1px solid var(--border); border-radius:var(--r); padding:16px 20px; font-size:0.85rem; color:var(--t2); line-height:1.65; margin:16px 0; }
+.info-box strong { color:var(--t1); }
+.warn-box { background:rgba(232,152,12,0.06); border:1px solid rgba(232,152,12,0.2); border-radius:var(--r); padding:16px 20px; font-size:0.85rem; color:var(--t2); line-height:1.65; margin:16px 0; }
+.warn-box strong { color:var(--amber); }
+.code-block { background:var(--bg3); border:1px solid var(--border); border-radius:var(--r); padding:16px 20px; font-family:var(--mono); font-size:0.82rem; color:var(--t1); line-height:1.7; overflow-x:auto; margin:12px 0; white-space:pre; }
+.tool-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; margin:16px 0; }
+.tool-card { background:var(--bg3); border:1px solid var(--border); border-radius:var(--r); padding:16px; text-align:center; }
+.tool-card h4 { font-size:0.9rem; margin-bottom:4px; }
+.tool-card p { font-size:0.78rem; color:var(--t3); margin:0; }
+.nav-back { display:inline-flex; align-items:center; gap:6px; font-size:0.85rem; color:var(--t3); text-decoration:none; margin-bottom:24px; }
+.nav-back:hover { color:var(--amber); }
+@media (max-width:768px) {
+  .page-hero { padding:64px 0 40px; }
+  .step-content { margin-left:0; margin-top:12px; }
+  .tool-grid { grid-template-columns:1fr; }
+}
+</style>
+<script>
+  (function(){var t=localStorage.getItem('corla-theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark');})();
+</script>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><div class="logo-mark"></div>corla<span style="color:var(--amber)">.ai</span></a>
+    <div class="nav-links">
+      <a href="../use-cases.html">Use Cases</a>
+      <a href="../how-it-works.html">How It Works</a>
+      <a href="../agent-deliberation.html">Agent Deliberation</a>
+      <a href="../security.html">Security</a>
+      <a href="../blog/index.html">Blog</a>
+      <a href="index.html" class="active">Docs</a>
+      <a href="../pricing.html">Pricing</a>
+    </div>
+    <div class="nav-right">
+      <a href="https://admin.corla.ai/login" class="btn btn-secondary btn-sm">Login</a>
+      <a href="https://admin.corla.ai/signup" class="btn btn-primary btn-sm">Get Started</a>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme" title="Toggle light/dark mode">
+        <svg class="icon-moon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.5 9.5A6 6 0 0 1 6.5 2.5a6 6 0 1 0 7 7z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg class="icon-sun" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="3" stroke="currentColor" stroke-width="1.5"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3.05 3.05l1.41 1.41M11.54 11.54l1.41 1.41M3.05 12.95l1.41-1.41M11.54 4.46l1.41-1.41" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+      <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M3 6h16M3 11h16M3 16h16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="../use-cases.html">Use Cases</a>
+  <a href="../how-it-works.html">How It Works</a>
+  <a href="../agent-deliberation.html">Agent Deliberation</a>
+  <a href="../security.html">Security</a>
+  <a href="../blog/index.html">Blog</a>
+  <a href="index.html">Docs</a>
+  <a href="../pricing.html">Pricing</a>
+  <a href="https://admin.corla.ai/login" style="color:var(--t2);border-bottom:none;margin-top:8px;">Login</a>
+  <a href="https://admin.corla.ai/signup" style="color:var(--amber);border-bottom:none;">Get Started &rarr;</a>
+</div>
+
+<section class="page-hero">
+  <div style="position:absolute;top:-160px;left:50%;transform:translateX(-50%);width:800px;height:500px;background:radial-gradient(ellipse at 50% 0%,rgba(232,152,12,0.09) 0%,rgba(79,126,255,0.04) 40%,transparent 70%);pointer-events:none;"></div>
+  <div class="wrap">
+    <div class="badge" style="margin-bottom:20px;"><span class="badge-dot"></span>Developer Guide</div>
+    <h1>Developer Setup Guide</h1>
+    <p style="font-size:1.05rem;max-width:600px;margin-top:16px;line-height:1.8;">Install the Corla adapter, log in with your grant, and start receiving enterprise context in your AI dev tools &mdash; in under 5 minutes.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap" style="max-width:780px;">
+    <a href="index.html" class="nav-back">&larr; Back to Documentation</a>
+
+    <!-- Prerequisites -->
+    <div class="info-box reveal" style="margin-bottom:40px;">
+      <strong>Before you start:</strong> Your enterprise admin should have created a grant for you and shared an <strong>invite secret</strong> (a one-time code). You'll also need the <strong>enterprise slug</strong>, your <strong>member ID</strong>, and the <strong>project ID</strong> for the project you're working on. Check your email &mdash; these may have been sent to you.
+    </div>
+
+    <!-- Step 1 -->
+    <div class="step reveal">
+      <div class="step-header">
+        <div class="step-num">1</div>
+        <h3>Install the Corla adapter</h3>
+      </div>
+      <div class="step-content">
+        <p>Install the adapter globally using npm:</p>
+        <div class="code-block">npm install -g @corla/adapter</div>
+        <p>This gives you the <code>corla</code> CLI command. Verify the installation:</p>
+        <div class="code-block">corla status</div>
+      </div>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="step reveal">
+      <div class="step-header">
+        <div class="step-num">2</div>
+        <h3>Log in with your grant</h3>
+      </div>
+      <div class="step-content">
+        <p>Run the login command with your credentials:</p>
+        <div class="code-block">corla login</div>
+        <p>You'll be prompted for:</p>
+        <ul>
+          <li><strong>Broker URL</strong> &mdash; <code>https://broker.corla.ai</code> (or the URL your admin provided)</li>
+          <li><strong>Enterprise slug</strong> &mdash; e.g. <code>acme-engineering</code></li>
+          <li><strong>Member ID</strong> &mdash; the identifier your admin assigned to you</li>
+          <li><strong>Project ID</strong> &mdash; the project you're working on</li>
+          <li><strong>Invite secret</strong> &mdash; the one-time code from your admin (first login only)</li>
+        </ul>
+        <p>On success, you'll receive a token. The CLI will show you how to set it:</p>
+        <div class="code-block">export CORLA_TOKEN=eyJhbGci...your-token-here</div>
+        <p>Add this to your shell profile (<code>~/.zshrc</code> or <code>~/.bashrc</code>) so it persists across terminal sessions.</p>
+        <div class="warn-box">
+          <strong>Keep your token private.</strong> Never commit it to git, share it in chat, or include it in screenshots. It grants access to your enterprise's context. If compromised, ask your admin to revoke the grant.
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="step reveal">
+      <div class="step-header">
+        <div class="step-num">3</div>
+        <h3>Configure your project</h3>
+      </div>
+      <div class="step-content">
+        <p>Navigate to your project directory and run:</p>
+        <div class="code-block">cd /path/to/your/project
+corla init</div>
+        <p>This creates an <code>.mcp.json</code> file in your project root that configures Corla as an MCP server:</p>
+        <div class="code-block">{
+  "mcpServers": {
+    "corla": {
+      "type": "http",
+      "url": "https://broker.corla.ai/mcp",
+      "headers": {
+        "Authorization": "Bearer ${CORLA_TOKEN}"
+      }
+    }
+  }
+}</div>
+        <p>If you use VS Code, it also creates <code>.vscode/mcp.json</code> for VS Code Copilot integration.</p>
+      </div>
+    </div>
+
+    <!-- Step 4 -->
+    <div class="step reveal">
+      <div class="step-header">
+        <div class="step-num">4</div>
+        <h3>Start using enterprise context</h3>
+      </div>
+      <div class="step-content">
+        <p>That's it. Your AI tools will now automatically load enterprise context when working in this project. The context is fetched from the broker, compiled and scoped to your role, and delivered to your AI tool.</p>
+
+        <div class="tool-grid">
+          <div class="tool-card">
+            <h4>Claude Code</h4>
+            <p>Context loads automatically via MCP</p>
+          </div>
+          <div class="tool-card">
+            <h4>Cursor</h4>
+            <p>Reads .mcp.json for context</p>
+          </div>
+          <div class="tool-card">
+            <h4>VS Code Copilot</h4>
+            <p>Uses .vscode/mcp.json</p>
+          </div>
+        </div>
+
+        <p>To verify the connection is working:</p>
+        <div class="code-block">corla status</div>
+        <p>You should see your enterprise name, project, role, and token expiry.</p>
+      </div>
+    </div>
+
+    <!-- How it works under the hood -->
+    <div class="step reveal">
+      <div class="step-header">
+        <div class="step-num">&mdash;</div>
+        <h3>What happens under the hood</h3>
+      </div>
+      <div class="step-content">
+        <p>When your AI tool starts a session, it connects to the Corla broker via MCP and:</p>
+        <ul>
+          <li>Your token is validated and checked against the revocation list</li>
+          <li>Your grant, role, and project are verified</li>
+          <li>Relevant assets are compiled &mdash; redacted, scoped to your role, and signed</li>
+          <li>The compiled context is delivered to your AI tool in-memory (never written to disk)</li>
+          <li>Every access is logged in an immutable audit trail</li>
+        </ul>
+        <p>You never see the raw assets. Your AI tool receives processed context that helps it write better, more aligned code &mdash; without exposing the enterprise's proprietary material.</p>
+      </div>
+    </div>
+
+    <!-- Troubleshooting -->
+    <div style="margin-top:56px;" class="reveal">
+      <h2 style="font-size:1.15rem;margin-bottom:20px;">Troubleshooting</h2>
+
+      <div class="info-box" style="margin-bottom:12px;">
+        <strong>"Token expired" or "401 Unauthorized"</strong><br>
+        Your token has expired. Run <code>corla login</code> again to get a new one. Update <code>CORLA_TOKEN</code> in your shell profile.
+      </div>
+
+      <div class="info-box" style="margin-bottom:12px;">
+        <strong>"Grant not found" or "Policy denied"</strong><br>
+        Your grant may have been revoked or expired. Contact your enterprise admin to check your grant status.
+      </div>
+
+      <div class="info-box" style="margin-bottom:12px;">
+        <strong>"Invalid invite secret"</strong><br>
+        Invite secrets are single-use. If you've already used it, you don't need it again. If you haven't and it's not working, ask your admin to revoke the grant and create a new one.
+      </div>
+
+      <div class="info-box">
+        <strong>MCP server not showing up in your AI tool</strong><br>
+        Make sure <code>CORLA_TOKEN</code> is set in your environment and <code>.mcp.json</code> exists in your project root. Restart your AI tool after adding the config.
+      </div>
+    </div>
+
+    <!-- Next step -->
+    <div style="margin-top:48px;padding:32px 28px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2);" class="reveal">
+      <h3 style="margin-bottom:8px;">Need help?</h3>
+      <p style="font-size:0.92rem;color:var(--t2);line-height:1.7;margin-bottom:0;">If you run into any issues, reach out to your enterprise admin or contact us at <a href="mailto:hello@corla.ai" style="color:var(--amber);">hello@corla.ai</a>.</p>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="../index.html" class="nav-logo" style="margin-bottom:4px;"><div class="logo-mark"></div>corla<span style="color:var(--amber)">.ai</span></a>
+        <p>The AI Context Broker for enterprise engineering teams.</p>
+        <div class="badge" style="width:fit-content;"><span class="badge-dot pulse"></span>Now Available</div>
+      </div>
+      <div class="footer-col"><h5>Product</h5><ul><li><a href="../use-cases.html">Use Cases</a></li><li><a href="../how-it-works.html">How It Works</a></li><li><a href="../agent-deliberation.html">Agent Deliberation</a></li><li><a href="../security.html">Security</a></li><li><a href="../pricing.html">Pricing</a></li></ul></div>
+      <div class="footer-col"><h5>Resources</h5><ul><li><a href="../blog/index.html">Blog</a></li><li><a href="index.html">Documentation</a></li></ul></div>
+      <div class="footer-col"><h5>Company</h5><ul><li><a href="#">NOI Technologies</a></li><li><a href="mailto:hello@corla.ai">hello@corla.ai</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">&copy; 2025 Corla &middot; A product by NOI Technologies</div>
+      <div class="footer-legal"><a href="/privacy.html">Privacy</a><a href="/security.html">Security</a><a href="/terms.html">Terms</a></div>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>
