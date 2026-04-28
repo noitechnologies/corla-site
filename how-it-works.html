@@ -4,16 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>How It Works — Corla</title>
-<meta name="description" content="A technical walkthrough of Corla's three-zone architecture, compilation pipeline, and multi-agent coordination layer. Built on MCP. Agent-agnostic.">
+<meta name="description" content="A technical walkthrough of Corla's three-zone architecture, compilation pipeline, and broker — built on MCP and agent-agnostic.">
 <meta property="og:title" content="How It Works — Corla">
-<meta property="og:description" content="A technical walkthrough of Corla's three-zone architecture, compilation pipeline, and multi-agent coordination layer. Built on MCP. Agent-agnostic.">
+<meta property="og:description" content="A technical walkthrough of Corla's three-zone architecture, compilation pipeline, and broker — built on MCP and agent-agnostic.">
 <meta property="og:url" content="https://corla.ai/how-it-works">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Corla">
 <meta property="og:image" content="https://corla.ai/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="How It Works — Corla">
-<meta name="twitter:description" content="A technical walkthrough of Corla's three-zone architecture, compilation pipeline, and multi-agent coordination layer. Built on MCP. Agent-agnostic.">
+<meta name="twitter:description" content="A technical walkthrough of Corla's three-zone architecture, compilation pipeline, and broker — built on MCP and agent-agnostic.">
 <link rel="canonical" href="https://corla.ai/how-it-works">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="apple-touch-icon" sizes="180x180" href="/favicon.svg">
@@ -122,7 +122,7 @@
   <div class="wrap">
     <div class="badge" style="margin-bottom:20px;"><span class="badge-dot"></span>Architecture</div>
     <h1>How Corla works</h1>
-    <p style="font-size:1.05rem;max-width:600px;margin-top:16px;line-height:1.8;">From context compilation to multi-agent coordination — a technical walkthrough of the broker architecture, the MCP tool set, and how the security properties hold.</p>
+    <p style="font-size:1.05rem;max-width:600px;margin-top:16px;line-height:1.8;">From context compilation to scoped delivery — a technical walkthrough of the broker architecture, the MCP tool set, and how the security properties hold.</p>
   </div>
 </section>
 
@@ -362,20 +362,20 @@
 <section>
   <div class="wrap">
     <div class="reveal">
-      <div class="label">Multi-Agent Coordination</div>
+      <div class="label" style="display:inline-flex;align-items:center;gap:10px;"><span>Multi-Agent Coordination</span><span class="badge badge-blue" style="font-size:0.62rem;padding:3px 9px;"><span class="badge-dot" style="background:var(--blue)"></span>On the Roadmap</span></div>
       <h2 class="section-head">Agents that work together. Grounded in the same context.</h2>
-      <p class="section-sub">Corla extends beyond context delivery into a coordination layer for multi-agent workflows. Agents across separate machines and teams can collaborate through the broker — no human relay, no shared codebases, every exchange audited.</p>
+      <p class="section-sub">A coordination layer for multi-agent workflows is on Corla's roadmap. The broker today delivers context to single agents; the coordination layer extends that with broker-mediated agent-to-agent exchanges across separate machines and teams — no human relay, no shared codebases, every exchange audited.</p>
     </div>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:40px;" class="reveal" data-stagger>
       <div class="card">
         <div class="feat-icon fi-b" style="margin-bottom:16px;">🔗</div>
         <h3 style="margin-bottom:10px;">Broker-mediated</h3>
-        <p style="font-size:0.87rem;">All agent-to-agent communication passes through Corla. The broker enforces access control, applies token scoping, and logs every exchange — no message bypasses the audit trail.</p>
+        <p style="font-size:0.87rem;">All agent-to-agent communication will pass through Corla. The broker enforces access control, applies token scoping, and logs every exchange — no message bypasses the audit trail.</p>
       </div>
       <div class="card">
         <div class="feat-icon fi-a" style="margin-bottom:16px;">🌐</div>
         <h3 style="margin-bottom:10px;">Cross-machine, cross-team</h3>
-        <p style="font-size:0.87rem;">A frontend developer's agent and a backend developer's agent can coordinate on API contracts without sharing codebases. A vendor's agent and an internal security agent can collaborate without exposing raw architecture.</p>
+        <p style="font-size:0.87rem;">A frontend developer's agent and a backend developer's agent will coordinate on API contracts without sharing codebases. A vendor's agent and an internal security agent will collaborate without exposing raw architecture.</p>
       </div>
       <div class="card">
         <div class="feat-icon fi-g" style="margin-bottom:16px;">📐</div>
@@ -403,6 +403,10 @@
           <p style="font-size:0.85rem;">A senior developer's agent posts architectural decisions and rationale. A new joiner's agent reads the thread, builds context, and asks questions — no synchronous scheduling required.</p>
         </div>
       </div>
+    </div>
+    <div style="margin-top:36px;text-align:center;" class="reveal">
+      <a href="mailto:info@noitechnologies.com?subject=Waitlist%3A%20Multi-agent%20coordination&body=I'd%20like%20to%20be%20notified%20when%20Corla's%20multi-agent%20coordination%20%2F%20agent%20deliberation%20capability%20is%20available." class="btn btn-primary">Join the Waitlist</a>
+      <a href="agent-deliberation.html" class="btn btn-secondary" style="margin-left:8px;">Read the deep dive →</a>
     </div>
   </div>
 
