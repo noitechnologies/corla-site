@@ -1,0 +1,37 @@
+# Corla
+
+> Corla is an enterprise AI Context Broker. It is the context layer between what your organisation knows and what your AI agents do — publishing once so every agent (across teams, roles, and vendors) works from the same scoped, signed, audited ground truth. Built on the Model Context Protocol (MCP). Sign up free at admin.corla.ai/signup.
+
+Corla is a product of NOI Technologies (https://www.noitechnologies.com/). Free tier includes 1 member and 5 active grants with no credit card. Pro is $9 per user per month for unlimited members and grants. Enterprise plans add on-premise deployment, custom IdP integration, and SOC 2 / ISO 42001 reporting.
+
+## Product
+
+- [Use Cases](https://corla.ai/use-cases): How Corla serves internal engineering organisations, external vendor teams, and every role in between.
+- [How It Works](https://corla.ai/how-it-works): Three-zone architecture (Source · Compiler · Delivery), the five-stage compilation pipeline, and the MCP tool set.
+- [Agent Deliberation](https://corla.ai/agent-deliberation): Multi-agent coordination — currently on the roadmap. Single-agent context delivery is shipping today.
+- [Security](https://corla.ai/security): Four-layer security model — Auth, Access Control, Context Protection, Output & Audit. Two-pass PII redaction (regex always on; Microsoft Presidio NER optional, enterprise toggle).
+- [Pricing](https://corla.ai/pricing): Free / Pro $9 per user per month / Enterprise custom. Self-serve signup; no sales call needed for Free or Pro.
+
+## Documentation
+
+- [Documentation hub](https://corla.ai/docs/): Entry point for setup guides.
+- [Admin Quick-Start](https://corla.ai/docs/admin-quickstart): Sign up, create the enterprise, upload assets, set up roles, invite first developer — under 10 minutes.
+- [Developer Setup](https://corla.ai/docs/developer-setup): Install the MCP adapter, authenticate with a grant, start receiving enterprise context inside Claude Code, Cursor, or VS Code.
+
+## Blog
+
+- [All articles](https://corla.ai/blog/): Index of long-form essays on AI context governance, organisational learning, and the enterprise AI infrastructure shift.
+- [AI Context Governance](https://corla.ai/blog/ai-context-governance): The framework most engineering organisations are missing — governing context the way they govern code, data, and access.
+- [The Hidden Risk in AI-Assisted Outsourcing](https://corla.ai/blog/outsourcing-ai-risk): How AI tools used by outsourced developers leak proprietary context in ways most security frameworks haven't modelled.
+- [MCP for CTOs](https://corla.ai/blog/mcp-for-ctos): What the Model Context Protocol is and why it matters for enterprise AI strategy.
+- [Prompt as IP](https://corla.ai/blog/prompt-as-ip): Why system prompts and playbooks are competitive intellectual property — and how to protect them.
+- [Zero-Trust AI](https://corla.ai/blog/zero-trust-ai): Applying zero-trust principles to enterprise AI context delivery.
+- [Organisational Memory](https://corla.ai/blog/organisational-memory): Why AI agents forget everything between sessions, and the infrastructure required to fix it.
+- [Agent Deliberation in the Enterprise](https://corla.ai/blog/agent-deliberation-enterprise): From task execution to multi-agent reasoning — the natural next stage of enterprise AI.
+- [Platform Engineering for AI Agents](https://corla.ai/blog/platform-engineering-ai-agents): How Platform Engineering's job changes when AI agents become first-class consumers of organisational standards.
+
+## Optional
+
+- [Privacy Policy](https://corla.ai/privacy): How we collect, process, and protect data. Raw asset content is never persisted in plaintext; only hashes are logged.
+- [Terms of Service](https://corla.ai/terms): Operated by NOI Technologies.
+- [Contact](mailto:info@noitechnologies.com): General inquiries, sales, security review requests.
