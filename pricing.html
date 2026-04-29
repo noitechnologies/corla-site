@@ -95,6 +95,70 @@
 <script>
   (function(){var t=localStorage.getItem('corla-theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark');})();
 </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What's included in the Free tier?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Free includes 1 member and up to 5 active grants, with the full Corla product behind it: context delivery, complete audit trail, MCP integration, RBAC, OAuth 2.1 authentication, and PII/secrets redaction. No credit card required and no time limit. You only need to upgrade when you outgrow those two limits."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does the $9/user/month charge work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "When you upgrade to Pro, the $9/month is charged per user for every member of the workspace — not just the members beyond the free limit. So a 5-person team on Pro is $45/month, a 20-person team is $180/month, and so on. There's no separate base fee."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens to billing when I add or remove members?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Seats auto-adjust as you add or remove members from the admin console. Billing prorates automatically — you only pay for the days a seat was active. There's no manual seat management or upfront commitment to a number of users."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Where is the data stored? Can we keep it in our region?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The broker SaaS runs on AWS with EU, US, and Asia-Pacific regions available. Raw asset content is stored in your own infrastructure — Corla never stores raw content on its own servers. Audit events are written to your enterprise's audit sink."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens when we revoke a developer's access?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Revocation is immediate and propagates in under 30 seconds. The admin clicks Revoke in the admin console. All active sessions for that developer are invalidated and every subsequent context request is rejected. Their next attempt — whether in 5 seconds or 5 days — will fail."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does this work with our existing identity provider?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Corla supports OAuth 2.1, SAML 2.0, and OIDC. Most enterprise IdPs — Okta, Azure AD, Auth0, Google Workspace — are supported. For the developer side, the login flow opens in a browser and uses standard OAuth PKCE, which works with any supported IdP. Custom IdP integration is included in Enterprise tier."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can our security team review the architecture before we sign up?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Absolutely — we encourage it. Full architecture documentation, threat model, and SOC 2 Type II report are available under NDA for serious evaluations. Email info@noitechnologies.com with your company name and we'll get you the right materials within one business day."
+      }
+    }
+  ]
+}
+</script>
 </head>
 <body>
 <nav>

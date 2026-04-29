@@ -4,16 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Corla — Enterprise AI Context Broker</title>
-<meta name="description" content="Your AI agents are powerful. They just don't know your organisation. Corla is the context layer that connects what your org knows to every AI agent — consistent, role-scoped, and audited.">
+<meta name="description" content="Your AI agents are powerful. They just don't know your organisation. Corla is the context layer connecting org knowledge to every AI agent — scoped and audited.">
 <meta property="og:title" content="Corla — Enterprise AI Context Broker">
-<meta property="og:description" content="Your AI agents are powerful. They just don't know your organisation. Corla is the context layer that connects what your org knows to every AI agent — consistent, role-scoped, and audited.">
+<meta property="og:description" content="Your AI agents are powerful. They just don't know your organisation. Corla is the context layer connecting org knowledge to every AI agent — scoped and audited.">
 <meta property="og:url" content="https://corla.ai/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Corla">
 <meta property="og:image" content="https://corla.ai/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Corla — Enterprise AI Context Broker">
-<meta name="twitter:description" content="Your AI agents are powerful. They just don't know your organisation. Corla is the context layer that connects what your org knows to every AI agent — consistent, role-scoped, and audited.">
+<meta name="twitter:description" content="Your AI agents are powerful. They just don't know your organisation. Corla is the context layer connecting org knowledge to every AI agent — scoped and audited.">
 <link rel="canonical" href="https://corla.ai/">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="apple-touch-icon" href="favicon.svg">
@@ -149,21 +149,74 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "name": "Corla",
-  "description": "Enterprise AI Context Broker. One source of truth for every AI agent in your organisation — consistent, role-scoped, and audited.",
-  "url": "https://corla.ai",
-  "applicationCategory": "BusinessApplication",
-  "offers": {
-    "@type": "Offer",
-    "price": "39",
-    "priceCurrency": "USD"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "NOI Technologies",
-    "url": "https://corla.ai"
-  }
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://corla.ai/#organization",
+      "name": "Corla",
+      "url": "https://corla.ai",
+      "logo": "https://corla.ai/favicon.svg",
+      "sameAs": ["https://www.noitechnologies.com/"],
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "NOI Technologies",
+        "url": "https://www.noitechnologies.com/"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "info@noitechnologies.com",
+        "contactType": "customer support",
+        "availableLanguage": ["English"]
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://corla.ai/#website",
+      "url": "https://corla.ai",
+      "name": "Corla",
+      "description": "Enterprise AI Context Broker — one source of truth for every AI agent in your organisation.",
+      "publisher": { "@id": "https://corla.ai/#organization" }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://corla.ai/#software",
+      "name": "Corla",
+      "description": "Enterprise AI Context Broker. One source of truth for every AI agent in your organisation — consistent, role-scoped, and audited.",
+      "url": "https://corla.ai",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web",
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "Free",
+          "price": "0",
+          "priceCurrency": "USD",
+          "description": "1 member, 5 active grants, full context delivery, audit trail, and MCP integration. No credit card required."
+        },
+        {
+          "@type": "Offer",
+          "name": "Pro",
+          "price": "9",
+          "priceCurrency": "USD",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": "9",
+            "priceCurrency": "USD",
+            "unitText": "user/month",
+            "billingIncrement": 1
+          },
+          "description": "Unlimited members, unlimited grants, AI-powered PII redaction (Presidio NER), priority support."
+        },
+        {
+          "@type": "Offer",
+          "name": "Enterprise",
+          "priceCurrency": "USD",
+          "description": "Custom pricing for on-premise deployment, custom IdP integration, SOC 2 / ISO 42001 reporting, and dedicated SLA."
+        }
+      ],
+      "publisher": { "@id": "https://corla.ai/#organization" }
+    }
+  ]
 }
 </script>
 </head>
