@@ -238,7 +238,7 @@
     </div>
     <div class="stages reveal">
       <div class="stage"><div class="stage-num">1</div><h4>Intent extract</h4><p>Goal, constraints, domain keywords — the metadata safe to expose.</p></div>
-      <div class="stage"><div class="stage-num">2</div><h4>Redact</h4><p>PII and secrets stripped. Emails, API keys, JWTs, connection strings.</p></div>
+      <div class="stage"><div class="stage-num">2</div><h4>Redact</h4><p>Two-pass redaction: regex (always on) for emails, API keys, JWTs, connection strings. Optional Presidio NER for names, addresses, contextual identifiers. Configurable per enterprise.</p></div>
       <div class="stage"><div class="stage-num">3</div><h4>Scope project</h4><p>RBAC role ceiling applied. Internal sections removed. Sensitivity filtered.</p></div>
       <div class="stage"><div class="stage-num">4</div><h4>Sign &amp; seal</h4><p>HMAC-SHA256 with enterprise key. TTL embedded. Canonical JSON.</p></div>
       <div class="stage"><div class="stage-num">5</div><h4>Emit package</h4><p>Signed <code>CompiledPackage</code> JSON. Cached in Redis. Audited.</p></div>

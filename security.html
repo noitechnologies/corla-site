@@ -228,7 +228,30 @@
 </section>
 
 
-<!-- IP PROTECTION -->
+<!-- PII REDACTION -->
+<section style="padding:72px 0;">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="label">PII Redaction</div>
+      <h2 class="section-head">AI-Powered PII Redaction</h2>
+      <p class="section-sub">Corla uses a two-pass redaction pipeline. Pattern matching catches what's structured. AI catches what isn't.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;" class="reveal">
+      <div class="card">
+        <h3 style="font-size:0.95rem;margin-bottom:8px;">Pass 1 — Regex (always on)</h3>
+        <p style="font-size:0.87rem;line-height:1.7;">Pattern matching catches structured PII at compile time: emails, phone numbers, SSNs, API keys, JWT tokens, and connection strings. Runs on every package, free and Pro tiers alike. Deterministic, fast, and the floor for what gets stripped.</p>
+      </div>
+      <div class="card">
+        <h3 style="font-size:0.95rem;margin-bottom:8px;">Pass 2 — Presidio NER (optional)</h3>
+        <p style="font-size:0.87rem;line-height:1.7;">Microsoft Presidio NER models detect unstructured PII that pattern matching misses — person names, physical addresses, organisation names, and contextual identifiers. Enterprises enable NER redaction per-organisation in Settings.</p>
+      </div>
+      <div class="card card-amber" style="grid-column:1 / -1;">
+        <h3 style="font-size:0.95rem;margin-bottom:12px;">Fail-open by design</h3>
+        <p style="font-size:0.87rem;line-height:1.7;">If the NER service is unavailable, the system fails open with regex-only results — compilation is never blocked. Availability of the optional layer never gates delivery of the always-on layer.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
 
 <!-- THREAT MODEL -->
