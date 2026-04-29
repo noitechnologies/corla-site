@@ -1,6 +1,6 @@
 /* ═══════════════════════════════════════════════════
    CORLA.AI — SHARED STYLESHEET
-   Light + dark themes · IBM Plex Sans + IBM Plex Mono
+   Light + dark themes · Montserrat (sans) + system mono
    Fonts are loaded via <link> in each HTML <head> with
    preconnect to fonts.gstatic.com (better LCP than @import).
    ═══════════════════════════════════════════════════ */
@@ -28,8 +28,8 @@
   --t2:       #4A4E62;
   --t3:       #9096AA;
   /* Type stack — canonical names */
-  --font-sans: 'IBM Plex Sans', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --font-sans: 'Montserrat', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
   /* Back-compat aliases — existing inline <style> blocks still reference these.
      Prefer --font-sans / --font-mono in new code. */
   --display: var(--font-sans);
@@ -80,8 +80,8 @@ body {
   background: var(--bg);
   color: var(--t1);
   font-family: var(--font-sans);
-  font-size: 17px;
-  line-height: 1.65;
+  font-size: 16px;
+  line-height: 1.6;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -96,15 +96,16 @@ body::before {
 [data-theme="dark"] body::before { opacity: 0.4; }
 
 /* ── TYPOGRAPHY ───────────────────────────
-   Scale anchored to the brief: enterprise-infrastructure feel,
-   tight letter-spacing, 600-weight headings. Responsive clamps
-   keep mobile readable while honouring the desktop max sizes. */
+   Scale aligned with fulfillor.com sizing: friendlier, more
+   body-text-driven hierarchy. Responsive clamps keep mobile
+   readable while honouring the desktop max sizes. Headings
+   are tightened with negative letter-spacing for a clean feel. */
 h1,h2,h3,h4,h5 { font-family: var(--font-sans); color: var(--t1); }
-h1 { font-size: clamp(2rem, 4vw, 3.75rem); line-height: 1.05; font-weight: 600; letter-spacing: -0.025em; }
-h2 { font-size: clamp(1.5rem, 2.5vw, 2rem);  line-height: 1.2;  font-weight: 600; letter-spacing: -0.015em; }
-h3 { font-size: clamp(1.1rem, 1.5vw, 1.25rem); line-height: 1.35; font-weight: 600; letter-spacing: -0.01em; }
-h4 { font-size: 1.05rem; font-weight: 600; line-height: 1.4; }
-p  { color: var(--t2); line-height: 1.65; }
+h1 { font-size: clamp(1.75rem, 3vw, 2.5rem);   line-height: 1.15; font-weight: 700; letter-spacing: -0.02em; }
+h2 { font-size: clamp(1.5rem, 2.5vw, 2.1875rem); line-height: 1.25; font-weight: 700; letter-spacing: -0.015em; }
+h3 { font-size: clamp(1.125rem, 1.5vw, 1.25rem); line-height: 1.4;  font-weight: 600; letter-spacing: -0.005em; }
+h4 { font-size: 1rem; font-weight: 600; line-height: 1.4; }
+p  { color: var(--t2); line-height: 1.6; }
 a  { color: inherit; text-decoration: none; }
 strong { color: var(--t1); font-weight: 600; }
 em { color: var(--amber); font-style: normal; }
@@ -216,11 +217,10 @@ nav {
 /* ── LABELS / BADGES ────────────────────── */
 .label {
   display: inline-flex; align-items: center; gap: 6px;
-  font-family: var(--font-mono);
-  font-size: 12px; font-weight: 500; line-height: 1.4;
-  letter-spacing: 0.04em; text-transform: uppercase;
+  font-family: var(--font-sans);
+  font-size: 12px; font-weight: 600; line-height: 1.4;
+  letter-spacing: 0.08em; text-transform: uppercase;
   color: var(--amber); margin-bottom: 14px;
-  font-variant-numeric: tabular-nums;
 }
 .badge {
   display: inline-flex; align-items: center; gap: 7px;
@@ -232,38 +232,35 @@ nav {
 .badge-dot.pulse { animation: pulse 2s ease infinite; }
 
 /* ── TYPE SCALE UTILITIES ───────────────────────────
-   Semantic, named sizes mirroring the design-system spec.
-   Apply on top of plain HTML where you want the spec's exact
-   size/weight/line-height/letter-spacing without writing a
-   bespoke rule. h1/h2/h3/body already follow this scale via
-   the base rules above; these utilities exist for the cases
-   where the markup isn't a heading (e.g. a span used as a
-   visual H1). All values match the design audit. */
-.text-display  { font-family: var(--font-sans); font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: 1.0;  letter-spacing: -0.035em; font-weight: 700; }
-.text-h1       { font-family: var(--font-sans); font-size: clamp(2rem, 4vw, 3.75rem);  line-height: 1.05; letter-spacing: -0.025em; font-weight: 600; }
-.text-h2       { font-family: var(--font-sans); font-size: clamp(1.5rem, 2.5vw, 2rem); line-height: 1.2;  letter-spacing: -0.015em; font-weight: 600; }
-.text-h3       { font-family: var(--font-sans); font-size: clamp(1.1rem, 1.5vw, 1.25rem); line-height: 1.35; letter-spacing: -0.01em;  font-weight: 600; }
-.text-body-lg  { font-size: 19px; line-height: 1.6;  letter-spacing: -0.005em; }
-.text-body     { font-size: 17px; line-height: 1.65; letter-spacing: 0; }
-.text-body-sm  { font-size: 14px; line-height: 1.6;  letter-spacing: 0; }
-.text-label    { font-size: 12px; line-height: 1.4;  letter-spacing: 0.04em; text-transform: uppercase; }
-.text-eyebrow  { font-size: 11px; line-height: 1.4;  letter-spacing: 0.04em; text-transform: uppercase; }
+   Semantic, named sizes — apply on plain HTML where you want
+   the named size/weight without writing a bespoke rule.
+   h1/h2/h3/body already follow this scale via the base rules
+   above. Sizing is anchored to fulfillor.com's friendlier,
+   more body-driven hierarchy. */
+.text-display  { font-family: var(--font-sans); font-size: clamp(2rem, 4vw, 3rem);     line-height: 1.1;  letter-spacing: -0.025em; font-weight: 700; }
+.text-h1       { font-family: var(--font-sans); font-size: clamp(1.75rem, 3vw, 2.5rem);    line-height: 1.15; letter-spacing: -0.02em;  font-weight: 700; }
+.text-h2       { font-family: var(--font-sans); font-size: clamp(1.5rem, 2.5vw, 2.1875rem); line-height: 1.25; letter-spacing: -0.015em; font-weight: 700; }
+.text-h3       { font-family: var(--font-sans); font-size: clamp(1.125rem, 1.5vw, 1.25rem); line-height: 1.4;  letter-spacing: -0.005em; font-weight: 600; }
+.text-body-lg  { font-size: 18px; line-height: 1.65; letter-spacing: 0; }
+.text-body     { font-size: 16px; line-height: 1.6;  letter-spacing: 0; }
+.text-body-sm  { font-size: 14px; line-height: 1.55; letter-spacing: 0; }
+.text-label    { font-size: 12px; line-height: 1.4;  letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; }
+.text-eyebrow  { font-size: 11px; line-height: 1.4;  letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; }
 
-/* Reusable eyebrow — the small uppercase mono label that opens
+/* Reusable eyebrow — the small uppercase label that opens
    a section ("ENTERPRISE AI INFRASTRUCTURE · NOW AVAILABLE",
-   "WHAT CHANGES", etc.). Keeps existing colour treatments
-   (amber on hero pills, muted on section heads) by setting
-   `color` separately at the call site. */
+   "WHAT CHANGES", etc.). Set `color` at the call site for the
+   amber/muted colour variants. */
 .eyebrow {
   display: inline-flex; align-items: center; gap: 6px;
-  font-family: var(--font-mono);
-  font-size: 12px; font-weight: 500; line-height: 1.4;
-  letter-spacing: 0.04em; text-transform: uppercase;
+  font-family: var(--font-sans);
+  font-size: 12px; font-weight: 600; line-height: 1.4;
+  letter-spacing: 0.08em; text-transform: uppercase;
   color: var(--t3);
-  font-variant-numeric: tabular-nums;
 }
 
-/* Family helpers */
+/* Family helpers — kept for the rare case (tabular numerals,
+   inline code) where mono is intentional. */
 .font-sans { font-family: var(--font-sans); }
 .font-mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
 
@@ -390,7 +387,7 @@ footer {
 /* ── STAT BLOCKS ────────────────────────── */
 .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: var(--r2); overflow: hidden; }
 .stat-block { background: var(--bg2); padding: 28px 24px; text-align: center; }
-.stat-num { font-family: var(--font-mono); font-size: 2rem; font-weight: 600; color: var(--amber); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+.stat-num { font-family: var(--font-sans); font-size: 2rem; font-weight: 700; color: var(--amber); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
 .stat-label { font-size: 0.82rem; color: var(--t3); margin-top: 4px; }
 
 /* ── TABLE ──────────────────────────────── */
