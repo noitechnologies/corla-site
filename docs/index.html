@@ -13,16 +13,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Documentation — Corla</title>
-<meta name="description" content="Get started with Corla. Guides for enterprise admins and developers — from signup to context delivery in minutes.">
+<meta name="description" content="Get started with Corla. Guides for admins and developers, plus the member portal for connecting Claude.ai and ChatGPT — signup to context delivery in minutes.">
 <meta property="og:title" content="Documentation — Corla">
-<meta property="og:description" content="Get started with Corla. Guides for enterprise admins and developers — from signup to context delivery in minutes.">
+<meta property="og:description" content="Get started with Corla. Guides for admins and developers, plus the member portal for connecting Claude.ai and ChatGPT — signup to context delivery in minutes.">
 <meta property="og:url" content="https://corla.ai/docs/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Corla">
 <meta property="og:image" content="https://corla.ai/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Documentation — Corla">
-<meta name="twitter:description" content="Get started with Corla. Guides for enterprise admins and developers — from signup to context delivery in minutes.">
+<meta name="twitter:description" content="Get started with Corla. Guides for admins and developers, plus the member portal for connecting Claude.ai and ChatGPT — signup to context delivery in minutes.">
 <link rel="canonical" href="https://corla.ai/docs/">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="apple-touch-icon" sizes="180x180" href="/favicon.svg">
@@ -66,7 +66,8 @@
     "@type": "ItemList",
     "itemListElement": [
       { "@type": "ListItem", "position": 1, "name": "Admin Quick-Start Guide", "url": "https://corla.ai/docs/admin-quickstart" },
-      { "@type": "ListItem", "position": 2, "name": "Developer Setup Guide", "url": "https://corla.ai/docs/developer-setup" }
+      { "@type": "ListItem", "position": 2, "name": "Developer Setup Guide", "url": "https://corla.ai/docs/developer-setup" },
+      { "@type": "ListItem", "position": 3, "name": "Member Portal", "url": "https://admin.corla.ai/member/login" }
     ]
   }
 }
@@ -126,16 +127,24 @@
       <a href="admin-quickstart.html" class="doc-card">
         <div class="doc-badge">For Enterprise Admins</div>
         <h3>Admin Quick-Start Guide</h3>
-        <p>Sign up, create your enterprise, upload assets, set up roles, and invite your first developer &mdash; in under 10 minutes.</p>
+        <p>Sign up, create your enterprise, upload assets, set up roles, and invite your first member &mdash; in under 10 minutes.</p>
         <span class="doc-arrow">Read guide &rarr;</span>
       </a>
       <a href="developer-setup.html" class="doc-card">
         <div class="doc-badge">For Developers</div>
         <h3>Developer Setup Guide</h3>
-        <p>Install the adapter, authenticate with your grant, and start receiving enterprise context in Claude Code, Cursor, or VS Code.</p>
+        <p>Install the @corla/adapter CLI, sign in (password or first-time invite secret), and start receiving enterprise context in Claude Code, Cursor, VS Code, or Windsurf.</p>
         <span class="doc-arrow">Read guide &rarr;</span>
       </a>
     </div>
+
+    <!-- Member portal callout -->
+    <a href="https://admin.corla.ai/member/login" class="doc-card reveal" style="display:block;margin-top:20px;text-decoration:none;">
+      <div class="doc-badge" style="color:var(--blue);">For Everyone Else (Claude.ai &amp; ChatGPT)</div>
+      <h3>Member Portal</h3>
+      <p>No CLI? Sign in to the member portal at <code>admin.corla.ai/member/login</code> with your invite secret (set a password on first login). View your active projects, change your password, and copy the custom-connector instructions for Claude.ai or ChatGPT &mdash; paste one URL into Settings → Connectors → Add custom and you're grounded.</p>
+      <span class="doc-arrow" style="color:var(--blue);">Open the portal &rarr;</span>
+    </a>
   </div>
 </section>
 

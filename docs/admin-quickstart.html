@@ -233,9 +233,9 @@
           <li><strong>TTL</strong> &mdash; how long each session token lasts (default: 8 hours)</li>
           <li><strong>Expiry</strong> &mdash; optional date when the grant itself expires</li>
         </ul>
-        <p>After creating the grant, you'll see a one-time <strong>invite secret</strong>. Share this with the developer &mdash; they need it for their first login. If the developer has an email on file, they'll also receive it by email.</p>
+        <p>After creating the grant, you'll see a one-time <strong>invite secret</strong>. Share this with the member &mdash; they need it for their first login only. On first login (in the CLI or in the <a href="https://admin.corla.ai/member/login" style="color:var(--amber);">member portal</a>), they set a password. Every subsequent login uses the password &mdash; no admin involvement, no fresh invite secret needed.</p>
         <div class="info-box">
-          <strong>Security note:</strong> The invite secret is shown only once and is single-use. After the developer's first login, it's consumed. If they lose it, revoke the grant and create a new one.
+          <strong>Security note:</strong> The invite secret is shown only once and is single-use. After the member's first login, it's consumed. If they forget their password, they reset it from the member portal &mdash; you don't need to touch the grant.
         </div>
       </div>
     </div>
@@ -261,7 +261,11 @@
     <!-- Next step -->
     <div style="margin-top:56px;padding:32px 28px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2);" class="reveal">
       <h3 style="margin-bottom:8px;">What's next?</h3>
-      <p style="font-size:0.92rem;color:var(--t2);line-height:1.7;margin-bottom:16px;">Share the <a href="developer-setup.html" style="color:var(--amber);">Developer Setup Guide</a> with your developer along with their invite secret. They'll be receiving enterprise context in their AI tools within minutes.</p>
+      <p style="font-size:0.92rem;color:var(--t2);line-height:1.7;margin-bottom:16px;">Share the right path with the member along with their invite secret:</p>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;font-size:0.9rem;color:var(--t2);line-height:1.6;margin-bottom:18px;">
+        <li><span style="color:var(--amber);font-weight:700;margin-right:6px;">→</span><strong>Developers</strong> &mdash; the <a href="developer-setup.html" style="color:var(--amber);">Developer Setup Guide</a> walks them through the <code>@corla/adapter</code> CLI for Claude Code, Cursor, VS Code, and Windsurf.</li>
+        <li><span style="color:var(--amber);font-weight:700;margin-right:6px;">→</span><strong>Everyone else</strong> &mdash; point them at the <a href="https://admin.corla.ai/member/login" style="color:var(--amber);">member portal</a> (admin.corla.ai/member/login). They sign in once with the invite secret, set a password, and copy the connector URL straight into Claude.ai or ChatGPT (Settings → Connectors → Add custom).</li>
+      </ul>
       <a href="developer-setup.html" class="btn btn-primary btn-sm">Developer Setup Guide &rarr;</a>
     </div>
 

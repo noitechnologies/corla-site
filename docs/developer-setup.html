@@ -13,7 +13,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Developer Setup Guide — Corla</title>
-<meta name="description" content="Install the Corla adapter, authenticate with your grant, and start receiving enterprise AI context in Claude Code, Cursor, or VS Code.">
+<meta name="description" content="Install the @corla/adapter CLI, sign in with password (or invite secret first time), and pull enterprise context into Claude Code, Cursor, VS Code, Windsurf.">
 <meta property="og:title" content="Developer Setup Guide — Corla">
 <meta property="og:description" content="Start receiving enterprise AI context in your dev tools in under 5 minutes.">
 <meta property="og:url" content="https://corla.ai/docs/developer-setup">
@@ -22,7 +22,7 @@
 <meta property="og:image" content="https://corla.ai/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Developer Setup Guide — Corla">
-<meta name="twitter:description" content="Install the Corla adapter, authenticate with your grant, and start receiving enterprise AI context in Claude Code, Cursor, or VS Code.">
+<meta name="twitter:description" content="Install the @corla/adapter CLI, sign in with password (or invite secret first time), and pull enterprise context into Claude Code, Cursor, VS Code, Windsurf.">
 <link rel="canonical" href="https://corla.ai/docs/developer-setup">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <meta name="theme-color" content="#F7F5F0">
@@ -134,7 +134,7 @@
 
     <!-- Prerequisites -->
     <div class="info-box reveal" style="margin-bottom:40px;">
-      <strong>Before you start:</strong> Your enterprise admin should have created a grant for you and shared an <strong>invite secret</strong> (a one-time code). You'll also need the <strong>enterprise slug</strong>, your <strong>member ID</strong>, and the <strong>project ID</strong> for the project you're working on. Check your email &mdash; these may have been sent to you.
+      <strong>Before you start:</strong> Your enterprise admin should have created a grant for you and shared an <strong>invite secret</strong> (a one-time code, used the very first time you log in &mdash; you'll set a password after that). You'll also need the <strong>enterprise slug</strong>, your <strong>member ID</strong>, and the <strong>project ID</strong> for the project you're working on. Check your email &mdash; these may have been sent to you.
     </div>
 
     <!-- Step 1 -->
@@ -155,24 +155,35 @@
     <div class="step reveal">
       <div class="step-header">
         <div class="step-num">2</div>
-        <h3>Log in with your grant</h3>
+        <h3>Log in (password or invite secret)</h3>
       </div>
       <div class="step-content">
-        <p>Run the login command with your credentials:</p>
+        <p>Run the login command:</p>
         <div class="code-block">corla login</div>
-        <p>You'll be prompted for:</p>
+        <p>You'll be prompted for the broker URL (<code>https://broker.corla.ai</code>), your <strong>enterprise slug</strong>, <strong>member ID</strong>, and <strong>project ID</strong> — your admin will have shared these. Then for the credential.</p>
+
+        <p style="margin-top:18px;"><strong>First login &mdash; invite secret + set a password:</strong></p>
         <ul>
-          <li><strong>Broker URL</strong> &mdash; <code>https://broker.corla.ai</code> (or the URL your admin provided)</li>
-          <li><strong>Enterprise slug</strong> &mdash; e.g. <code>acme-engineering</code></li>
-          <li><strong>Member ID</strong> &mdash; the identifier your admin assigned to you</li>
-          <li><strong>Project ID</strong> &mdash; the project you're working on</li>
-          <li><strong>Invite secret</strong> &mdash; the one-time code from your admin (first login only)</li>
+          <li>Enter the <strong>one-time invite secret</strong> from your admin.</li>
+          <li>The CLI prompts you to set a password. This password is yours from then on.</li>
         </ul>
-        <p>On success, you'll receive a token. The CLI will show you how to set it:</p>
+
+        <p style="margin-top:18px;"><strong>Subsequent logins &mdash; password only:</strong></p>
+        <ul>
+          <li><code>corla login</code> auto-detects your existing account and asks for your password &mdash; no admin involvement needed to reconnect.</li>
+          <li>Forgot or want to rotate it? <code>corla set-password</code> sets a new one from the terminal.</li>
+        </ul>
+
+        <p style="margin-top:18px;">On success, you'll receive a token. The CLI prints the export command:</p>
         <div class="code-block">export CORLA_TOKEN=eyJhbGci...your-token-here</div>
-        <p>Add this to your shell profile (<code>~/.zshrc</code> or <code>~/.bashrc</code>) so it persists across terminal sessions.</p>
+        <p>Add it to your shell profile (<code>~/.zshrc</code> or <code>~/.bashrc</code>) so it persists across terminal sessions. Tokens expire; <code>corla refresh</code> silently rotates an expiring token without opening a browser or re-prompting.</p>
+
+        <div class="info-box">
+          <strong>Prefer a browser?</strong> Sign in at <a href="https://admin.corla.ai/member/login" style="color:var(--amber);">admin.corla.ai/member/login</a> &mdash; the member portal. View your active projects, change your password, copy your token, and pull the connector instructions for Claude.ai or ChatGPT in one place.
+        </div>
+
         <div class="warn-box">
-          <strong>Keep your token private.</strong> Never commit it to git, share it in chat, or include it in screenshots. It grants access to your enterprise's context. If compromised, ask your admin to revoke the grant.
+          <strong>Keep your token private.</strong> Never commit it to git, share it in chat, or include it in screenshots. It grants access to your enterprise's context. If compromised, change your password (<code>corla set-password</code>) and ask your admin to revoke the active sessions.
         </div>
       </div>
     </div>
@@ -187,7 +198,12 @@
         <p>Navigate to your project directory and run:</p>
         <div class="code-block">cd /path/to/your/project
 corla init</div>
-        <p>This creates an <code>.mcp.json</code> file in your project root that configures Corla as an MCP server:</p>
+        <p>This writes the MCP config for every supported IDE in one shot:</p>
+        <ul>
+          <li><code>.mcp.json</code> &mdash; root config (Claude Code, Cursor, Windsurf)</li>
+          <li><code>.vscode/mcp.json</code> &mdash; VS Code Copilot</li>
+        </ul>
+        <p>The <code>.mcp.json</code> looks like this:</p>
         <div class="code-block">{
   "mcpServers": {
     "corla": {
@@ -199,7 +215,8 @@ corla init</div>
     }
   }
 }</div>
-        <p>If you use VS Code, it also creates <code>.vscode/mcp.json</code> for VS Code Copilot integration.</p>
+        <p>Using Antigravity? Pass the flag and the Antigravity config gets written too:</p>
+        <div class="code-block">corla init --antigravity</div>
       </div>
     </div>
 
@@ -225,11 +242,38 @@ corla init</div>
             <h4>VS Code Copilot</h4>
             <p>Uses .vscode/mcp.json</p>
           </div>
+          <div class="tool-card">
+            <h4>Windsurf</h4>
+            <p>Reads .mcp.json for context</p>
+          </div>
+          <div class="tool-card">
+            <h4>Claude.ai (web/mobile)</h4>
+            <p>Custom connector — paste broker URL</p>
+          </div>
+          <div class="tool-card">
+            <h4>ChatGPT (web/mobile)</h4>
+            <p>Custom connector — paste broker URL</p>
+          </div>
         </div>
 
         <p>To verify the connection is working:</p>
         <div class="code-block">corla status</div>
         <p>You should see your enterprise name, project, role, and token expiry.</p>
+      </div>
+    </div>
+
+    <!-- Multi-project -->
+    <div class="step reveal">
+      <div class="step-header">
+        <div class="step-num">5</div>
+        <h3>Switching between projects</h3>
+      </div>
+      <div class="step-content">
+        <p>If your admin has granted you access to multiple projects, you can switch between them inside a single connection &mdash; no disconnect, no re-auth, no admin ticket.</p>
+        <p>Claude Code, Cursor, Claude.ai, and ChatGPT discover available projects automatically via the broker's <code>list_projects</code> MCP tool. Just ask the agent:</p>
+        <div class="code-block">"Which projects do I have access to?"
+"Switch to the payments project."</div>
+        <p>The session-level project context updates immediately. The next compiled package is scoped to the new project.</p>
       </div>
     </div>
 
@@ -258,7 +302,12 @@ corla init</div>
 
       <div class="info-box" style="margin-bottom:12px;">
         <strong>"Token expired" or "401 Unauthorized"</strong><br>
-        Your token has expired. Run <code>corla login</code> again to get a new one. Update <code>CORLA_TOKEN</code> in your shell profile.
+        Your token has expired. Run <code>corla refresh</code> for a silent rotation (no browser, no re-auth). If the underlying session is gone, <code>corla login</code> with your password gets you a fresh one.
+      </div>
+
+      <div class="info-box" style="margin-bottom:12px;">
+        <strong>"Forgot my password"</strong><br>
+        Run <code>corla set-password</code> to set a new one from the terminal, or sign in to <a href="https://admin.corla.ai/member/login" style="color:var(--amber);">admin.corla.ai/member/login</a> and reset it from the member portal. (If you've never set one, you'll still have your one-time invite secret &mdash; ask your admin to re-issue it if lost.)
       </div>
 
       <div class="info-box" style="margin-bottom:12px;">
