@@ -13,16 +13,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Use Cases — Corla</title>
-<meta name="description" content="How Corla serves internal engineering organisations, external vendor teams, and every role in between. One context broker, two distinct problems solved.">
+<meta name="description" content="How Corla serves engineering, vendors, and non-engineering teams (support, sales, design, product) using Claude.ai, ChatGPT, and developer IDEs.">
 <meta property="og:title" content="Use Cases — Corla">
-<meta property="og:description" content="How Corla serves internal engineering organisations, external vendor teams, and every role in between. One context broker, two distinct problems solved.">
+<meta property="og:description" content="How Corla serves engineering, vendors, and non-engineering teams (support, sales, design, product) using Claude.ai, ChatGPT, and developer IDEs.">
 <meta property="og:url" content="https://corla.ai/use-cases">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Corla">
 <meta property="og:image" content="https://corla.ai/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Use Cases — Corla">
-<meta name="twitter:description" content="How Corla serves internal engineering organisations, external vendor teams, and every role in between. One context broker, two distinct problems solved.">
+<meta name="twitter:description" content="How Corla serves engineering, vendors, and non-engineering teams (support, sales, design, product) using Claude.ai, ChatGPT, and developer IDEs.">
 <link rel="canonical" href="https://corla.ai/use-cases">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="apple-touch-icon" href="favicon.svg">
@@ -119,8 +119,12 @@
   "@context": "https://schema.org",
   "@type": "WebPage",
   "name": "Use Cases — Corla",
-  "description": "How Corla serves internal engineering organisations, external vendor teams, and every role in between. One context broker, two distinct problems solved.",
+  "description": "How Corla serves engineering, vendors, and non-engineering teams (support, sales, design, product) using Claude.ai, ChatGPT, and developer IDEs.",
   "url": "https://corla.ai/use-cases",
+  "audience": {
+    "@type": "Audience",
+    "audienceType": "Engineering, Design, Product, Support, Sales, Marketing, Security, Data, DevOps, QA, Mobile, Onboarding"
+  },
   "isPartOf": { "@type": "WebSite", "name": "Corla", "url": "https://corla.ai" },
   "primaryImageOfPage": { "@type": "ImageObject", "url": "https://corla.ai/og-image.png" },
   "publisher": {
@@ -171,8 +175,8 @@
   <div class="hero-grid" style="position:absolute;inset:0;"></div>
   <div class="wrap">
     <div class="label">Use Cases</div>
-    <h1>Two audiences. One broker.</h1>
-    <p style="font-size:1.05rem;max-width:580px;margin-top:16px;line-height:1.8;">Corla serves two distinct problems that most engineering organisations face simultaneously — and the infrastructure that solves one reinforces the other.</p>
+    <h1>Every team. Every role. One broker.</h1>
+    <p style="font-size:1.05rem;max-width:620px;margin-top:16px;line-height:1.8;">Corla serves engineering organisations, external vendors, and every non-engineering team using AI — designers, support, sales, marketing, product. One MCP endpoint, three distinct value stories, all reinforcing each other.</p>
   </div>
 </section>
 
@@ -323,6 +327,86 @@
           <p>Multiple vendor teams on the same engagement can align on interfaces through the broker — scoped by the enterprise. Neither team sees the other's codebase. Every exchange is logged.</p>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ NON-ENGINEERING TEAMS ════════════════════════════════ -->
+<section id="non-engineering" class="uc-section">
+  <div class="wrap">
+    <div class="uc-header reveal">
+      <div>
+        <div class="label">Use Case 03</div>
+        <h2 class="section-head">Non-engineering teams using Claude.ai and ChatGPT.</h2>
+        <p style="font-size:1rem;max-width:680px;line-height:1.8;">AI tools left engineering long ago. Designers, support, sales, marketing, and product teams use Claude.ai and ChatGPT every day — and need the same organisational grounding their engineers do. Corla works as a custom connector: one URL, paste it into Settings, sign in once, every conversation grounded.</p>
+      </div>
+    </div>
+
+    <div class="scenario-grid reveal" data-stagger>
+      <div class="scenario">
+        <div class="scenario-icon">🎧</div>
+        <h3>Support teams</h3>
+        <p>Support playbooks, escalation procedures, product knowledge, and the latest known-issue list — published once, available in every support agent's Claude or ChatGPT conversation. New hires onboard with the same context the senior team carries.</p>
+      </div>
+      <div class="scenario">
+        <div class="scenario-icon">📣</div>
+        <h3>Sales &amp; Marketing</h3>
+        <p>Brand guidelines, messaging frameworks, pricing rules, competitive positioning, and current campaign assets — grounded in every email draft, every deck, every customer conversation an AI tool helps with. No more inconsistent positioning.</p>
+      </div>
+      <div class="scenario">
+        <div class="scenario-icon">🎨</div>
+        <h3>Design teams</h3>
+        <p>Design system tokens, component libraries, brand standards, accessibility requirements, and writing guidelines — loaded into every AI-assisted design exploration, copy draft, or asset annotation. The system stays consistent across teams.</p>
+      </div>
+      <div class="scenario">
+        <div class="scenario-icon">📐</div>
+        <h3>Product</h3>
+        <p>PRDs, roadmap context, user-research findings, and the why-behind-decisions log — grounded in every product spec, every prioritisation discussion, every stakeholder summary. The institutional memory follows the work.</p>
+      </div>
+    </div>
+
+    <div class="card reveal" style="margin-top:48px;padding:32px;background:var(--bg3);">
+      <h3 style="margin-bottom:14px;font-size:1rem;">How non-engineering members connect</h3>
+      <p style="font-size:0.9rem;color:var(--t2);line-height:1.7;margin-bottom:14px;">No CLI required. Members add Corla as a custom connector in their AI tool's settings:</p>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;font-size:0.9rem;color:var(--t2);line-height:1.6;">
+        <li><span style="color:var(--green);font-weight:700;margin-right:8px;">1.</span>Open Claude.ai or ChatGPT → Settings → Connectors → Add custom</li>
+        <li><span style="color:var(--green);font-weight:700;margin-right:8px;">2.</span>Paste the broker URL: <code>https://broker.corla.ai/mcp</code></li>
+        <li><span style="color:var(--green);font-weight:700;margin-right:8px;">3.</span>Sign in with the one-time invite secret from your admin (set a password on first login)</li>
+        <li><span style="color:var(--green);font-weight:700;margin-right:8px;">4.</span>Done. Every subsequent conversation is grounded in your org's published context.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══ MULTI-PROJECT + ROLES ════════════════════════════════ -->
+<section id="roles" class="uc-section" style="background:var(--bg2);">
+  <div class="wrap">
+    <div class="uc-header reveal">
+      <div>
+        <div class="label">Roles &amp; Multi-Project</div>
+        <h2 class="section-head">One member. Many projects. Scoped per role.</h2>
+        <p style="font-size:1rem;max-width:680px;line-height:1.8;">Members with access to multiple projects switch between them inside a single connection — no disconnect, no re-auth. Claude and ChatGPT see available projects automatically via the <code>list_projects</code> tool. Every project carries a role, and every role gets a different scope ceiling.</p>
+      </div>
+    </div>
+
+    <div class="reveal" style="margin-top:32px;">
+      <h3 style="font-size:0.9rem;color:var(--t2);font-weight:600;margin-bottom:18px;text-transform:uppercase;letter-spacing:0.04em;">Member roles supported out of the box</h3>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;">
+        <span class="badge" style="justify-content:center;">Frontend</span>
+        <span class="badge" style="justify-content:center;">Backend</span>
+        <span class="badge" style="justify-content:center;">Fullstack</span>
+        <span class="badge" style="justify-content:center;">Mobile</span>
+        <span class="badge" style="justify-content:center;">DevOps</span>
+        <span class="badge" style="justify-content:center;">Security</span>
+        <span class="badge" style="justify-content:center;">Data</span>
+        <span class="badge" style="justify-content:center;">QA</span>
+        <span class="badge" style="justify-content:center;">Product</span>
+        <span class="badge" style="justify-content:center;">Design</span>
+        <span class="badge" style="justify-content:center;">Onboarding</span>
+        <span class="badge" style="justify-content:center;">Support</span>
+        <span class="badge" style="justify-content:center;">General</span>
+      </div>
+      <p style="font-size:0.85rem;color:var(--t3);margin-top:18px;line-height:1.6;">Each role carries its own scope ceiling and sensitivity rules. A Support member sees the support playbook scope; a Backend member sees the engineering context for their project; a General member gets the org-wide baseline. Custom roles available on Enterprise.</p>
     </div>
   </div>
 </section>

@@ -13,16 +13,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>How It Works — Corla</title>
-<meta name="description" content="A technical walkthrough of Corla's three-zone architecture, compilation pipeline, and broker — built on MCP and agent-agnostic.">
+<meta name="description" content="Three-zone architecture, compilation pipeline, and the one MCP endpoint that serves Claude Code, Cursor, VS Code, Windsurf, Claude.ai, and ChatGPT.">
 <meta property="og:title" content="How It Works — Corla">
-<meta property="og:description" content="A technical walkthrough of Corla's three-zone architecture, compilation pipeline, and broker — built on MCP and agent-agnostic.">
+<meta property="og:description" content="Three-zone architecture, compilation pipeline, and the one MCP endpoint that serves Claude Code, Cursor, VS Code, Windsurf, Claude.ai, and ChatGPT.">
 <meta property="og:url" content="https://corla.ai/how-it-works">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Corla">
 <meta property="og:image" content="https://corla.ai/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="How It Works — Corla">
-<meta name="twitter:description" content="A technical walkthrough of Corla's three-zone architecture, compilation pipeline, and broker — built on MCP and agent-agnostic.">
+<meta name="twitter:description" content="Three-zone architecture, compilation pipeline, and the one MCP endpoint that serves Claude Code, Cursor, VS Code, Windsurf, Claude.ai, and ChatGPT.">
 <link rel="canonical" href="https://corla.ai/how-it-works">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="apple-touch-icon" sizes="180x180" href="/favicon.svg">
@@ -97,7 +97,7 @@
   "@context": "https://schema.org",
   "@type": "TechArticle",
   "headline": "How Corla Works — Three-Zone Architecture",
-  "description": "A technical walkthrough of Corla's three-zone architecture, compilation pipeline, and broker — built on MCP and agent-agnostic.",
+  "description": "Three-zone architecture, compilation pipeline, and the one MCP endpoint that serves Claude Code, Cursor, VS Code, Windsurf, Claude.ai, and ChatGPT.",
   "url": "https://corla.ai/how-it-works",
   "audience": { "@type": "Audience", "audienceType": "Platform Engineers, CTOs, Security Teams" },
   "isPartOf": { "@type": "WebSite", "name": "Corla", "url": "https://corla.ai" },
@@ -194,14 +194,14 @@
         </ul>
       </div>
       <div class="card">
-        <div style="font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--t3);margin-bottom:12px;">Zone 3 · Developer</div>
-        <h3 style="margin-bottom:10px;">Developer's machine</h3>
-        <p style="font-size:0.88rem;margin-bottom:16px;">Untrusted by default. Receives only compiled derivatives — signed, scoped, TTL-bounded. Content is injected into the AI tool's in-memory context only. Never written to disk.</p>
+        <div style="font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--t3);margin-bottom:12px;">Zone 3 · Member</div>
+        <h3 style="margin-bottom:10px;">Member's AI tool</h3>
+        <p style="font-size:0.88rem;margin-bottom:16px;">Untrusted by default. Receives only compiled derivatives — signed, scoped, TTL-bounded. Whether the AI tool is Claude Code, Cursor, VS Code, Windsurf, Claude.ai, or ChatGPT, the contract is identical: in-memory context only, never written to disk.</p>
         <ul style="list-style:none;display:flex;flex-direction:column;gap:7px;">
-          <li style="font-size:0.83rem;color:var(--t2);display:flex;gap:8px;align-items:flex-start;"><span style="color:var(--t3);flex-shrink:0">·</span>MCP adapter (one config file)</li>
-          <li style="font-size:0.83rem;color:var(--t2);display:flex;gap:8px;align-items:flex-start;"><span style="color:var(--t3);flex-shrink:0">·</span>AI coding tool (Claude Code, Cursor, etc.)</li>
+          <li style="font-size:0.83rem;color:var(--t2);display:flex;gap:8px;align-items:flex-start;"><span style="color:var(--t3);flex-shrink:0">·</span>MCP adapter (CLI) or custom connector (browser)</li>
+          <li style="font-size:0.83rem;color:var(--t2);display:flex;gap:8px;align-items:flex-start;"><span style="color:var(--t3);flex-shrink:0">·</span>AI tool (Claude Code, Cursor, VS Code, Windsurf, Claude.ai, ChatGPT)</li>
           <li style="font-size:0.83rem;color:var(--t2);display:flex;gap:8px;align-items:flex-start;"><span style="color:var(--t3);flex-shrink:0">·</span>Compiled package (opaque derivative)</li>
-          <li style="font-size:0.83rem;color:var(--t2);display:flex;gap:8px;align-items:flex-start;"><span style="color:var(--t3);flex-shrink:0">·</span>Local repository</li>
+          <li style="font-size:0.83rem;color:var(--t2);display:flex;gap:8px;align-items:flex-start;"><span style="color:var(--t3);flex-shrink:0">·</span>Local repository or workspace</li>
           <li style="font-size:0.83rem;color:var(--t2);display:flex;gap:8px;align-items:flex-start;"><span style="color:var(--red);flex-shrink:0">✗</span>No raw asset content. Ever.</li>
         </ul>
       </div>
@@ -362,29 +362,48 @@
   </div>
 </section>
 
-<!-- DEVELOPER SETUP -->
+<!-- SETUP — TWO PATHS -->
 <section class="section-dark">
   <div class="wrap">
     <div class="reveal">
-      <div class="label">Developer Setup</div>
-      <h2 class="section-head">Three commands. Enterprise context, automatically.</h2>
+      <div class="label">Setup</div>
+      <h2 class="section-head">One MCP endpoint. Two paths to it.</h2>
+      <p class="section-sub">Developers wire Corla into their IDE via the CLI. Everyone else adds it as a custom connector in Claude.ai or ChatGPT — no install, no terminal. Same broker, same audit trail, same context.</p>
     </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;" class="reveal">
-      <div>
-        <div style="display:flex;flex-direction:column;gap:16px;">
-          <div class="card"><div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--amber);margin-bottom:8px;">Step 1</div><h4 style="margin-bottom:6px;">Install the adapter</h4><p style="font-size:0.85rem;"><code>npm install -g @corla/adapter</code></p></div>
-          <div class="card"><div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--amber);margin-bottom:8px;">Step 2</div><h4 style="margin-bottom:6px;">Initialise the project</h4><p style="font-size:0.85rem;"><code>corla init</code> — writes <code>.mcp.json</code> and appends a Corla behaviour block to <code>CLAUDE.md</code> (auto-loaded by Claude Code as genuine system context). Works with Claude Code, Cursor, and Windsurf automatically.</p></div>
-          <div class="card"><div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--amber);margin-bottom:8px;">Step 3</div><h4 style="margin-bottom:6px;">Authenticate once</h4><p style="font-size:0.85rem;"><code>corla login</code> — OAuth 2.1 PKCE browser flow. Set <code>CORLA_TOKEN</code> in your <code>.env</code> file. Done.</p></div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start;" class="reveal">
+
+      <!-- Developer path -->
+      <div class="card" style="padding:32px;">
+        <div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--amber);margin-bottom:10px;">Developers · CLI</div>
+        <h3 style="margin-bottom:14px;">Claude Code, Cursor, VS Code, Windsurf</h3>
+        <p style="font-size:0.88rem;line-height:1.7;margin-bottom:18px;">Three commands and the IDE knows your org. The <code>corla init</code> command writes <code>.mcp.json</code>, <code>.vscode/mcp.json</code>, and the Cursor / Windsurf configs in one shot. Optional <code>--antigravity</code> flag enables Antigravity support.</p>
+        <div class="card" style="background:var(--bg3);padding:18px;">
+          <p style="font-size:0.82rem;color:var(--t2);font-family:var(--mono);line-height:1.85;margin:0;"><span style="color:var(--amber)">$</span> npm install -g @corla/adapter<br><span style="color:var(--amber)">$</span> corla init<br><span style="color:var(--amber)">$</span> corla login</p>
         </div>
+        <p style="font-size:0.82rem;color:var(--t3);margin-top:14px;line-height:1.6;">First login uses your one-time invite secret and prompts you to set a password. Every subsequent <code>corla login</code> uses the password — no admin involvement needed to reconnect.</p>
       </div>
-      <div>
-        <h3 style="margin-bottom:16px;">From that point, zero friction.</h3>
-        <p style="margin-bottom:16px;">Every subsequent AI tool invocation in the project directory automatically pulls enterprise context. The developer types <code>claude</code> or opens Cursor and their AI tool already knows the enterprise's patterns, conventions, and constraints.</p>
-        <p>No flags. No prompts. No selecting context. No copy-pasting playbooks. The context is just there — compiled, scoped, and injected before the first token is generated.</p>
-        <div class="card" style="margin-top:24px;background:var(--bg3);">
-          <p style="font-size:0.85rem;color:var(--t2);font-family:var(--mono);line-height:1.7;"><span style="color:var(--amber)">$</span> claude "implement the payment webhook handler"<br><span style="color:var(--t3)">[corla] ✓ Context: payments-playbook-v3 (Platform Eng)</span><br><span style="color:var(--t3)">[corla] ✓ Standards: typescript-strict, auth-service-v2</span><br><span style="color:var(--t3)">[corla] ✓ Scope: senior / payments / internal</span><br><span style="color:var(--green)">Claude is thinking...</span></p>
+
+      <!-- Connector path -->
+      <div class="card" style="padding:32px;">
+        <div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--blue);margin-bottom:10px;">Everyone Else · Connector</div>
+        <h3 style="margin-bottom:14px;">Claude.ai &amp; ChatGPT (web + mobile)</h3>
+        <p style="font-size:0.88rem;line-height:1.7;margin-bottom:18px;">No CLI. Open the AI tool, add Corla as a custom connector, paste the URL, sign in. Designers, support, sales, marketing, product, and any role using Claude or ChatGPT gets the same scoped context as the engineering team.</p>
+        <div class="card" style="background:var(--bg3);padding:18px;">
+          <ol style="list-style:none;display:flex;flex-direction:column;gap:8px;font-size:0.82rem;color:var(--t2);line-height:1.6;margin:0;padding:0;">
+            <li><span style="color:var(--blue);font-weight:700;margin-right:6px;">1.</span>Settings → Connectors → Add custom</li>
+            <li><span style="color:var(--blue);font-weight:700;margin-right:6px;">2.</span>Paste <code>https://broker.corla.ai/mcp</code></li>
+            <li><span style="color:var(--blue);font-weight:700;margin-right:6px;">3.</span>Sign in with your invite secret (set a password)</li>
+          </ol>
         </div>
+        <p style="font-size:0.82rem;color:var(--t3);margin-top:14px;line-height:1.6;">Members can also visit the <a href="https://admin.corla.ai/member/login" style="color:var(--amber);">member portal</a> any time to view active projects, change their password, or copy connector instructions.</p>
       </div>
+    </div>
+
+    <!-- Multi-project callout -->
+    <div class="card card-amber reveal" style="margin-top:32px;padding:28px 32px;">
+      <h3 style="font-size:0.95rem;margin-bottom:8px;">Multi-project switching, no reconnect</h3>
+      <p style="font-size:0.88rem;line-height:1.7;">Members with access to multiple projects switch between them inside a single connection. Claude and ChatGPT see available projects automatically via the <code>list_projects</code> MCP tool. No disconnect, no re-auth, no admin ticket — just ask the agent to switch projects.</p>
     </div>
   </div>
 </section>
