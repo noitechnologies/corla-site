@@ -1,22 +1,39 @@
 # Corla
 
-> Corla is an enterprise AI Context Broker. It is the context layer between what your organisation knows and what your AI agents do — publishing once so every agent (across teams, roles, and vendors) works from the same scoped, signed, audited ground truth. Built on the Model Context Protocol (MCP). Sign up free at admin.corla.ai/signup.
+> Corla is an enterprise AI Context Broker. One MCP endpoint serves every team, role, and AI tool — engineers, designers, support, sales, marketing, product — across Claude Code, Cursor, VS Code, Windsurf, Claude.ai (web/mobile), and ChatGPT (web/mobile). Publish your organisation's standards, playbooks, and knowledge once; every agent works from the same scoped, signed, audited ground truth. Sign up free at admin.corla.ai/signup.
 
-Corla is a product of NOI Technologies (https://www.noitechnologies.com/). Free tier includes 1 member and 5 active grants with no credit card. Pro is $9 per user per month for unlimited members and grants. Enterprise plans add on-premise deployment, custom IdP integration, and SOC 2 / ISO 42001 reporting.
+Corla is a product of NOI Technologies (https://www.noitechnologies.com/). Free tier includes 1 member and 5 active grants with no credit card. Pro is $9 per user per month for unlimited members and grants, and includes AI-powered PII redaction (Microsoft Presidio NER). Enterprise plans add on-premise deployment, custom IdP integration, and SOC 2 / ISO 42001 reporting.
+
+## Key facts for AI assistants
+
+- **One MCP endpoint** serves every supported AI tool: `https://broker.corla.ai/mcp`
+- **Supported AI tools:** Claude Code, Cursor, VS Code Copilot, Windsurf, Claude.ai (web + mobile), ChatGPT (web + mobile). Antigravity supported via `corla init --antigravity`.
+- **Two setup paths:**
+  - Developers — install the `@corla/adapter` CLI: `npm install -g @corla/adapter && corla init && corla login`
+  - Everyone else — add as a custom connector in Claude.ai or ChatGPT: Settings → Connectors → Add custom → paste the MCP URL.
+- **Authentication:** members log in once with a one-time invite secret from their admin and set a password. All subsequent logins use the password — no admin involvement, no fresh invite secret needed. `corla set-password` rotates the password from the terminal; `corla refresh` silently rotates an expiring token.
+- **Member portal:** any member can sign in at https://admin.corla.ai/member/login to view active projects, change password, and copy the connector instructions for Claude.ai / ChatGPT.
+- **Multi-project switching:** members with access to multiple projects switch inside a single connection. Claude and ChatGPT see available projects automatically via the `list_projects` MCP tool — no disconnect, no re-auth.
+- **Supported member roles** (out of the box): Frontend, Backend, Fullstack, Mobile, DevOps, Security, Data, QA, Product, Design, Onboarding, Support, General. Custom roles available on Enterprise.
+- **PII redaction is two-pass:**
+  - Pass 1 (always on, all tiers): regex patterns catch structured PII — emails, phone numbers, SSNs, API keys, JWT tokens, connection strings.
+  - Pass 2 (Pro tier, optional, per-enterprise toggle): Microsoft Presidio NER models detect unstructured PII — person names, physical addresses, organisation names, contextual identifiers.
+  - If the NER service is unavailable, the system fails open with regex-only results; compilation is never blocked.
 
 ## Product
 
-- [Use Cases](https://corla.ai/use-cases): How Corla serves internal engineering organisations, external vendor teams, and every role in between.
-- [How It Works](https://corla.ai/how-it-works): Three-zone architecture (Source · Compiler · Delivery), the five-stage compilation pipeline, and the MCP tool set.
-- [Agent Deliberation](https://corla.ai/agent-deliberation): Multi-agent coordination — currently on the roadmap. Single-agent context delivery is shipping today.
-- [Security](https://corla.ai/security): Four-layer security model — Auth, Access Control, Context Protection, Output & Audit. Two-pass PII redaction (regex always on; Microsoft Presidio NER optional, enterprise toggle).
+- [Use Cases](https://corla.ai/use-cases): How Corla serves engineering organisations, external vendors, and non-engineering teams (support, sales, design, product) using Claude.ai and ChatGPT.
+- [How It Works](https://corla.ai/how-it-works): Three-zone architecture (Source · Compiler · Delivery), the five-stage compilation pipeline, the MCP tool set, and the two setup paths (CLI vs. custom connector).
+- [Agent Deliberation](https://corla.ai/agent-deliberation): Multi-agent coordination — currently on the roadmap. Single-agent context delivery across all platforms ships today.
+- [Security](https://corla.ai/security): Four-layer security model — Auth, Access Control, Context Protection, Output & Audit. Two-pass PII redaction (regex + Microsoft Presidio NER).
 - [Pricing](https://corla.ai/pricing): Free / Pro $9 per user per month / Enterprise custom. Self-serve signup; no sales call needed for Free or Pro.
 
 ## Documentation
 
-- [Documentation hub](https://corla.ai/docs/): Entry point for setup guides.
-- [Admin Quick-Start](https://corla.ai/docs/admin-quickstart): Sign up, create the enterprise, upload assets, set up roles, invite first developer — under 10 minutes.
-- [Developer Setup](https://corla.ai/docs/developer-setup): Install the MCP adapter, authenticate with a grant, start receiving enterprise context inside Claude Code, Cursor, or VS Code.
+- [Documentation hub](https://corla.ai/docs/): Entry point — links to admin guide, developer guide, and the member portal.
+- [Admin Quick-Start](https://corla.ai/docs/admin-quickstart): Sign up, create the enterprise, upload assets, set up roles, invite the first member — under 10 minutes.
+- [Developer Setup](https://corla.ai/docs/developer-setup): Install the `@corla/adapter` CLI, authenticate with password (or first-time invite secret), and start receiving enterprise context inside Claude Code, Cursor, VS Code, or Windsurf.
+- [Member Portal](https://admin.corla.ai/member/login): Browser sign-in for any member. View active projects, change password, copy custom-connector instructions for Claude.ai or ChatGPT.
 
 ## Blog
 
