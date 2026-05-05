@@ -105,7 +105,7 @@ async function handleWaitlistSubmit(e) {
     btn.textContent = 'Request Early Access →';
     btn.disabled = false;
     btn.style.opacity = '1';
-    if (status) { status.textContent = '⚠ Something went wrong. Email us at hello@corla.ai'; status.style.color = 'var(--red)'; }
+    if (status) { status.textContent = '⚠ Something went wrong. Email us at info@noitechnologies.com'; status.style.color = 'var(--red)'; }
   }
 }
 
